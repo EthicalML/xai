@@ -38,6 +38,33 @@ You can find example usage in the examples folder.
 
 ### 1) Data Analysis
 
+```
+import xai
+from xai.xdata import XData
+from xai import xmodel
+from xai import xmonitor
+
+xd = XData("path/to/csv/data.csv")
+
+xd.df.head()
+#> Current DF
+
+xd.buckets()
+#> Show buckets of all
+
+xd.correlations()
+#> Show correlations of all
+
+xd.convert_categorical(["col1", "col2", "col3"])
+
+xd.display.head()
+#> DF with unmodified values
+
+```
+
+
+
+
 
 ### 2) Model Evaluation
 

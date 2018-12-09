@@ -3,7 +3,7 @@ import os
 import sys
 
 if sys.version_info < (3,0):
-    sys.exit('\nSorry, Python < 3.0 is not supported\nIf you have Python 3.x installed use: pip3 install wc.py')
+    sys.exit('\nSorry, Python < 3.0 is not supported\nIf you have Python 3.x installed use: pip3 install xai')
     sys.exit('')
 
 currentFileDirectory = os.path.dirname(__file__)
@@ -34,14 +34,15 @@ setup(
     long_description=readme,
     author="Alejandro Saucedo",
     author_email="a@ethical.institute",
-    url="https://github.com/EthicalML/xai",
+    url="https://github.com/EthicalML/XAI",
     classifiers=[
         "Intended Audience :: Developers",
-        'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.3',
-        'Programming Language :: Python :: 3.4',
+        "License :: OSI Approved :: MIT Software License",
+        "Natural Language :: English",
+        'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
     ],
-    keywords="",
+    keywords="xai, machine learning, deep learning, explainability, bias evaluation",
     license="MIT",
     packages=find_packages(exclude=["*.tests", "*.tests.*", "tests.*", "tests"]),
     include_package_data=True,
