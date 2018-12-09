@@ -1,0 +1,6 @@
+include README.md
+include requirements.txt
+recursive-include wcpy *.pickle
+recursive-exclude * __pycache__
+recursive-exclude * *.py[co]
+recursive-include docs *.md *.jpg *.png *.gif
