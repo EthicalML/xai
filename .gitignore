@@ -80,4 +80,5 @@ node_modules/
 # Tags
 tags
 tags.*
+.tags
 
