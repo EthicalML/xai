@@ -20,5 +20,4 @@ help:
 	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 	rm -rf ../docs/*
 	cp -r build/html/* ../docs
-
 	touch ../docs/.nojekyll ../docs/_static/.nojekyll ../docs/_static/js/.nojekyll ../docs/_static/css/.nojekyll ../docs/_static/fonts/.nojekyll

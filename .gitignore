@@ -81,6 +81,7 @@ node_modules/
 tags
 tags.*
 .tags
+.tags.*
 
 docs_src/build/
 
