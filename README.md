@@ -5,14 +5,46 @@
 
 # XAI - An explainability-first AI library
 
-XAI is a Machine Learning library that is designed with tools and techniques that enable for eXplainable AI. The XAI library is maintained by [The Institute for Ethical AI & ML](http://ethical.institute/)'s 8 principles for [Responsible Machine Learning].
+XAI is a Machine Learning library that is designed with AI explainability in its core. XAI contains various tools that enable for analysis and evaluation of data and models. The XAI library is maintained by [The Institute for Ethical AI & ML](http://ethical.institute/), and it was developed based on the [8 principles for Responsible Machine Learning](http://ethical.institute/principles.html).
 
-wrapper for several popular libraries which provides an interface with compliance and explainability in mind.
+## What do we mean by eXplainable AI?
 
-The XAI library is designed with the [8 principles for responsible machine learning] in its core, specifically focusing on the following ones:
+The XAI library is designed to empower machine learning engineers and relevant domain experts to analyse the end-to-end solution and identify discrepancies that may result in sub-optimal performance relative to the objectives required. More concretely, the XAI library is designed using the 3-steps of explainable machine learning, which involve 1) data analysis, 2) model evaluation, and 3) production monitoring. 
 
-#1 Practical benchmarks
-#2 Explainability by justification
-#4 Bias evaluation
+The provide a visual overview of these three steps, we can have a look at this in the diagram below:
+
+<img width="100%" src="images/bias.png">
+
+
+# XAI Quickstart
+
+## Installation
+
+The XAI package is on PyPI. To install you can run:
+
+```
+pip install xai
+```
+
+Alternatively you can install from source by cloning the repo and running:
+
+```
+python setup.py install 
+```
+
+## Usage
+
+You can find example usage in the examples folder.
+
+### 1) Data Analysis
+
+
+### 2) Model Evaluation
+
+
+### 3) Production Monitoring
+
+
+
 
 
