@@ -82,3 +82,5 @@ tags
 tags.*
 .tags
 
+docs_src/build/
+
