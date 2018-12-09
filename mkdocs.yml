@@ -1,0 +1,6 @@
+site_name: XAI - eXplainable AI
+site_url: https://github.com/EthicalML/XAI
+repo_name: GitHub
+site_description: Explainability first machine learning library
+copyright: MIT
+theme: 'material'
