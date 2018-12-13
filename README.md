@@ -44,21 +44,38 @@ from xai.xdata import XData
 from xai import xmodel
 from xai import xmonitor
 
-xd = XData("path/to/csv/data.csv")
+xd = XData("path/to/csv/data.csv", "target_col")
+#> Loads file, converts numbers to numerical, short str to categorical, long str to text (100 char+)
 
 xd.df.head()
 #> Current DF
 
-xd.buckets()
-#> Show buckets of all
+xd.imbalances(threshold=0.5, plot=True)
+#> Show buckets of all features
+
+xd.target_imbalances()
+#> Show buckets of all features as breakdown to the target function
+
+xd.partial_imbalances()
+#> Show buckets of selected features compared across each other
+
+
 
 xd.correlations()
 #> Show correlations of all
 
-xd.convert_categorical(["col1", "col2", "col3"])
-
 xd.display.head()
 #> DF with unmodified values
+
+print(xd.x_train.shape, xd.y_train.shape)
+#> Balanced on 80% by default
+
+print(xd.x_test.shape, xd.y_test.shape)
+#> Balanced on 20% by default
+
+xd.train_test_split(balanced_columns=["col1", "col2"])
+#> Plot showing how it is balanced on those two classes
+
 
 ```
 

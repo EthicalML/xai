@@ -87,7 +87,6 @@ Description: ![GitHub](https://img.shields.io/badge/Version-0.1-lightgrey.svg)
 Keywords: xai,machine learning,deep learning,explainability,bias evaluation
 Platform: UNKNOWN
 Classifier: Intended Audience :: Developers
-Classifier: License :: OSI Approved :: MIT Software License
 Classifier: Natural Language :: English
 Classifier: Programming Language :: Python :: 3.6
 Classifier: Programming Language :: Python :: 3.7
