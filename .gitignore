@@ -84,4 +84,5 @@ tags.*
 .tags.*
 
 docs_src/build/
+.mypy_cache
 
