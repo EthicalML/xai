@@ -5,7 +5,6 @@ from typing import List, Any
 
 class XData:
     def __init__(self, 
-                target_name: str,
                 df: pd.DataFrame = None,
                 csv_path: str = None,
                 col_names: List[str] = None,
@@ -14,7 +13,6 @@ class XData:
                 threshold: int = 0.5,
                 **kwargs) -> None:
         
-        self._target_name = target_name
         self._threshold = threshold
 
         if df is not None:
@@ -115,7 +113,7 @@ class XData:
 
         imbalances = []
         for col in column_names:
-            imbalance = self.imbalance(
+            imbalance = self.show_imbalance(
                 col,
                 bins=bins,
                 cross_column_names=cross_column_names)
@@ -138,7 +136,7 @@ class XData:
 
         count_grp = grouped.count()
         count_max = count_grp.values.max()
-        count_upsample = int(target_upsample*count_max)
+        count_upsample = int(target_upsample*count_max+1)
         count_downsample = int(target_downsample*count_max)
 
         def norm(x):
