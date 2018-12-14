@@ -85,4 +85,6 @@ tags.*
 
 docs_src/build/
 .mypy_cache
+.eggs
+xai.egg-info
 
