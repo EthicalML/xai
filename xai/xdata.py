@@ -85,7 +85,7 @@ class XData:
         grouped_col = grouped[column_name]
         count_grp = grouped_col.count()
         count_max = count_grp.values.max()
-        ratios = count_grp/count_max
+        ratios = round(count_grp/count_max,4)
         imbalances = ratios < self._threshold
         
         cm = plt.cm.get_cmap('RdYlBu_r')
@@ -93,7 +93,7 @@ class XData:
                    for r,t in zip(ratios, imbalances)]
         ax = count_grp.plot.bar(color=colors)
         lp = plt.axhline(self._threshold*count_max, color='r')
-        lp.set_label(f"Threshold: {self._threshold*count_max} ({self._threshold*100}%)")
+        lp.set_label(f"Threshold: {self._threshold*count_max:.2f} ({self._threshold*100:.2f}%)")
         plt.legend()
         plt.show()
             
@@ -136,7 +136,7 @@ class XData:
 
         count_grp = grouped.count()
         count_max = count_grp.values.max()
-        count_upsample = int(target_upsample*count_max+1)
+        count_upsample = int(target_upsample*count_max)
         count_downsample = int(target_downsample*count_max)
 
         def norm(x):
