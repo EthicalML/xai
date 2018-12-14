@@ -1,7 +1,10 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
+from scipy.stats import spearmanr as sr
+from scipy.cluster import hierarchy as hc
 from typing import List, Any
+import math
 
 class XData:
     def __init__(self, 
@@ -10,6 +13,7 @@ class XData:
                 col_names: List[str] = None,
                 categorical_cols: List[str] = None,
                 string_cols: List[str] = None,
+                numerical_cols: List[str] = None,
                 threshold: int = 0.5,
                 **kwargs) -> None:
         
@@ -22,6 +26,12 @@ class XData:
             if not csv_path:
                 raise Exception("Neither df or csv_file parameters provided.")
             df = self._read_csv(csv_path, col_names, **kwargs)
+
+        if not categorical_cols:
+            self._categorical_cols = self.df.select_dtypes(include=[np.object])
+
+        if not numerical_cols:
+            self._numerical_cols = self.df.select_dtypes(include=[np.number])
 
         self._initialise_from_dataframe(df, col_names, categorical_cols)
 
@@ -54,6 +64,23 @@ class XData:
     def reset(self):
         self.df = self.orig_df
 
+    def normalize_numeric(self):
+        numerical_cols = self._numerical_cols
+        for k in numerical_cols:
+            self.df[k] = self.df[k].astype(np.float32)
+            self.df[k] -= self.df[k].mean()
+            self.df[k] /= self.df[k].std()
+
+        return self.df
+
+    def convert_categories(self):
+        categorical_cols = self._categorical_cols
+        self.df[categorical_cols] = self.df[categorical_cols].astype('category')
+        self.df[categorical_cols] = self.df[categorical_cols].apply(lambda x: x.cat.codes)
+        self.df[categorical_cols] = self.df[categorical_cols].astype('int8')
+
+        return self.df
+
     def _group_by_columns(self,
             all_cols: List[str], 
             bins: int) -> pd.core.groupby.groupby.DataFrameGroupBy:
@@ -66,7 +93,7 @@ class XData:
                 col_min = col.min()
                 col_max = col.max()
                 col_bins = pd.cut(col, list(range(col_min, col_max, 
-                    int((col_max-col_min)/bins))))
+                    math.ceil((col_max-col_min)/bins))))
                 grp = col_bins
 
             group_list.append(grp)
@@ -75,7 +102,7 @@ class XData:
         return grouped 
 
 
-    def show_imbalance(self, 
+    def imbalance(self, 
             column_name: str, 
             bins: int = 10, 
             cross_column_names: List[str] = []) -> None:
@@ -99,7 +126,7 @@ class XData:
             
         return None
 
-    def show_imbalances(self,
+    def imbalances(self,
             bins: int = 10,
             column_names: List[str] = [],
             cross_column_names: List[str] = []) -> None:
@@ -113,7 +140,7 @@ class XData:
 
         imbalances = []
         for col in column_names:
-            imbalance = self.show_imbalance(
+            imbalance = self.imbalance(
                 col,
                 bins=bins,
                 cross_column_names=cross_column_names)
@@ -150,7 +177,60 @@ class XData:
         self.df = grouped.apply(norm) \
                     .reset_index(drop=True)
         
+    def _plot_dendogram(self, 
+            corr, 
+            cols: List[str],
+            figsize=(10,5)):
+        corr = np.round(corr, 4)
+        corr_condensed = hc.distance.squareform(1-corr)
+        z = hc.linkage(corr_condensed, method="average")
+        fig = plt.figure(figsize=figsize)
+        dendrogram = hc.dendrogram(
+            z, labels=cols, orientation="left", leaf_font_size=16)
+        plt.show()
 
+    def _plot_matrix(self, 
+            corr, 
+            cols: List[str], 
+            figsize=(10,5)):
+        fig = plt.figure(figsize=figsize)
+        ax = fig.add_subplot(111)
+        cax = ax.matshow(
+                corr, 
+                cmap='coolwarm', 
+                vmin=-1, 
+                vmax=1)
+        fig.colorbar(cax)
+        ticks = np.arange(0,len(cols),1)
+        ax.set_xticks(ticks)
+        plt.xticks(rotation=90)
+        ax.set_yticks(ticks)
+        ax.set_xticklabels(cols)
+        ax.set_yticklabels(cols)
+        plt.show()
+
+
+    def correlations(self, 
+            include_categorical: bool = False,
+            plot_type: str = "dendogram",
+            figsize = [10,5]):
+        corr = None
+        cols: List = []
+        if include_categorical:
+            corr = sr(self.df).correlation 
+            cols = self.df.columns
+        else:
+            corr = self.df.corr()
+            cols = corr.columns
+
+        if plot_type == "dendogram":
+            self._plot_dendogram(corr, cols, figsize=figsize)
+        elif plot_type == "matrix":
+            self._plot_matrix(corr, cols, figsize=figsize)
+        else:
+            raise(f"Variable plot_type not valid. Provided: {plot_type}")
+
+        return corr
 
     
 
