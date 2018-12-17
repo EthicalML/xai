@@ -8,16 +8,19 @@ import math
 
 class XData:
     def __init__(self, 
+                target_name: str,
                 df: pd.DataFrame = None,
                 csv_path: str = None,
+                protected_cols: List[str] = None,
                 col_names: List[str] = None,
                 categorical_cols: List[str] = None,
                 string_cols: List[str] = None,
                 numerical_cols: List[str] = None,
-                threshold: int = 0.5,
+                threshold: float = 0.5,
                 **kwargs) -> None:
         
         self._threshold = threshold
+        self._target_name = target_name
 
         if df is not None:
             if not isinstance(df, pd.DataFrame):
@@ -27,13 +30,16 @@ class XData:
                 raise Exception("Neither df or csv_file parameters provided.")
             df = self._read_csv(csv_path, col_names, **kwargs)
 
+        self._initialise_from_dataframe(df, col_names, categorical_cols)
+
         if not categorical_cols:
-            self._categorical_cols = self.df.select_dtypes(include=[np.object])
+            self._categorical_cols = self.df.select_dtypes(include=[np.object]).columns
 
         if not numerical_cols:
-            self._numerical_cols = self.df.select_dtypes(include=[np.number])
+            self._numerical_cols = self.df.select_dtypes(include=[np.number]).columns
 
-        self._initialise_from_dataframe(df, col_names, categorical_cols)
+        if not protected_cols:
+            self._protected_cols = self.df.columns
 
     def _initialise_from_dataframe(self,
             df: pd.DataFrame,
@@ -46,6 +52,13 @@ class XData:
             df.columns = col_names
         self.orig_df = df.copy()
         self.df = df
+
+    def set_protected(self, 
+            protected_cols: List[str]):
+        if any([c not in self.df.columns for c in protected_cols]):
+            raise("One (or more) of the columns provided do not exist."\
+                    " Provided: {protected_cols}. Actual: {self.df.columns}")
+        self._protected_cols = protected_cols
 
     def _read_csv(self, 
             csv_path: str, 
@@ -92,8 +105,8 @@ class XData:
             else:
                 col_min = col.min()
                 col_max = col.max()
-                col_bins = pd.cut(col, list(range(col_min, col_max, 
-                    math.ceil((col_max-col_min)/bins))))
+                # TODO: Use the original bins for display purposes as they may come normalised
+                col_bins = pd.cut(col, list(np.linspace(col_min, col_max, bins)))
                 grp = col_bins
 
             group_list.append(grp)
@@ -102,12 +115,15 @@ class XData:
         return grouped 
 
 
-    def imbalance(self, 
+    def show_imbalance(self, 
             column_name: str, 
             bins: int = 10, 
-            cross_column_names: List[str] = []) -> None:
+            cross: List[str] = None) -> Any:
 
-        all_cols = cross_column_names + [column_name]
+        if cross is None:
+            cross = [self._target_name]
+
+        all_cols = cross + [column_name]
         grouped = self._group_by_columns(all_cols, bins)
         grouped_col = grouped[column_name]
         count_grp = grouped_col.count()
@@ -124,47 +140,53 @@ class XData:
         plt.legend()
         plt.show()
             
-        return None
+        return count_grp, ratios, imbalances
 
-    def imbalances(self,
+    def show_imbalances(self,
             bins: int = 10,
             column_names: List[str] = [],
-            cross_column_names: List[str] = []) -> None:
+            cross: List[str] = None) -> Any:
 
-        # TODO: Ensure column_names and cross_column_names are part of df.columns
+        # TODO: Ensure column_names and cross are part of df.columns
         if not column_names:
-            column_names = [x for x in list(self.df.columns) if x not in cross_column_names]
+            column_names = [x for x in list(self._protected_cols) if x not in cross]
         else:
-            if any([x in column_names for x in cross_column_names]):
-                raise("Error: Columns in 'cross_column_names' are also in 'column_names'")
+            if any([x in column_names for x in cross]):
+                raise("Error: Columns in 'cross' are also in 'column_names'")
+
+        if cross is None:
+            cross = [self._target_name]
 
         imbalances = []
         for col in column_names:
-            imbalance = self.imbalance(
+            imbalance = self.show_imbalance(
                 col,
                 bins=bins,
-                cross_column_names=cross_column_names)
+                cross=cross)
             imbalances.append(imbalance)
 
         return imbalances
 
     def balance(self,
             column_name: str,
-            cross_column_names: List[str] = [],
-            target_upsample: int = None,
-            target_downsample: int = 1,
+            cross: List[str] = None,
+            upsample: int = None,
+            downsample: int = 1,
             bins: int = None):
 
-        if not target_upsample:
-            target_upsample = self._threshold
+        if cross is None:
+            cross = [self._target_name]
 
-        all_cols = cross_column_names + [column_name]
+        if not upsample:
+            upsample = self._threshold
+
+        all_cols = cross + [column_name]
         grouped = self._group_by_columns(all_cols, bins)
 
         count_grp = grouped.count()
         count_max = count_grp.values.max()
-        count_upsample = int(target_upsample*count_max)
-        count_downsample = int(target_downsample*count_max)
+        count_upsample = int(upsample*count_max)
+        count_downsample = int(downsample*count_max)
 
         def norm(x):
             if x.shape[0] < count_upsample:
@@ -220,7 +242,7 @@ class XData:
             corr = sr(self.df).correlation 
             cols = self.df.columns
         else:
-            corr = self.df.corr()
+            corr = self.df[self._numerical_cols].corr()
             cols = corr.columns
 
         if plot_type == "dendogram":
@@ -231,6 +253,5 @@ class XData:
             raise(f"Variable plot_type not valid. Provided: {plot_type}")
 
         return corr
-
     
 

@@ -87,4 +87,5 @@ docs_src/build/
 .mypy_cache
 xai.egg-info
 .eggs
+.ipynb_checkpoints
 

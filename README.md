@@ -38,8 +38,61 @@ You can find example usage in the examples folder.
 
 ### 1) Data Analysis
 
+``` python
+# Initialise XData object with dataframe and target col
+xd = XData(df, target="loan")
+
+# Set protected columns (default is all)
+xd.set_protected(["gender", "ethnicity"])
+
+# Access dataframe directly
+xd.df.head()
+
+# View class imbalances
+xd.show_imbalances(cross=[])
+
+# View imbalance for specific column
+xd.show_imbalance("gender", cross=[])
+
+# Adapt threshold for imbalance evaluation
+xd.set_threshold(0.8)
+
+# Balance class that is under threshold
+xd.balance("gender")
+xd.show_imbalance("gender", cross=[])
+
+# Visualise cross-class imbalance
+xd.show_imbalance("gender")
+
+xd.reset()
+xd.balance("gender", downsample=0.8, upsample=0.8)
+xd.show_imbalance("gender")
+
+# View correlations
+xd.correlations()
+
+# Normalize numerical columns
+xd.normalize_numeric()
+
+# You can access test and train datasets as well
+xd.x_train.head()
+# xd.x_valid.head()
+# xd.x_test.head()
+
+```
 
 ### 2) Model Evaluation
+
+``` python
+# Initialise with data
+xm = XModel(xd, predictions=[])
+
+xm.refresh()
+
+xm.imbalances()
+
+xm.
+```
 
 
 ### 3) Production Monitoring
