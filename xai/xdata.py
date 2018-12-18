@@ -43,7 +43,7 @@ class XData:
 
     def _initialise_from_dataframe(self,
             df: pd.DataFrame,
-            col_names: List[str] = None,
+            col_names: Lireplacest[str] = None,
             categorical_cols: List[str] = None) -> None:
         """
         Process dataframe provided to create XData object from it. 
@@ -75,7 +75,7 @@ class XData:
         self._threshold = threshold
 
     def reset(self):
-        self.df = self.orig_df
+        self.df = self.orig_df.copy()
 
     def normalize_numeric(self):
         numerical_cols = self._numerical_cols
@@ -86,8 +86,10 @@ class XData:
 
         return self.df
 
-    def convert_categories(self):
-        categorical_cols = self._categorical_cols
+    def convert_categories(self,
+            categorical_cols: List[str] = None):
+        if categorical_cols is None:
+            categorical_cols = self._categorical_cols
         self.df[categorical_cols] = self.df[categorical_cols].astype('category')
         self.df[categorical_cols] = self.df[categorical_cols].apply(lambda x: x.cat.codes)
         self.df[categorical_cols] = self.df[categorical_cols].astype('int8')
@@ -100,7 +102,7 @@ class XData:
         group_list = []
         for c in all_cols:
             col = self.df[c]
-            if col.dtype == np.object or not bins:
+            if c in self._categorical_cols or not bins:
                 grp = c
             else:
                 col_min = col.min()
@@ -148,11 +150,13 @@ class XData:
             cross: List[str] = None) -> Any:
 
         # TODO: Ensure column_names and cross are part of df.columns
+        print(self._protected_cols)
+
         if not column_names:
-            column_names = [x for x in list(self._protected_cols) if x not in cross]
-        else:
-            if any([x in column_names for x in cross]):
-                raise("Error: Columns in 'cross' are also in 'column_names'")
+            column_names = self._protected_cols
+
+        if cross and any([x in column_names for x in cross]):
+            raise("Error: Columns in 'cross' are also in 'column_names'")
 
         if cross is None:
             cross = [self._target_name]
@@ -230,7 +234,6 @@ class XData:
         ax.set_xticklabels(cols)
         ax.set_yticklabels(cols)
         plt.show()
-
 
     def correlations(self, 
             include_categorical: bool = False,
