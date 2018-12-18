@@ -43,7 +43,7 @@ class XData:
 
     def _initialise_from_dataframe(self,
             df: pd.DataFrame,
-            col_names: Lireplacest[str] = None,
+            col_names: List[str] = None,
             categorical_cols: List[str] = None) -> None:
         """
         Process dataframe provided to create XData object from it. 
