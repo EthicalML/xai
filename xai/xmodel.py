@@ -4,6 +4,9 @@ from xai.xdata import XData
 import pandas as pd
 from typing import List, Any, Callable
 
+def predict_func(x,y,m):
+    return 
+
 class XModel:
     def __init__(self, 
             xdata: XData,

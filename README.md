@@ -40,10 +40,10 @@ You can find example usage in the examples folder.
 
 ``` python
 # Initialise XData object with dataframe and target col
-xd = XData(df, target="loan")
+xd = XData("loan", df)
 
 # Set protected columns (default is all)
-xd.set_protected(["gender", "ethnicity"])
+xd.set_protected(["gender", "ethnicity", "native-country", "age"])
 
 # Access dataframe directly
 xd.df.head()
@@ -71,27 +71,28 @@ xd.show_imbalance("gender")
 # View correlations
 xd.correlations()
 
-# Normalize numerical columns
 xd.normalize_numeric()
+xd.convert_categories()
+xd.test_split()
 
-# You can access test and train datasets as well
-xd.x_train.head()
-# xd.x_valid.head()
-# xd.x_test.head()
+model.fit(xd.df)
+preds = model.predict(xd_test.df)
+
+xd_test.roc_curve(preds, cross=["gender"])
 
 ```
 
 ### 2) Model Evaluation
 
 ``` python
-# Initialise with data
-xm = XModel(xd, predictions=[])
+# Normalize numerical columns
+xd.normalize_numeric()
+xd.convert_categories()
 
-xm.refresh()
-
-xm.imbalances()
-
-xm.
+# You can access test and train datasets as well
+xd.x_train.head()
+# xd.x_valid.head()
+# xd.x_test.head()
 ```
 
 
