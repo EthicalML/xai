@@ -5,21 +5,23 @@ from scipy.stats import spearmanr as sr
 from scipy.cluster import hierarchy as hc
 from typing import List, Any
 import random, math
+# TODO: Remove Dependencies, starting with Sklearn
+from sklearn.metrics import roc_curve
 
-# TODO: Make categorical_cols optional argument to 
+# TODO: Make categorical_cols optional argument (None) to 
 # avoid ambiguity when there are no categorical cols
 
 
 def normalize_numeric(
         df, 
-        cols: List[str] = []):
+        numerical_cols: List[str] = []):
 
     tmp_df = df.copy()
 
-    if not len(cols):
-        cols = df.select_dtypes(include=[np.number]).columns
+    if not len(numerical_cols):
+        numerical_cols = df.select_dtypes(include=[np.number]).columns
 
-    for k in cols:
+    for k in numerical_cols:
         tmp_df[k] = tmp_df[k].astype(np.float32)
         tmp_df[k] -= tmp_df[k].mean()
         tmp_df[k] /= tmp_df[k].std()
@@ -28,16 +30,16 @@ def normalize_numeric(
 
 def convert_categories(
         df,
-        cols: List[str] = []):
+        categorical_cols: List[str] = []):
 
     tmp_df = df.copy()
 
-    if not len(cols):
-        cols = df.select_dtypes(include=[np.object]).columns
+    if not len(categorical_cols):
+        categorical_cols = df.select_dtypes(include=[np.object]).columns
 
-    tmp_df[cols] = tmp_df[cols].astype('category')
-    tmp_df[cols] = tmp_df[cols].apply(lambda x: x.cat.codes)
-    tmp_df[cols] = tmp_df[cols].astype('int8')
+    tmp_df[categorical_cols] = tmp_df[categorical_cols].astype('category')
+    tmp_df[categorical_cols] = tmp_df[categorical_cols].apply(lambda x: x.cat.codes)
+    tmp_df[categorical_cols] = tmp_df[categorical_cols].astype('int8')
 
     return tmp_df
 
@@ -253,7 +255,7 @@ def balanced_train_test_split(
         random_state: int=None,
         include_target=True):
     """
-    sample_type: Can be "error", "half", or "upsample"
+    sample_type: Can be "error", or "half""
     """
     
     if random_state:
@@ -280,9 +282,7 @@ def balanced_train_test_split(
 
     def resample(x):
         group_size = x.shape[0]
-        if fallback_type == "upsample":
-            return x.sample(min_per_class, replace=True)
-        elif fallback_type == "half":
+        if fallback_type == "half":
             if group_size > 2*min_per_class:
                 return x.sample(min_per_class)
             else:
@@ -301,7 +301,7 @@ def balanced_train_test_split(
                         " and fallback_type provided was 'error'")
         else:
             raise(f"Sampling type provided not found: given {fallback_type}, "\
-                 "expected: 'error', 'half' or 'upsample'")
+                 "expected: 'error', or 'half'")
                     
     group = grouped.apply(resample)
 
@@ -322,4 +322,194 @@ def balanced_train_test_split(
     
     return x_train, y_train, x_test, y_test
 
+
+
+def convert_probs(probs, threshold=0.5):
+    """Convert probabilities into classes"""
+    # TODO: Enable for multiclass
+    return (probs >= threshold).astype(int)
+
+def perf_metrics(y_valid, y_pred):
+    TP = np.sum( y_pred[y_valid==1] )
+    TN = np.sum( y_pred[y_valid==0] == 0 )
+    FP = np.sum(  y_pred[y_valid==0] )
+    FN = np.sum(  y_pred[y_valid==1] == 0 )
+
+    precision = TP / (TP+FP)
+    recall = TP / (TP+FN)
+    specificity = TN / (TN+FP)
+    accuracy = (TP+TN) / (TP+TN+FP+FN)
+
+    return precision, recall, specificity, accuracy
+
+def metrics_imbalance(
+        x_df,
+        y_valid,
+        y_pred,
+        col_name=None,
+        cross=[],
+        categorical_cols=[],
+        bins=6,
+        prob_threshold=0.5,
+        plot=True):
+
+    x_tmp = x_df.copy()
+    x_tmp["target"] = y_valid
+    x_tmp["predicted"] = y_pred
+
+    # Convert predictions into classes
+    # TODO: Enable for multiclass
+    if x_tmp["predicted"].dtype.kind == 'f':
+        x_tmp["predicted"] = convert_probs(
+            x_tmp["predicted"], threshold=prob_threshold)
+
+    if col_name is None:
+        grouped = [("target", x_tmp),]
+    else:
+        cols = cross + [col_name]
+        grouped = group_by_columns(
+            x_tmp,
+            cols,
+            bins=bins,
+            categorical_cols=categorical_cols)
+
+    prfs = []
+    classes = []
+    for group, group_df in grouped:
+        group_valid = group_df["target"].values
+        group_pred = group_df["predicted"].values
+        precision, recall, specificity, accuracy = \
+            perf_metrics(group_valid, group_pred)
+        prfs.append([precision, recall, specificity, accuracy])
+        classes.append(str(group))
+
+    prfs_cols = ["precision", "recall", "specificity", "accuracy"]
+    prfs_df = pd.DataFrame(
+            prfs, 
+            columns=prfs_cols, 
+            index=classes)
+
+    if plot:
+        prfs_df.plot.bar(figsize=(20,5))
+        lp = plt.axhline(0.5, color='r')
+        lp = plt.axhline(1, color='g')
+
+    return prfs_df
+
+def metrics_imbalances(
+        x_test,
+        y_test,
+        predictions,
+        columns=[],
+        categorical_cols=[],
+        cross=[],
+        bins=6,
+        prob_threshold=0.5,
+        plot=True):
+
+    if not len(columns):
+        columns = x_test.columns
+
+    if not len(categorical_cols):
+        categorical_cols = x_test.select_dtypes(include=[np.object]).columns
+
+    results = []
+    for col in columns:
+        r = metrics_imbalance(
+            x_test,
+            y_test,
+            predictions,
+            col,
+            cross=cross,
+            categorical_cols=categorical_cols,
+            bins=6,
+            prob_threshold=prob_threshold,
+            plot=True)
+        results.append(r)
+
+    return results
+
+
+
+def roc_imbalance(
+        x_df,
+        y_valid,
+        y_pred,
+        col_name=None,
+        cross=[],
+        categorical_cols=None,
+        bins=6,
+        plot=True):
+
+    x_tmp = x_df.copy()
+    x_tmp["target"] = y_valid
+    x_tmp["predicted"] = y_pred
+
+    if col_name is None:
+        grouped = [("target", x_tmp),]
+    else:
+        cols = cross + [col_name]
+        grouped = group_by_columns(
+            x_tmp,
+            cols,
+            bins=bins,
+            categorical_cols=categorical_cols)
+
+    if plot:
+        plt.figure()
+
+    fprs = tprs = []
+
+    for group, group_df in grouped:
+        group_valid = group_df["target"]
+        group_pred = group_df["predicted"]
+
+        fpr, tpr, _ = roc_curve(group_valid, group_pred)
+        fprs.append(fpr)
+        tprs.append(tpr)
+
+        if plot:
+            plt.plot(fpr, tpr, label=group)
+            plt.plot([0, 1], [0, 1], 'k--')
+
+    if plot:
+        plt.xlim([0.0, 1.0])
+        plt.ylim([0.0, 1.05])
+        plt.xlabel('False Positive Rate')
+        plt.ylabel('True Positive Rate')
+        plt.legend(loc="lower right")
+        plt.show()
+
+    return fprs, tprs
+
+def roc_imbalances(
+        x_test,
+        y_test,
+        predictions,
+        columns=[],
+        categorical_cols=[],
+        cross=[],
+        bins=6,
+        plot=True):
+
+    if not len(columns):
+        columns = x_test.columns
+
+    if not len(categorical_cols):
+        categorical_cols = x_test.select_dtypes(include=[np.object]).columns
+
+    results = []
+    for col in columns:
+        r = roc_imbalance(
+            x_test,
+            y_test,
+            predictions,
+            col,
+            cross=cross,
+            categorical_cols=categorical_cols,
+            bins=6,
+            plot=True)
+        results.append(r)
+
+    return results
 
