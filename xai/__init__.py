@@ -257,6 +257,8 @@ def balanced_train_test_split(
     """
     sample_type: Can be "error", or "half""
     """
+    # TODO: Allow parameter test_size:int so it's possible 
+    # to provide preferred test size, and fill up the rest with normal .sample()
     
     if random_state:
         random.setstate(random_state)
@@ -596,4 +598,84 @@ def pr_imbalances(
 
     return results
 
+
+def smile_imbalance(
+        y_test, 
+        probs, 
+        threshold=0.5, 
+        manual_review=None,
+        display_breakdown=False,
+        bins=10):
+    
+    preds = convert_probs(probs, threshold).flatten()
+    d = pd.DataFrame(probs)
+    d.columns = ["probs"]
+    d["preds"] = preds
+    d["target"] = y_test
+
+    tps = np.full(y_test.shape, False, bool)
+
+    d["true-positives"] = np.full(y_test.shape[0], False, bool)
+    d["true-negatives"] = np.full(y_test.shape[0], False, bool)
+    d["false-positives"] = np.full(y_test.shape[0], False, bool)
+    d["false-negatives"] = np.full(y_test.shape[0], False, bool)
+    d["manual-review"] =  np.full(y_test.shape[0], False, bool)
+
+    d["true-positives"].loc[y_test == 1] = preds[y_test == 1] == 1
+    d["true-negatives"].loc[y_test == 0] = preds[y_test == 0] == 0
+    d["false-positives"].loc[y_test == 0] = preds[y_test == 0] == 1
+    d["false-negatives"].loc[y_test == 1] = preds[y_test == 1] == 0
+
+    d["correct"] = d["true-positives"].values
+    d["correct"].loc[d["true-negatives"] == 1] = True
+
+    d["incorrect"] = d["false-positives"].values
+    d["incorrect"].loc[d["false-negatives"] == 1] = True 
+    
+    if display_breakdown:
+        disp_cols = ["true-positives", 
+                     "true-negatives", 
+                     "false-positives", 
+                     "false-negatives"]
+    else:
+        disp_cols = ["correct", "incorrect"]
+    
+    if manual_review:
+        gt = probs > manual_review
+        lt = probs < threshold
+        d["manual-review"] = gt * lt > 0
+        
+        if display_breakdown:
+            d["true-positives"].loc[d["manual-review"]] = False
+            d["true-negatives"].loc[d["manual-review"]] = False
+            d["false-positives"].loc[d["manual-review"]] = False
+            d["false-negatives"].loc[d["manual-review"]] = False
+        else:
+            d["correct"].loc[d["manual-review"]] = False
+            d["incorrect"].loc[d["manual-review"]] = False
+        
+        disp_cols.append("manual-review")
+
+    d["true-positives"] = d["true-positives"].astype(int) 
+    d["true-negatives"] = d["true-negatives"].astype(int)
+    d["false-positives"] = d["false-positives"].astype(int)
+    d["false-negatives"] = d["false-negatives"].astype(int)
+    d["correct"] = d["correct"].astype(int)
+    d["incorrect"] = d["incorrect"].astype(int)
+
+    grouped = group_by_columns(d, ["probs"], bins=bins)
+
+    ax = grouped[disp_cols].sum().plot.bar(stacked=True, figsize=(15,5))
+    lim = ax.get_xlim()
+    ran = lim[1] - lim[0]
+    thre = ran*threshold + lim[0]
+    plt.axvline(thre)
+    if manual_review:
+        manr = ran*manual_review + lim[0]
+        plt.axvline(manr)
+    # TODO: Need to fix this hack and use the index
+    ax_xticks = [label.get_text().split()[1][:-1] for label in ax.get_xticklabels()]
+    ax.set_xticklabels(ax_xticks)
+    
+    return d
 
