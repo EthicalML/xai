@@ -6,7 +6,7 @@ from scipy.cluster import hierarchy as hc
 from typing import List, Any
 import random, math
 # TODO: Remove Dependencies, starting with Sklearn
-from sklearn.metrics import roc_curve
+from sklearn.metrics import roc_curve, precision_recall_curve
 
 # TODO: Make categorical_cols optional argument (None) to 
 # avoid ambiguity when there are no categorical cols
@@ -512,4 +512,88 @@ def roc_imbalances(
         results.append(r)
 
     return results
+
+
+
+def pr_imbalance(
+        x_df,
+        y_valid,
+        y_pred,
+        col_name=None,
+        cross=[],
+        categorical_cols=None,
+        bins=6,
+        plot=True):
+
+    x_tmp = x_df.copy()
+    x_tmp["target"] = y_valid
+    x_tmp["predicted"] = y_pred
+
+    if col_name is None:
+        grouped = [("target", x_tmp),]
+    else:
+        cols = cross + [col_name]
+        grouped = group_by_columns(
+            x_tmp,
+            cols,
+            bins=bins,
+            categorical_cols=categorical_cols)
+
+    if plot:
+        plt.figure()
+
+    prs = rcs = []
+
+    for group, group_df in grouped:
+        group_valid = group_df["target"]
+        group_pred = group_df["predicted"]
+
+        pr, rc, _ = precision_recall_curve(group_valid, group_pred)
+        prs.append(pr)
+        rcs.append(rc)
+
+        if plot:
+            plt.plot(pr,rc, label=group)
+
+    if plot:
+        plt.xlim([0.0, 1.0])
+        plt.ylim([0.0, 1.05])
+        plt.xlabel('Recall')
+        plt.ylabel('Precision')
+        plt.legend(loc="lower left")
+        plt.show()
+
+    return prs, rcs
+
+def pr_imbalances(
+        x_test,
+        y_test,
+        predictions,
+        columns=[],
+        categorical_cols=[],
+        cross=[],
+        bins=6,
+        plot=True):
+
+    if not len(columns):
+        columns = x_test.columns
+
+    if not len(categorical_cols):
+        categorical_cols = x_test.select_dtypes(include=[np.object]).columns
+
+    results = []
+    for col in columns:
+        r = pr_imbalance(
+            x_test,
+            y_test,
+            predictions,
+            col,
+            cross=cross,
+            categorical_cols=categorical_cols,
+            bins=6,
+            plot=True)
+        results.append(r)
+
+    return results
+
 
