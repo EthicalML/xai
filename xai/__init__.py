@@ -607,6 +607,8 @@ def smile_imbalance(
         display_breakdown=False,
         bins=10):
     
+    # TODO: Change function so it only iterates once
+
     preds = convert_probs(probs, threshold).flatten()
     d = pd.DataFrame(probs)
     d.columns = ["probs"]
@@ -678,4 +680,25 @@ def smile_imbalance(
     ax.set_xticklabels(ax_xticks)
     
     return d
+
+
+def feature_importance(x, y, func, repeat=10, plot=True):
+    base_score = func(x, y)
+    imp = [0] * len(x.columns)
+    for i in range(repeat):
+        for j, c in enumerate(x.columns):
+            tmp = x[c].values.copy()
+            np.random.shuffle(x[c].values)
+            score = func(x, y)
+            x[c] = tmp
+            imp[j] += base_score - score
+    imp = [a/repeat for a in imp]
+    imp_df = pd.DataFrame(data=[imp], columns=x.columns)
+    if plot:
+        imp_df.sum().sort_values().plot.barh()
+    return imp_df
+
+
+
+
 
