@@ -15,7 +15,6 @@ The provide a visual overview of these three steps, we can have a look at this i
 
 <img width="100%" src="images/bias.png">
 
-
 # XAI Quickstart
 
 ## Installation
