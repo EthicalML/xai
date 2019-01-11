@@ -37,67 +37,64 @@ You can find example usage in the examples folder.
 
 ### 1) Data Analysis
 
+#### Load a dataframe to work on
 ``` python
-# Initialise XData object with dataframe and target col
-xd = XData("loan", df)
+df = xai.data.census
+df.head()
+```
+<img width="100%" src="images/readme-1.png">
 
-# Set protected columns (default is all)
-xd.set_protected(["gender", "ethnicity", "native-country", "age"])
+#### View class imbalances for protected columns
+``` python
+protected_cols = ["gender", "ethnicity", "age"]
+ims = xai.show_imbalances(df, protected_cols)
+```
+<img width="100%" src="images/readme-2.png">
 
-# Access dataframe directly
-xd.df.head()
+#### View imbalance of one column
+``` python
+im = xai.show_imbalance(df, "gender")
+```
+<img width="100%" src="images/readme-3.png">
 
-# View class imbalances
-xd.show_imbalances(cross=[])
+#### View imbalance of one column intersected with another
+``` python
+im = xai.show_imbalance(df, "gender", cross=["loan"])
+```
+<img width="100%" src="images/readme-4.png">
 
-# View imbalance for specific column
-xd.show_imbalance("gender", cross=[])
+#### Balance the class using upsampling and/or downsampling
+``` python
+bal_df = xai.balance(df, "gender", cross=["loan"], upsample=1.0)
+```
+<img width="100%" src="images/readme-5.png">
 
-# Adapt threshold for imbalance evaluation
-xd.set_threshold(0.8)
-
-# Balance class that is under threshold
-xd.balance("gender")
-xd.show_imbalance("gender", cross=[])
-
-# Visualise cross-class imbalance
-xd.show_imbalance("gender")
-
-xd.reset()
-xd.balance("gender", downsample=0.8, upsample=0.8)
-xd.show_imbalance("gender")
-
-# View correlations
-xd.correlations()
-
-xd.normalize_numeric()
-xd.convert_categories()
-xd.test_split()
-
-model.fit(xd.df)
-preds = model.predict(xd_test.df)
-
-xd_test.roc_curve(preds, cross=["gender"])
-
+#### Create a balanced test-train split (should be done pre-balancing)
+``` python
+x_train, y_train, x_test, y_test = xai.balanced_train_test_split(
+            x, y, cross=["gender"], 
+            categorical_cols=categorical_cols, min_per_class=300)
 ```
 
 ### 2) Model Evaluation
 
+#### Identify metric imbalances for the whole model
 ``` python
-# Normalize numerical columns
-xd.normalize_numeric()
-xd.convert_categories()
-
-# You can access test and train datasets as well
-xd.x_train.head()
-# xd.x_valid.head()
-# xd.x_test.head()
+_= xai.metrics_imbalance(
+        x_test, 
+        y_test, 
+        probabilities)
 ```
 
-
-### 3) Production Monitoring
-
-
+#### Identify metric imbalances for protected columns
+``` python
+_= xai.metrics_imbalances(
+        x_test, 
+        y_test, 
+        probabilities,
+        columns=protected,
+        categorical_cols=categorical_cols)
+```
 
 
 
