@@ -24,11 +24,9 @@ class CleanCommand(Command):
     def run(self):
         os.system('rm -vrf ./build ./dist ./*.pyc ./*.tgz ./*.egg-info ./**/__pycache__ ./__pycache__ ./.eggs ./.cache')
 
-print(find_packages(exclude=["*.tests", "*.tests.*", "tests.*", "tests"]))
-
 setup(
     name="xai",
-    version="0.1",
+    version="0.0.1",
     description="XAI - An industry-ready machine learning library that ensures explainable AI by design",
     long_description=readme,
     author="Alejandro Saucedo",
@@ -45,7 +43,6 @@ setup(
     packages=find_packages(exclude=["*.tests", "*.tests.*", "tests.*", "tests"]),
     include_package_data=True,
     install_requires=requirements,
-    scripts=('xai.py',),
     data_files=[ (".", ["LICENSE"]) ],
     setup_requires=['pytest-runner'],
     tests_require=['pytest'],
