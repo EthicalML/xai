@@ -14,7 +14,6 @@ with open(os.path.join(currentFileDirectory, "README.md"), "r") as f:
 with open('requirements.txt') as f:
     requirements = f.read().splitlines()
 
-
 class CleanCommand(Command):
     """Custom clean command to tidy up the project root."""
     user_options = []
