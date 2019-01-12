@@ -37,7 +37,8 @@ You can find example usage in the examples folder.
 
 ### 1) Data Analysis
 
-#### Load a dataframe to work on
+With XAI you can identify imbalances in the data. For this, we will load the census dataset from the XAI library.
+
 ``` python
 df = xai.data.census
 df.head()
@@ -71,22 +72,54 @@ bal_df = xai.balance(df, "gender", cross=["loan"], upsample=1.0)
 
 #### Create a balanced test-train split (should be done pre-balancing)
 ``` python
+# Balanced train-test split with minimum 300 examples of 
+# the cross of the target y and the column gender
 x_train, y_train, x_test, y_test = xai.balanced_train_test_split(
             x, y, cross=["gender"], 
             categorical_cols=categorical_cols, min_per_class=300)
+
+# Visualise the imbalances of gender and the target 
+df_test = x_test.copy()
+df_test["loan"] = y_test
+_= xai.show_imbalance(df_test, "gender", cross=["loan"], categorical_cols=categorical_cols)
 ```
+<img width="100%" src="images/readme-16.png">
 
 ### 2) Model Evaluation
 
-#### Identify metric imbalances for the whole model
+We are able to also analyse the interaction between inference results and input features. For this, we will train a single layer deep learning model.
+
+```
+model = build_model(proc_df.drop("loan", axis=1))
+
+model.fit(f_in(x_train), y_train, epochs=50, batch_size=512)
+
+probabilities = model.predict(f_in(x_test))
+predictions = list((probabilities >= 0.5).astype(int).T[0])
+```
+<img width="100%" src="images/readme-15.png">
+
+#### Visualise permutation feature importance
+``` python
+def get_avg(x, y):
+    return model.evaluate(f_in(x), y, verbose=0)[1]
+
+imp = xai.feature_importance(x_test, y_test, get_avg)
+
+imp.head()
+```
+<img width="100%" src="images/readme-6.png">
+
+#### Identify metric imbalances against all test data
 ``` python
 _= xai.metrics_imbalance(
         x_test, 
         y_test, 
         probabilities)
 ```
+<img width="100%" src="images/readme-7.png">
 
-#### Identify metric imbalances for protected columns
+#### Identify metric imbalances grouped by protected columns
 ``` python
 _= xai.metrics_imbalances(
         x_test, 
@@ -95,6 +128,68 @@ _= xai.metrics_imbalances(
         columns=protected,
         categorical_cols=categorical_cols)
 ```
+<img width="100%" src="images/readme-8.png">
+
+#### Visualise the ROC curve against all test data
+``` python
+_= xai.roc_imbalance(
+    x_test, 
+    y_test, 
+    probabilities)
+```
+<img width="100%" src="images/readme-9.png">
+
+#### Visualise the ROC curves grouped by protected columns
+``` python
+_= xai.roc_imbalances(
+    x_test, 
+    y_test, 
+    probabilities, 
+    columns=protected,
+    categorical_cols=categorical_cols)
+```
+<img width="100%" src="images/readme-10.png">
+
+#### Visualise the precision-recall curve by protected columns
+``` python
+_= xai.pr_imbalances(
+    x_test, 
+    y_test, 
+    probabilities, 
+    columns=protected,
+    categorical_cols=categorical_cols)
+```
+<img width="100%" src="images/readme-11.png">
+
+#### Visualise accuracy grouped by probability buckets
+``` python
+d = xai.smile_imbalance(
+    y_test, 
+    probabilities)
+```
+<img width="100%" src="images/readme-12.png">
+
+#### Visualise statistical metrics grouped by probability buckets
+``` python
+d = xai.smile_imbalance(
+    y_test, 
+    probabilities,
+    display_breakdown=True)
+```
+<img width="100%" src="images/readme-13.png">
+
+#### Visualise benefits of adding manual review on probability thresholds
+``` python
+d = xai.smile_imbalance(
+    y_test, 
+    probabilities,
+    bins=9,
+    threshold=0.75,
+    manual_review=0.375,
+    display_breakdown=False)
+```
+<img width="100%" src="images/readme-14.png">
+
 
 
 
