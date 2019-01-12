@@ -4,9 +4,13 @@
 ![GitHub](https://img.shields.io/badge/License-MIT-lightgrey.svg)
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/Naereen/StrapDown.js/graphs/commit-activity)
 
-# XAI [0.1 ALPHA] - An ML eXplainability library 
+# XAI - An eXplainability toolbox for machine learning [v0.1 ALPHA] 
 
 XAI is a Machine Learning library that is designed with AI explainability in its core. XAI contains various tools that enable for analysis and evaluation of data and models. The XAI library is maintained by [The Institute for Ethical AI & ML](http://ethical.institute/), and it was developed based on the [8 principles for Responsible Machine Learning](http://ethical.institute/principles.html).
+
+# ALPHA Version
+
+This library is currently in early stage developments
 
 ## What do we mean by eXplainable AI?
 
