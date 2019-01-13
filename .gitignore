@@ -89,3 +89,6 @@ xai.egg-info
 .eggs
 .ipynb_checkpoints
 
+xai.egg-info/
+build
+
