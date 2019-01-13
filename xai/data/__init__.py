@@ -26,7 +26,6 @@ def load_census(return_xy: bool = False
         array with targets.
     :rtype: (pd.DataFrame, Optional[np.array])
 
-
     """
     df = pd.read_csv(os.path.join(PATH, "census.csv"), index_col=0)
     if not return_xy:

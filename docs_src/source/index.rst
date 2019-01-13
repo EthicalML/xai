@@ -3,8 +3,8 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to xai - WordCount Python's documentation!
-====================================================
+Welcome to the XAI docs - eXplainable machine learning
+===========================================================
 
 .. toctree::
    :maxdepth: 4
@@ -15,7 +15,7 @@ Welcome to the ``xai`` documentation. Here you will the installation guide, the 
 
 
 Installation
-----------
+--------------
 
 
 xai Python Docstrings
@@ -23,44 +23,19 @@ xai Python Docstrings
 
 
 Submodules
-----------
+------------
 
-xai\.xai\_extractor module
---------------------------
-
-.. automodule:: xai.xai_extractor
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-xai\.xai\_extractor\_file module
---------------------------------
-
-.. automodule:: xai.xai_extractor_file
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-xai\.xai\_extractor\_processor module
--------------------------------------
-
-.. automodule:: xai.xai_extractor_processor
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-
-xai\.main module
+xai\.data module
 -----------------
 
-.. automodule:: xai.main
+.. automodule:: xai.data
     :members:
     :undoc-members:
     :show-inheritance:
 
 
 Module contents
----------------
+-----------------
 
 .. automodule:: xai
     :members:

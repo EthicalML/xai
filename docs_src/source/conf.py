@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
-# xai.py - eXplainable AI documentation build configuration file, created by
+# xai - eXplainable AI documentation build configuration file, created by
 # sphinx-quickstart on Fri Jun 23 15:52:18 2017.
 #
 # This file is execfile()d with the current directory set to its
@@ -20,6 +20,7 @@
 import os
 import sys
 sys.path.insert(0, os.path.abspath('../..'))
+print(sys.path)
 
 # -- General configuration ------------------------------------------------
 
@@ -47,7 +48,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = 'xai.py - eXplainable AI'
+project = 'xai - eXplainable AI'
 copyright = '2018, Alejandro Saucedo'
 author = 'Alejandro Saucedo'
 
@@ -133,7 +134,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'xai-eXplainableAI.tex', 'xai.py - eXplainable AI Documentation',
+    (master_doc, 'xai-eXplainableAI.tex', 'xai - eXplainable AI Documentation',
      'Alejandro Saucedo', 'manual'),
 ]
 
@@ -143,7 +144,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'wcpy-wordcountpython', 'xai.py - eXplainable AI Documentation',
+    (master_doc, 'xai-eXplainableAI', 'xai - eXplainable AI Documentation',
      [author], 1)
 ]
 
@@ -154,8 +155,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'xai-eXplainableAI', 'xai.py - eXplainable AI Documentation',
-     author, 'xai-eXplainableAI', 'One line description of project.',
+    (master_doc, 'xai-eXplainableAI', 'xai - eXplainable AI Documentation',
+     author, 'xai-eXplainableAI', 'xai - eXplainable AI Documentation.',
      'Miscellaneous'),
 ]
 

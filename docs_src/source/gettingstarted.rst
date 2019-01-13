@@ -6,12 +6,12 @@ Getting started guide
    :caption: Contents:
 
 
-Welcome to the ``wc.py`` documentation. Here you will find everything, from the quick start guide
+Welcome to the ``XAI`` documentation. Here you will find everything
 
 Indices and tables
 ==================
 
 * :ref:`genindex`
-* :doc:`wcpy`
+* :doc:`xai`
 * :ref:`search`
 
