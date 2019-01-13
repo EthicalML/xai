@@ -4,7 +4,7 @@
 # You can set these variables from the command line.
 SPHINXOPTS    =
 SPHINXBUILD   = python -msphinx
-SPHINXPROJ    = xai-eXplainableAI
+SPHINXPROJ    = xai
 SOURCEDIR     = source
 BUILDDIR      = build
 

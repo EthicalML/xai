@@ -14,8 +14,26 @@ from sklearn.metrics import roc_curve, precision_recall_curve
 
 def normalize_numeric(
         df, 
-        numerical_cols: List[str] = []):
+        numerical_cols: List[str] = []
+        ) -> pd.DataFrame:
+    """
+    Normalizes numeric columns by substracting the mean and dividing
+    by standard deviation. If the parameter numerical_cols is not
+    provided, it will take all the columns of dtype np.number.
 
+    :Example:
+
+    import xai
+    norm_df = xai.normalize_numeric(df)
+
+    :param df: Pandas Dataframe containing data (inputs and target)
+    :type df: pd.DataFrame
+    :param numerical_cols: List of strings containing numercial cols
+    :type categorical_cols: str
+    :returns: Dataframe with normalized numerical values.
+    :rtype: pandas.DataFrame
+
+    """
     tmp_df = df.copy()
 
     if not len(numerical_cols):
@@ -31,7 +49,24 @@ def normalize_numeric(
 def convert_categories(
         df,
         categorical_cols: List[str] = []):
+    """
+    Converts columns to numeric categories. If the categorical_cols
+    parameter is passed as a list then those columns are converted.
+    Otherwise, all np.object columns are converted.
 
+    :Example:
+
+    import xai
+    cat_df = xai.convert_categories(df)
+
+    :param df: Pandas Dataframe containing data (inputs and target)
+    :type df: pd.DataFrame
+    :param categorical_cols: List of strings containing categorical cols
+    :type categorical_cols: str
+    :returns: Dataframe with categorical numerical values.
+    :rtype: pandas.DataFrame
+
+    """
     tmp_df = df.copy()
 
     if not len(categorical_cols):
@@ -49,6 +84,33 @@ def group_by_columns(
         bins: int = 6,
         categorical_cols: List[str] = [],
         ) -> pd.core.groupby.groupby.DataFrameGroupBy:
+    """
+    Groups dataframe by columns provided. If categorical it uses categories,
+    if numeric, it uses bins. If more than one column is provided, the function
+    creates crossed sub-groups.
+
+    :Example:
+
+    import xai
+    columns=["loan", "gender", "age"]
+    cat_df = xai.group_by_columns(
+        df, 
+        columns=columns,
+        bins=10,
+        categorical_cols=["gender"])
+
+    :param df: Pandas Dataframe containing data (inputs and target)
+    :type df: pd.DataFrame
+    :param bins: [Default: 6] Number of bins to be used for numerical cols
+    :type bins: int
+    :param categorical_cols: [Default: []] Columns within dataframe that are
+    categorical. Columns that are not np.objects and are not part explicitly
+    provided here will be treated as numeric, and bins will be used.
+    :type categorical_cols: List[str]
+    :returns: Dataframe with categorical numerical values.
+    :rtype: pandas.core.groupby.groupby.DataFrameGroupBy
+
+    """
 
     if not len(categorical_cols):
         categorical_cols = df.select_dtypes(include=[np.object]).columns

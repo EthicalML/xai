@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Welcome to xai - WordCount Python’s documentation! &mdash; xai.py - eXplainable AI 0.1 documentation</title>
+  <title>Welcome to the XAI docs - eXplainable machine learning &mdash; xai - eXplainable AI 0.1 documentation</title>
   
 
   
@@ -46,7 +46,7 @@
           
 
           
-            <a href="#" class="icon icon-home"> xai.py - eXplainable AI
+            <a href="#" class="icon icon-home"> xai - eXplainable AI
           
 
           
@@ -82,16 +82,13 @@
             
               <!-- Local TOC -->
               <div class="local-toc"><ul>
-<li><a class="reference internal" href="#">Welcome to xai - WordCount Python’s documentation!</a><ul>
+<li><a class="reference internal" href="#">Welcome to the XAI docs - eXplainable machine learning</a><ul>
 <li><a class="reference internal" href="#installation">Installation</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#xai-python-docstrings">xai Python Docstrings</a><ul>
 <li><a class="reference internal" href="#submodules">Submodules</a></li>
-<li><a class="reference internal" href="#xai-xai-extractor-module">xai.xai_extractor module</a></li>
-<li><a class="reference internal" href="#xai-xai-extractor-file-module">xai.xai_extractor_file module</a></li>
-<li><a class="reference internal" href="#xai-xai-extractor-processor-module">xai.xai_extractor_processor module</a></li>
-<li><a class="reference internal" href="#xai-main-module">xai.main module</a></li>
+<li><a class="reference internal" href="#module-xai.data">xai.data module</a></li>
 <li><a class="reference internal" href="#module-xai">Module contents</a></li>
 </ul>
 </li>
@@ -109,7 +106,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="#">xai.py - eXplainable AI</a>
+          <a href="#">xai - eXplainable AI</a>
         
       </nav>
 
@@ -140,7 +137,7 @@
     
       <li><a href="#">Docs</a> &raquo;</li>
         
-      <li>Welcome to xai - WordCount Python’s documentation!</li>
+      <li>Welcome to the XAI docs - eXplainable machine learning</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -159,8 +156,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="welcome-to-xai-wordcount-python-s-documentation">
-<h1>Welcome to xai - WordCount Python’s documentation!<a class="headerlink" href="#welcome-to-xai-wordcount-python-s-documentation" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="welcome-to-the-xai-docs-explainable-machine-learning">
+<h1>Welcome to the XAI docs - eXplainable machine learning<a class="headerlink" href="#welcome-to-the-xai-docs-explainable-machine-learning" title="Permalink to this headline">¶</a></h1>
 <div class="toctree-wrapper compound">
 </div>
 <p>Welcome to the <code class="docutils literal notranslate"><span class="pre">xai</span></code> documentation. Here you will the installation guide, the quick start guide, and the detailed docstrings code documentation of the xai library.</p>
@@ -173,20 +170,172 @@
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="xai-xai-extractor-module">
-<h2>xai.xai_extractor module<a class="headerlink" href="#xai-xai-extractor-module" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="xai-xai-extractor-file-module">
-<h2>xai.xai_extractor_file module<a class="headerlink" href="#xai-xai-extractor-file-module" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="xai-xai-extractor-processor-module">
-<h2>xai.xai_extractor_processor module<a class="headerlink" href="#xai-xai-extractor-processor-module" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="xai-main-module">
-<h2>xai.main module<a class="headerlink" href="#xai-main-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-xai.data">
+<span id="xai-data-module"></span><h2>xai.data module<a class="headerlink" href="#module-xai.data" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="xai.data.load_census">
+<code class="descclassname">xai.data.</code><code class="descname">load_census</code><span class="sig-paren">(</span><em>return_xy: bool = False</em><span class="sig-paren">)</span> &#x2192; Tuple[pandas.core.frame.DataFrame, Optional[numpy.core.multiarray.array]]<a class="headerlink" href="#xai.data.load_census" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load adult census dataset with column as “loan”
+instead of “target” to use during examples to “automate
+a loan approval process”.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Example:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+<p>from xai.data import load_census
+df = load_census()</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>return_xy</strong> (<em>bool</em>) – [default: False] pass True if you would like
+to return the data as X, y where X are the input columns and
+y is the target. If nothing (or False) is provided, the default
+return will be the full dataframe.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Dataframe with full contents OR dataframe with inputs and
+array with targets.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">(pd.DataFrame, Optional[np.array])</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 </div>
 <div class="section" id="module-xai">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-xai" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="xai.balance">
+<code class="descclassname">xai.</code><code class="descname">balance</code><span class="sig-paren">(</span><em>df: pandas.core.frame.DataFrame</em>, <em>column_name: str</em>, <em>cross: List[str] = []</em>, <em>upsample: int = 0.5</em>, <em>downsample: int = 1</em>, <em>bins: int = 6</em>, <em>categorical_cols: List[str] = []</em>, <em>plot: bool = True</em><span class="sig-paren">)</span><a class="headerlink" href="#xai.balance" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="xai.balanced_train_test_split">
+<code class="descclassname">xai.</code><code class="descname">balanced_train_test_split</code><span class="sig-paren">(</span><em>x: pandas.core.frame.DataFrame</em>, <em>y: numpy.core.multiarray.array</em>, <em>cross: List[str] = []</em>, <em>categorical_cols: List[str] = []</em>, <em>min_per_class: int = 20</em>, <em>fallback_type: str = 'half'</em>, <em>bins: int = 6</em>, <em>random_state: int = None</em>, <em>include_target=True</em><span class="sig-paren">)</span><a class="headerlink" href="#xai.balanced_train_test_split" title="Permalink to this definition">¶</a></dt>
+<dd><p>sample_type: Can be “error”, or “half”“</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="xai.convert_categories">
+<code class="descclassname">xai.</code><code class="descname">convert_categories</code><span class="sig-paren">(</span><em>df</em>, <em>categorical_cols: List[str] = []</em><span class="sig-paren">)</span><a class="headerlink" href="#xai.convert_categories" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="xai.convert_probs">
+<code class="descclassname">xai.</code><code class="descname">convert_probs</code><span class="sig-paren">(</span><em>probs</em>, <em>threshold=0.5</em><span class="sig-paren">)</span><a class="headerlink" href="#xai.convert_probs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert probabilities into classes</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="xai.correlations">
+<code class="descclassname">xai.</code><code class="descname">correlations</code><span class="sig-paren">(</span><em>df: pandas.core.frame.DataFrame, include_categorical: bool = False, plot_type: str = 'dendogram', figsize=[10, 5], categorical_cols: List[str] = []</em><span class="sig-paren">)</span><a class="headerlink" href="#xai.correlations" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="xai.feature_importance">
+<code class="descclassname">xai.</code><code class="descname">feature_importance</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>func</em>, <em>repeat=10</em>, <em>plot=True</em><span class="sig-paren">)</span><a class="headerlink" href="#xai.feature_importance" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="xai.group_by_columns">
+<code class="descclassname">xai.</code><code class="descname">group_by_columns</code><span class="sig-paren">(</span><em>df: pandas.core.frame.DataFrame, columns: List[str], bins: int = 6, categorical_cols: List[str] = []</em><span class="sig-paren">)</span> &#x2192; pandas.core.groupby.groupby.DataFrameGroupBy<a class="headerlink" href="#xai.group_by_columns" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="xai.metrics_imbalance">
+<code class="descclassname">xai.</code><code class="descname">metrics_imbalance</code><span class="sig-paren">(</span><em>x_df</em>, <em>y_valid</em>, <em>y_pred</em>, <em>col_name=None</em>, <em>cross=[]</em>, <em>categorical_cols=[]</em>, <em>bins=6</em>, <em>prob_threshold=0.5</em>, <em>plot=True</em><span class="sig-paren">)</span><a class="headerlink" href="#xai.metrics_imbalance" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="xai.metrics_imbalances">
+<code class="descclassname">xai.</code><code class="descname">metrics_imbalances</code><span class="sig-paren">(</span><em>x_test</em>, <em>y_test</em>, <em>predictions</em>, <em>columns=[]</em>, <em>categorical_cols=[]</em>, <em>cross=[]</em>, <em>bins=6</em>, <em>prob_threshold=0.5</em>, <em>plot=True</em><span class="sig-paren">)</span><a class="headerlink" href="#xai.metrics_imbalances" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="xai.normalize_numeric">
+<code class="descclassname">xai.</code><code class="descname">normalize_numeric</code><span class="sig-paren">(</span><em>df</em>, <em>numerical_cols: List[str] = []</em><span class="sig-paren">)</span> &#x2192; pandas.core.frame.DataFrame<a class="headerlink" href="#xai.normalize_numeric" title="Permalink to this definition">¶</a></dt>
+<dd><p>Normalizes numeric columns by substracting the mean and dividing
+by standard deviation. If the parameter numerical_cols is not
+provided, it will take all the columns of dtype np.number.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Example:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+<p>import xai
+norm_df = xai.normalize_numeric(df)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>df</strong> (<em>pd.DataFrame</em>) – Pandas Dataframe containing data (inputs and target)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Dataframe with normalized numerical values.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">pd.DataFrame</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="xai.perf_metrics">
+<code class="descclassname">xai.</code><code class="descname">perf_metrics</code><span class="sig-paren">(</span><em>y_valid</em>, <em>y_pred</em><span class="sig-paren">)</span><a class="headerlink" href="#xai.perf_metrics" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="xai.plot_dendogram">
+<code class="descclassname">xai.</code><code class="descname">plot_dendogram</code><span class="sig-paren">(</span><em>corr: pandas.core.frame.DataFrame, cols: List[str], figsize=(10, 5)</em><span class="sig-paren">)</span><a class="headerlink" href="#xai.plot_dendogram" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="xai.plot_matrix">
+<code class="descclassname">xai.</code><code class="descname">plot_matrix</code><span class="sig-paren">(</span><em>corr, cols: List[str], figsize=(10, 5)</em><span class="sig-paren">)</span><a class="headerlink" href="#xai.plot_matrix" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="xai.pr_imbalance">
+<code class="descclassname">xai.</code><code class="descname">pr_imbalance</code><span class="sig-paren">(</span><em>x_df</em>, <em>y_valid</em>, <em>y_pred</em>, <em>col_name=None</em>, <em>cross=[]</em>, <em>categorical_cols=None</em>, <em>bins=6</em>, <em>plot=True</em><span class="sig-paren">)</span><a class="headerlink" href="#xai.pr_imbalance" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="xai.pr_imbalances">
+<code class="descclassname">xai.</code><code class="descname">pr_imbalances</code><span class="sig-paren">(</span><em>x_test</em>, <em>y_test</em>, <em>predictions</em>, <em>columns=[]</em>, <em>categorical_cols=[]</em>, <em>cross=[]</em>, <em>bins=6</em>, <em>plot=True</em><span class="sig-paren">)</span><a class="headerlink" href="#xai.pr_imbalances" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="xai.roc_imbalance">
+<code class="descclassname">xai.</code><code class="descname">roc_imbalance</code><span class="sig-paren">(</span><em>x_df</em>, <em>y_valid</em>, <em>y_pred</em>, <em>col_name=None</em>, <em>cross=[]</em>, <em>categorical_cols=None</em>, <em>bins=6</em>, <em>plot=True</em><span class="sig-paren">)</span><a class="headerlink" href="#xai.roc_imbalance" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="xai.roc_imbalances">
+<code class="descclassname">xai.</code><code class="descname">roc_imbalances</code><span class="sig-paren">(</span><em>x_test</em>, <em>y_test</em>, <em>predictions</em>, <em>columns=[]</em>, <em>categorical_cols=[]</em>, <em>cross=[]</em>, <em>bins=6</em>, <em>plot=True</em><span class="sig-paren">)</span><a class="headerlink" href="#xai.roc_imbalances" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="xai.show_imbalance">
+<code class="descclassname">xai.</code><code class="descname">show_imbalance</code><span class="sig-paren">(</span><em>df: pandas.core.frame.DataFrame</em>, <em>column_name: str</em>, <em>cross: List[str] = []</em>, <em>categorical_cols: List[str] = []</em>, <em>bins: int = 6</em>, <em>threshold: float = 0.5</em><span class="sig-paren">)</span> &#x2192; Any<a class="headerlink" href="#xai.show_imbalance" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="xai.show_imbalances">
+<code class="descclassname">xai.</code><code class="descname">show_imbalances</code><span class="sig-paren">(</span><em>df: pandas.core.frame.DataFrame</em>, <em>columns: List[str] = []</em>, <em>cross: List[str] = []</em>, <em>categorical_cols: List[str] = []</em>, <em>bins: int = 6</em><span class="sig-paren">)</span> &#x2192; Any<a class="headerlink" href="#xai.show_imbalances" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="xai.smile_imbalance">
+<code class="descclassname">xai.</code><code class="descname">smile_imbalance</code><span class="sig-paren">(</span><em>y_test</em>, <em>probs</em>, <em>threshold=0.5</em>, <em>manual_review=None</em>, <em>display_breakdown=False</em>, <em>bins=10</em><span class="sig-paren">)</span><a class="headerlink" href="#xai.smile_imbalance" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </div>
 </div>
 
