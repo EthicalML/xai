@@ -13,7 +13,7 @@ about:
     home: https://github.com/EthicalML/xai
     license: MIT
     license_file: LICENSE
-    summary: XAI - An eXplainability toolbox for machine learning [v0.0.2 ALPHA] 
+    summary: XAI - An eXplainability toolbox for machine learning
 
 extra:
     maintainers:
