@@ -1,5 +1,12 @@
-pandas >=0.23.4
-matplotlib >=3.0.2
-numpy >=1.15.4
-scipy >=1.1.0
-scikit-learn >=0.20.1
+pandas==0.23.4
+matplotlib==3.0.2
+numpy==1.15.4
+scipy==1.1.0
+scikit-learn==0.20.1
+python-dateutil==2.5.0
+pytz==2011k
+pyparsing==2.0.1
+cycler==0.10
+kiwisolver==1.0.1
+six==1.5
+
