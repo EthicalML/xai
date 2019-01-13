@@ -21,6 +21,7 @@ extra:
 
 source: 
     git_url: https://github.com/EthicalML/xai
+    git_rev: master
 
 channels:
     - conda-forge
@@ -28,20 +29,20 @@ channels:
 
 requirements:
     build:
-        - python >=3.5
+        - python
         - setuptools
-        - pandas==0.23.4
-        - matplotlib==3.0.2
-        - numpy==1.15.4
-        - scipy==1.1.0
-        - scikit-learn==0.20.1
+        - pandas
+        - matplotlib
+        - numpy
+        - scipy
+        - scikit-learn
 
     run:
-        - python >=3.5
+        - python
         - setuptools
-        - pandas==0.23.4
-        - matplotlib==3.0.2
-        - numpy==1.15.4
-        - scipy==1.1.0
-        - scikit-learn==0.20.1
+        - pandas
+        - matplotlib
+        - numpy
+        - scipy
+        - scikit-learn
 
