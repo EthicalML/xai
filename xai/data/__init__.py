@@ -24,7 +24,7 @@ def load_census(return_xy: bool = False
     :type return_xy: bool
     :returns: Dataframe with full contents OR dataframe with inputs and 
         array with targets.
-    :rtype: (pd.DataFrame, Optional[np.array])
+    :rtype: (pandas.DataFrame, Optional[numpy.array])
 
     """
     df = pd.read_csv(os.path.join(PATH, "census.csv"), index_col=0)

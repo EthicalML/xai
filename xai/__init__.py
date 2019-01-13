@@ -18,8 +18,8 @@ def normalize_numeric(
         ) -> pd.DataFrame:
     """
     Normalizes numeric columns by substracting the mean and dividing
-    by standard deviation. If the parameter numerical_cols is not
-    provided, it will take all the columns of dtype np.number.
+        by standard deviation. If the parameter numerical_cols is not
+        provided, it will take all the columns of dtype np.number.
 
     :Example:
 
@@ -51,8 +51,8 @@ def convert_categories(
         categorical_cols: List[str] = []):
     """
     Converts columns to numeric categories. If the categorical_cols
-    parameter is passed as a list then those columns are converted.
-    Otherwise, all np.object columns are converted.
+        parameter is passed as a list then those columns are converted.
+        Otherwise, all np.object columns are converted.
 
     :Example:
 
@@ -60,7 +60,7 @@ def convert_categories(
     cat_df = xai.convert_categories(df)
 
     :param df: Pandas Dataframe containing data (inputs and target)
-    :type df: pd.DataFrame
+    :type df: pandas.DataFrame
     :param categorical_cols: List of strings containing categorical cols
     :type categorical_cols: str
     :returns: Dataframe with categorical numerical values.
@@ -86,8 +86,8 @@ def group_by_columns(
         ) -> pd.core.groupby.groupby.DataFrameGroupBy:
     """
     Groups dataframe by columns provided. If categorical it uses categories,
-    if numeric, it uses bins. If more than one column is provided, the function
-    creates crossed sub-groups.
+        if numeric, it uses bins. If more than one column is provided, the function
+        creates crossed sub-groups.
 
     :Example:
 
@@ -100,12 +100,12 @@ def group_by_columns(
         categorical_cols=["gender"])
 
     :param df: Pandas Dataframe containing data (inputs and target)
-    :type df: pd.DataFrame
+    :type df: pandas.DataFrame
     :param bins: [Default: 6] Number of bins to be used for numerical cols
     :type bins: int
     :param categorical_cols: [Default: []] Columns within dataframe that are
-    categorical. Columns that are not np.objects and are not part explicitly
-    provided here will be treated as numeric, and bins will be used.
+        categorical. Columns that are not np.objects and are not part explicitly
+        provided here will be treated as numeric, and bins will be used.
     :type categorical_cols: List[str]
     :returns: Dataframe with categorical numerical values.
     :rtype: pandas.core.groupby.groupby.DataFrameGroupBy
@@ -141,6 +141,38 @@ def show_imbalance(
         bins: int = 6, 
         threshold: float = 0.5
         ) -> Any:
+    """
+    Shows imbalances in the data by comparing either categories
+        or bins for numerical columns.
+
+    :Example:
+
+    import xai
+    cat_df = xai.show_imbalance(
+        df, 
+        "gender",
+        cross=["loan"],
+        bins=10,
+        threshold=0.8)
+
+    :param df: Pandas Dataframe containing data (inputs and target)
+    :type df: pandas.DataFrame
+    :param column: The column to use as basis for calculating imbalances
+    :type column: str
+    :param cross: [Default: []] An array containing other columns to cross with for comparison
+    :type cross: List[str]
+    :param categorical_cols: [Default: []] Columns within dataframe that are
+        categorical. Columns that are not np.objects and are not part explicitly
+        provided here will be treated as numeric, and bins will be used.
+    :type categorical_cols: List[str]
+    :param bins: [Default: 6] Number of bins to be used for numerical cols
+    :type bins: int
+    :param threshold: [Default: 0.5] Threshold to display in the chart.
+    :type bins: float
+    :returns: GroupsCounts, List of imbalance percent, List where imbalances found
+    :rtype: Tuple[pandas...DataFrameGroupBy, List[float], List[bool]]
+
+    """
 
     if not len(categorical_cols):
         categorical_cols = df.select_dtypes(include=[np.object]).columns
@@ -175,7 +207,44 @@ def show_imbalances(
         cross: List[str] = [],
         categorical_cols: List[str] = [],
         bins: int = 6) -> Any:
+    """
+    Shows imbalances in the data by comparing either categories
+        or bins for numerical columns for multiple columns provided.
 
+    :Example:
+
+    target = "loan"
+    protected = ["gender", "ethnicity", "age"]
+
+    cat_df = xai.show_imbalances(
+        df, 
+        protected,
+        cross=[target],
+        bins=10,
+        threshold=0.8)
+
+    :param df: Pandas Dataframe containing data (inputs and target)
+    :type df: pandas.DataFrame
+    :param columns: The columns to use as basis for calculating imbalances
+    :type columns: List[str]
+    :param cross: [Default: []] An array containing other columns to 
+        cross with for comparison
+    :type cross: List[str]
+    :param categorical_cols: [Default: []] Columns within dataframe that are
+        categorical. Columns that are not np.objects and are not part explicitly
+        provided here will be treated as numeric, and bins will be used.
+    :type categorical_cols: List[str]
+    :param bins: [Default: 6] Number of bins to be used for numerical cols
+    :type bins: int
+    :param threshold: [Default: 0.5] Threshold to display in the chart.
+    :type bins: float
+    :returns: Dataframe with categorical numerical values.
+    :rtype: pandas.DataFrame
+    :returns: List of Tuples containing: GroupsCounts, List of 
+        imbalance percent, and List where imbalances found
+    :rtype: List[Tuple[pandas...DataFrameGroupBy, List[float], List[bool]]]
+
+    """
     if not len(columns):
         columns = df.columns
 
@@ -205,7 +274,48 @@ def balance(
         downsample: int = 1,
         bins: int = 6,
         categorical_cols: List[str] = [],
-        plot: bool = True):
+        plot: bool = True
+        ) -> pd.DataFrame:
+    """
+    Balances a dataframe based on the columns and cross columns provided.
+        The results can be upsampled or downsampled. By default, there is no
+        downsample, and the upsample is towards a minimum of 50% of the 
+        frequency of the highest class.
+
+    :Example:
+
+    cat_df = xai.balance(
+        df, 
+        "gender",
+        cross=["loan"],
+        upsample=0.8,
+        downsample=0.8)
+
+    :param df: Pandas Dataframe containing data (inputs and target)
+    :type df: pandas.DataFrame
+    :param column_name: The column to use as basis for balancing dataframe
+    :type column_name: List[str]
+    :param cross: [Default: []] An array containing other columns to 
+        cross with for comparison
+    :type cross: List[str]
+    :param upsample: [Default: 0.5] Target upsample for columns lower 
+        than percentage.
+    :type upsample: float
+    :param downsample: [Default: 1] Target downsample for columns higher 
+        than percentage.
+    :type downsample: float
+    :param bins: [Default: 6] Number of bins to be used for numerical cols
+    :type bins: int
+    :param categorical_cols: [Default: []] Columns within dataframe that are
+        categorical. Columns that are not np.objects and are not part explicitly
+        provided here will be treated as numeric, and bins will be used.
+    :type categorical_cols: List[str]
+    :param threshold: [Default: 0.5] Threshold to display in the chart.
+    :type bins: float
+    :returns: Dataframe with categorical numerical values.
+    :rtype: pandas.DataFrame
+
+    """
 
     if not len(categorical_cols):
         categorical_cols = df.select_dtypes(include=[np.object]).columns
@@ -247,6 +357,14 @@ def plot_dendogram(
         corr: pd.DataFrame, 
         cols: List[str],
         figsize=(10,5)):
+    """
+    Plot dendogram of a correlation matrix, using the columns provided.
+
+    :returns: Null
+    :rtype: None
+
+    """
+
     corr = np.round(corr, 4)
     corr_condensed = hc.distance.squareform(1-corr)
     z = hc.linkage(corr_condensed, method="average")
