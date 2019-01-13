@@ -4,9 +4,9 @@ numpy==1.15.4
 scipy==1.1.0
 scikit-learn==0.20.1
 python-dateutil==2.5.0
-pytz==2011k
+pytz==2018.7
 pyparsing==2.0.1
 cycler==0.10
 kiwisolver==1.0.1
-six==1.5
+six==1.12.0
 
