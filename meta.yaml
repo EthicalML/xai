@@ -29,5 +29,18 @@ channels:
 requirements:
     build:
         - python {{ python }}
+        - pandas==0.23.4
+        - matplotlib==3.0.2
+        - numpy==1.15.4
+        - scipy==1.1.0
+        - scikit-learn==0.20.1
+
     run:
         - python
+        - python {{ python }}
+        - pandas==0.23.4
+        - matplotlib==3.0.2
+        - numpy==1.15.4
+        - scipy==1.1.0
+        - scikit-learn==0.20.1
+
