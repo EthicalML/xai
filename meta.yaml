@@ -36,6 +36,12 @@ requirements:
         - numpy
         - scipy
         - scikit-learn
+        - python-dateutil==2.5.0
+        - pytz==2011k
+        - pyparsing==2.0.1
+        - cycler==0.10
+        - kiwisolver==1.0.1
+        - six==1.5
 
     run:
         - python
@@ -45,4 +51,10 @@ requirements:
         - numpy
         - scipy
         - scikit-learn
+        - python-dateutil==2.5.0
+        - pytz==2011k
+        - pyparsing==2.0.1
+        - cycler==0.10
+        - kiwisolver==1.0.1
+        - six==1.5
 
