@@ -90,5 +90,5 @@ xai.egg-info
 .ipynb_checkpoints
 
 xai.egg-info/
-build
+build/
 
