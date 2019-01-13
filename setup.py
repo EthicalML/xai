@@ -26,7 +26,7 @@ class CleanCommand(Command):
 
 setup(
     name="xai",
-    version="0.0.1",
+    version="0.0.3",
     description="XAI - An industry-ready machine learning library that ensures explainable AI by design",
     long_description=readme,
     author="Alejandro Saucedo",

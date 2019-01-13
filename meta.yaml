@@ -1,0 +1,33 @@
+package: 
+    name: xai
+    version: "0.0.2"
+    
+python:
+    - 3.6
+
+build:
+    number: 1
+    script: python setup.py install
+
+about:
+    home: https://github.com/EthicalML/xai
+    license: MIT
+    license_file: LICENSE
+    summary: XAI - An eXplainability toolbox for machine learning [v0.0.2 ALPHA] 
+
+extra:
+    maintainers:
+        - Alejandro Saucedo <a@ethical.institute>
+
+source: 
+    git_url: https://github.com/EthicalML/xai
+
+channels:
+    - conda-forge
+    - defaults
+
+requirements:
+    build:
+        - python {{ python }}
+    run:
+        - python
