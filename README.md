@@ -1,5 +1,5 @@
 ![GitHub](https://img.shields.io/badge/Release-ALPHA-yellow.svg)
-![GitHub](https://img.shields.io/badge/Version-0.0.3_ALPHA-lightgrey.svg)
+![GitHub](https://img.shields.io/badge/Version-0.0.4_ALPHA-lightgrey.svg)
 ![GitHub](https://img.shields.io/badge/Python-3.5_|_3.6-blue.svg)
 ![GitHub](https://img.shields.io/badge/License-MIT-lightgrey.svg)
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/Naereen/StrapDown.js/graphs/commit-activity)
@@ -10,7 +10,7 @@ XAI is a Machine Learning library that is designed with AI explainability in its
 
 You can find the documentation at [https://ethicalml.github.io/xai/index.html](https://ethicalml.github.io/xai/index.html). You can also check out our [talk at Tensorflow London](https://www.youtube.com/watch?v=GZpfBhQJ0H4) where the idea was first conceived - the talk also contains an insight on the definitions and principles in this library.
 
-# 0.0.3 - ALPHA Version
+# 0.0.4 - ALPHA Version
 
 This library is currently in early stage developments and hence it will be quite unstable due to the fast updates. It is important to bare this in mind if using it in production. 
 
@@ -47,7 +47,8 @@ You can find example usage in the examples folder.
 With XAI you can identify imbalances in the data. For this, we will load the census dataset from the XAI library.
 
 ``` python
-df = xai.data.census
+import xai.data
+df = xai.data.load_census()
 df.head()
 ```
 <img width="100%" src="images/readme-1.png">

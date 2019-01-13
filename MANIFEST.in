@@ -2,5 +2,6 @@ include README.md
 include requirements.txt
 recursive-include xai *.pickle
 recursive-exclude * __pycache__
+recursive-include xai *.csv
 recursive-exclude * *.py[co]
 recursive-include docs *.md *.jpg *.png *.gif
