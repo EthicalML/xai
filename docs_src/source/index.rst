@@ -12,6 +12,8 @@ Welcome to the XAI docs - eXplainable machine learning
 
 Welcome to the ``xai`` documentation. Here you will the installation guide, the quick start guide, and the detailed docstrings code documentation of the xai library.
 
+The documentation is currently under construction - for the meantime you can check out the main Github page (https://github.com/EthicalML/) for the quickstart guide.
+
 
 
 Installation
