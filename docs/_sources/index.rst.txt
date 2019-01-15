@@ -7,7 +7,7 @@ Welcome to the XAI docs - eXplainable machine learning
 ===========================================================
 
 .. toctree::
-   :maxdepth: 4
+   :maxdepth: 4 
 
 
 Welcome to the ``xai`` documentation. Here you will the installation guide, the quick start guide, and the detailed docstrings code documentation of the xai library.
@@ -15,11 +15,11 @@ Welcome to the ``xai`` documentation. Here you will the installation guide, the 
 The documentation is currently under construction - for the meantime you can check out the main Github repository for the code (https://github.com/EthicalML/).
 
 About
-------
+================
 
-XAI is a Machine Learning library that is designed with AI explainability in its core. XAI contains various tools that enable for analysis and evaluation of data and models. The XAI library is maintained by [The Institute for Ethical AI & ML](http://ethical.institute/), and it was developed based on the [8 principles for Responsible Machine Learning](http://ethical.institute/principles.html).
+XAI is a Machine Learning library that is designed with AI explainability in its core. XAI contains various tools that enable for analysis and evaluation of data and models. The XAI library is maintained by `The Institute for Ethical AI & ML <http://ethical.institute/>`_, and it was developed based on the `8 principles for Responsible Machine Learning <http://ethical.institute/principles.html>`_.
 
-You can find the documentation at [https://ethicalml.github.io/xai/index.html](https://ethicalml.github.io/xai/index.html). You can also check out our [talk at Tensorflow London](https://www.youtube.com/watch?v=GZpfBhQJ0H4) where the idea was first conceived - the talk also contains an insight on the definitions and principles in this library.
+You can find the documentation at https://ethicalml.github.io/xai/index.html. You can also check out our `talk at Tensorflow London <https://www.youtube.com/watch?v=GZpfBhQJ0H4>`_ where the idea was first conceived - the talk also contains an insight on the definitions and principles in this library.
 
 0.0.4 - ALPHA Version
 ------------------------
@@ -36,7 +36,7 @@ We provide a visual overview of these three steps mentioned above in this diagra
 .. image:: _static/bias.png
 
 XAI Quickstart
------------------
+====================================
 
 Installation
 ------------------
@@ -53,12 +53,14 @@ Alternatively you can install from source by cloning the repo and running:
 
    python setup.py install 
 
-## Usage
+Usage
+---------
 
 You can find example usage in the examples folder.
 
 1) Data Analysis
-------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 
 With XAI you can identify imbalances in the data. For this, we will load the census dataset from the XAI library.
 
@@ -71,7 +73,7 @@ With XAI you can identify imbalances in the data. For this, we will load the cen
 .. image:: _static/readme-1.png
 
 View class imbalances for protected columns
-------------------------------------------------
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 .. parsed-literal::
 
@@ -81,7 +83,8 @@ View class imbalances for protected columns
 .. image:: _static/readme-2.png
 
 View imbalance of one column
----------------------------------
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 
 .. parsed-literal::
 
@@ -90,7 +93,8 @@ View imbalance of one column
 .. image:: _static/readme-3.png
 
 View imbalance of one column intersected with another
------------------------------------------------------------
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 
 .. parsed-literal::
 
@@ -99,7 +103,8 @@ View imbalance of one column intersected with another
 .. image:: _static/readme-4.png
 
 Balance the class using upsampling and/or downsampling
---------------------------------------------------------------
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 
 .. parsed-literal::
    bal_df = xai.balance(df, "gender", cross=["loan"], upsample=1.0)
@@ -107,7 +112,8 @@ Balance the class using upsampling and/or downsampling
 .. image:: _static/readme-5.png
 
 Create a balanced test-train split (should be done pre-balancing)
-------------------------------------------------------------------------
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 
 .. parsed-literal::
 
@@ -125,7 +131,7 @@ Create a balanced test-train split (should be done pre-balancing)
 .. image:: _static/readme-16.png
 
 2) Model Evaluation
---------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
 We are able to also analyse the interaction between inference results and input features. For this, we will train a single layer deep learning model.
 
@@ -140,7 +146,8 @@ We are able to also analyse the interaction between inference results and input 
 .. image:: _static/readme-15.png
 
 Visualise permutation feature importance
----------------------------------------------------
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 
 .. parsed-literal::
 
@@ -154,7 +161,8 @@ Visualise permutation feature importance
 .. image:: _static/readme-6.png
 
 Identify metric imbalances against all test data
------------------------------------------------------
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 
 .. parsed-literal::
 
@@ -166,7 +174,8 @@ Identify metric imbalances against all test data
 .. image:: _static/readme-7.png
 
 Identify metric imbalances grouped by protected columns
--------------------------------------------------------------
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 
 .. parsed-literal::
    _= xai.metrics_imbalances(
@@ -179,7 +188,8 @@ Identify metric imbalances grouped by protected columns
 .. image:: _static/readme-8.png
 
 Visualise the ROC curve against all test data
-------------------------------------------------
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 
 .. parsed-literal::
 
@@ -191,7 +201,8 @@ Visualise the ROC curve against all test data
 .. image:: _static/readme-9.png
 
 Visualise the ROC curves grouped by protected columns
-------------------------------------------------------------
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 
 .. parsed-literal::
    _= xai.roc_imbalances(
@@ -204,7 +215,8 @@ Visualise the ROC curves grouped by protected columns
 .. image:: _static/readme-10.png
 
 Visualise the precision-recall curve by protected columns
--------------------------------------------------------------
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 
 .. parsed-literal::
 
@@ -218,7 +230,8 @@ Visualise the precision-recall curve by protected columns
 .. image:: _static/readme-11.png
 
 Visualise accuracy grouped by probability buckets
-----------------------------------------------------------
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 
 .. parsed-literal::
 
@@ -229,7 +242,8 @@ Visualise accuracy grouped by probability buckets
 .. image:: _static/readme-12.png
 
 Visualise statistical metrics grouped by probability buckets
-------------------------------------------------------------------
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 
 .. parsed-literal::
 
@@ -241,7 +255,8 @@ Visualise statistical metrics grouped by probability buckets
 .. image:: _static/readme-13.png
 
 Visualise benefits of adding manual review on probability thresholds
----------------------------------------------------------------------------
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 
 .. parsed-literal::
 
@@ -255,17 +270,6 @@ Visualise benefits of adding manual review on probability thresholds
        
 .. image:: _static/readme-14.png
 
-
-
-
-
-
-Quick Start
--------------
-
-
-Installation
---------------
 
 
 xai Python Docstrings

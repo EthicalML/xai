@@ -82,19 +82,24 @@
             
               <!-- Local TOC -->
               <div class="local-toc"><ul>
-<li><a class="reference internal" href="#">Welcome to the XAI docs - eXplainable machine learning</a><ul>
-<li><a class="reference internal" href="#about">About</a></li>
+<li><a class="reference internal" href="#">Welcome to the XAI docs - eXplainable machine learning</a></li>
+<li><a class="reference internal" href="#about">About</a><ul>
 <li><a class="reference internal" href="#alpha-version">0.0.4 - ALPHA Version</a></li>
 <li><a class="reference internal" href="#what-do-we-mean-by-explainable-ai">What do we mean by eXplainable AI?</a></li>
-<li><a class="reference internal" href="#xai-quickstart">XAI Quickstart</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#xai-quickstart">XAI Quickstart</a><ul>
 <li><a class="reference internal" href="#installation">Installation</a></li>
-<li><a class="reference internal" href="#data-analysis">1) Data Analysis</a></li>
+<li><a class="reference internal" href="#usage">Usage</a><ul>
+<li><a class="reference internal" href="#data-analysis">1) Data Analysis</a><ul>
 <li><a class="reference internal" href="#view-class-imbalances-for-protected-columns">View class imbalances for protected columns</a></li>
 <li><a class="reference internal" href="#view-imbalance-of-one-column">View imbalance of one column</a></li>
 <li><a class="reference internal" href="#view-imbalance-of-one-column-intersected-with-another">View imbalance of one column intersected with another</a></li>
 <li><a class="reference internal" href="#balance-the-class-using-upsampling-and-or-downsampling">Balance the class using upsampling and/or downsampling</a></li>
 <li><a class="reference internal" href="#create-a-balanced-test-train-split-should-be-done-pre-balancing">Create a balanced test-train split (should be done pre-balancing)</a></li>
-<li><a class="reference internal" href="#model-evaluation">2) Model Evaluation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#model-evaluation">2) Model Evaluation</a><ul>
 <li><a class="reference internal" href="#visualise-permutation-feature-importance">Visualise permutation feature importance</a></li>
 <li><a class="reference internal" href="#identify-metric-imbalances-against-all-test-data">Identify metric imbalances against all test data</a></li>
 <li><a class="reference internal" href="#identify-metric-imbalances-grouped-by-protected-columns">Identify metric imbalances grouped by protected columns</a></li>
@@ -104,8 +109,10 @@
 <li><a class="reference internal" href="#visualise-accuracy-grouped-by-probability-buckets">Visualise accuracy grouped by probability buckets</a></li>
 <li><a class="reference internal" href="#visualise-statistical-metrics-grouped-by-probability-buckets">Visualise statistical metrics grouped by probability buckets</a></li>
 <li><a class="reference internal" href="#visualise-benefits-of-adding-manual-review-on-probability-thresholds">Visualise benefits of adding manual review on probability thresholds</a></li>
-<li><a class="reference internal" href="#quick-start">Quick Start</a></li>
-<li><a class="reference internal" href="#id1">Installation</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a class="reference internal" href="#xai-python-docstrings">xai Python Docstrings</a><ul>
@@ -184,11 +191,11 @@
 </div>
 <p>Welcome to the <code class="docutils literal notranslate"><span class="pre">xai</span></code> documentation. Here you will the installation guide, the quick start guide, and the detailed docstrings code documentation of the xai library.</p>
 <p>The documentation is currently under construction - for the meantime you can check out the main Github repository for the code (<a class="reference external" href="https://github.com/EthicalML/">https://github.com/EthicalML/</a>).</p>
-<div class="section" id="about">
-<h2>About<a class="headerlink" href="#about" title="Permalink to this headline">¶</a></h2>
-<p>XAI is a Machine Learning library that is designed with AI explainability in its core. XAI contains various tools that enable for analysis and evaluation of data and models. The XAI library is maintained by [The Institute for Ethical AI &amp; ML](<a class="reference external" href="http://ethical.institute/">http://ethical.institute/</a>), and it was developed based on the [8 principles for Responsible Machine Learning](<a class="reference external" href="http://ethical.institute/principles.html">http://ethical.institute/principles.html</a>).</p>
-<p>You can find the documentation at [<a class="reference external" href="https://ethicalml.github.io/xai/index.html](https://ethicalml.github.io/xai/index.html">https://ethicalml.github.io/xai/index.html](https://ethicalml.github.io/xai/index.html</a>). You can also check out our [talk at Tensorflow London](<a class="reference external" href="https://www.youtube.com/watch?v=GZpfBhQJ0H4">https://www.youtube.com/watch?v=GZpfBhQJ0H4</a>) where the idea was first conceived - the talk also contains an insight on the definitions and principles in this library.</p>
 </div>
+<div class="section" id="about">
+<h1>About<a class="headerlink" href="#about" title="Permalink to this headline">¶</a></h1>
+<p>XAI is a Machine Learning library that is designed with AI explainability in its core. XAI contains various tools that enable for analysis and evaluation of data and models. The XAI library is maintained by <a class="reference external" href="http://ethical.institute/">The Institute for Ethical AI &amp; ML</a>, and it was developed based on the <a class="reference external" href="http://ethical.institute/principles.html">8 principles for Responsible Machine Learning</a>.</p>
+<p>You can find the documentation at <a class="reference external" href="https://ethicalml.github.io/xai/index.html">https://ethicalml.github.io/xai/index.html</a>. You can also check out our <a class="reference external" href="https://www.youtube.com/watch?v=GZpfBhQJ0H4">talk at Tensorflow London</a> where the idea was first conceived - the talk also contains an insight on the definitions and principles in this library.</p>
 <div class="section" id="alpha-version">
 <h2>0.0.4 - ALPHA Version<a class="headerlink" href="#alpha-version" title="Permalink to this headline">¶</a></h2>
 <p>This library is currently in early stage developments and hence it will be quite unstable due to the fast updates. It is important to bare this in mind if using it in production.</p>
@@ -199,9 +206,9 @@
 <p>We provide a visual overview of these three steps mentioned above in this diagram:</p>
 <img alt="_images/bias.png" src="_images/bias.png" />
 </div>
-<div class="section" id="xai-quickstart">
-<h2>XAI Quickstart<a class="headerlink" href="#xai-quickstart" title="Permalink to this headline">¶</a></h2>
 </div>
+<div class="section" id="xai-quickstart">
+<h1>XAI Quickstart<a class="headerlink" href="#xai-quickstart" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="installation">
 <h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
 <p>The XAI package is on PyPI. To install you can run:</p>
@@ -212,11 +219,12 @@
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">install</span>
 </pre></div>
 </div>
-<p>## Usage</p>
-<p>You can find example usage in the examples folder.</p>
 </div>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<p>You can find example usage in the examples folder.</p>
 <div class="section" id="data-analysis">
-<h2>1) Data Analysis<a class="headerlink" href="#data-analysis" title="Permalink to this headline">¶</a></h2>
+<h3>1) Data Analysis<a class="headerlink" href="#data-analysis" title="Permalink to this headline">¶</a></h3>
 <p>With XAI you can identify imbalances in the data. For this, we will load the census dataset from the XAI library.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">xai.data</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">xai</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">load_census</span><span class="p">()</span>
@@ -224,9 +232,8 @@
 </pre></div>
 </div>
 <img alt="_images/readme-1.png" src="_images/readme-1.png" />
-</div>
 <div class="section" id="view-class-imbalances-for-protected-columns">
-<h2>View class imbalances for protected columns<a class="headerlink" href="#view-class-imbalances-for-protected-columns" title="Permalink to this headline">¶</a></h2>
+<h4>View class imbalances for protected columns<a class="headerlink" href="#view-class-imbalances-for-protected-columns" title="Permalink to this headline">¶</a></h4>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">protected_cols</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;gender&quot;</span><span class="p">,</span> <span class="s2">&quot;ethnicity&quot;</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">]</span>
 <span class="n">ims</span> <span class="o">=</span> <span class="n">xai</span><span class="o">.</span><span class="n">show_imbalances</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">protected_cols</span><span class="p">)</span>
 </pre></div>
@@ -234,28 +241,28 @@
 <img alt="_images/readme-2.png" src="_images/readme-2.png" />
 </div>
 <div class="section" id="view-imbalance-of-one-column">
-<h2>View imbalance of one column<a class="headerlink" href="#view-imbalance-of-one-column" title="Permalink to this headline">¶</a></h2>
+<h4>View imbalance of one column<a class="headerlink" href="#view-imbalance-of-one-column" title="Permalink to this headline">¶</a></h4>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">im</span> <span class="o">=</span> <span class="n">xai</span><span class="o">.</span><span class="n">show_imbalance</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s2">&quot;gender&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <img alt="_images/readme-3.png" src="_images/readme-3.png" />
 </div>
 <div class="section" id="view-imbalance-of-one-column-intersected-with-another">
-<h2>View imbalance of one column intersected with another<a class="headerlink" href="#view-imbalance-of-one-column-intersected-with-another" title="Permalink to this headline">¶</a></h2>
+<h4>View imbalance of one column intersected with another<a class="headerlink" href="#view-imbalance-of-one-column-intersected-with-another" title="Permalink to this headline">¶</a></h4>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">im</span> <span class="o">=</span> <span class="n">xai</span><span class="o">.</span><span class="n">show_imbalance</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s2">&quot;gender&quot;</span><span class="p">,</span> <span class="n">cross</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;loan&quot;</span><span class="p">])</span>
 </pre></div>
 </div>
 <img alt="_images/readme-4.png" src="_images/readme-4.png" />
 </div>
 <div class="section" id="balance-the-class-using-upsampling-and-or-downsampling">
-<h2>Balance the class using upsampling and/or downsampling<a class="headerlink" href="#balance-the-class-using-upsampling-and-or-downsampling" title="Permalink to this headline">¶</a></h2>
+<h4>Balance the class using upsampling and/or downsampling<a class="headerlink" href="#balance-the-class-using-upsampling-and-or-downsampling" title="Permalink to this headline">¶</a></h4>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">bal_df</span> <span class="o">=</span> <span class="n">xai</span><span class="o">.</span><span class="n">balance</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s2">&quot;gender&quot;</span><span class="p">,</span> <span class="n">cross</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;loan&quot;</span><span class="p">],</span> <span class="n">upsample</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
 </pre></div>
 </div>
 <img alt="_images/readme-5.png" src="_images/readme-5.png" />
 </div>
 <div class="section" id="create-a-balanced-test-train-split-should-be-done-pre-balancing">
-<h2>Create a balanced test-train split (should be done pre-balancing)<a class="headerlink" href="#create-a-balanced-test-train-split-should-be-done-pre-balancing" title="Permalink to this headline">¶</a></h2>
+<h4>Create a balanced test-train split (should be done pre-balancing)<a class="headerlink" href="#create-a-balanced-test-train-split-should-be-done-pre-balancing" title="Permalink to this headline">¶</a></h4>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Balanced train-test split with minimum 300 examples of</span>
 <span class="c1"># the cross of the target y and the column gender</span>
 <span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">x_test</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">xai</span><span class="o">.</span><span class="n">balanced_train_test_split</span><span class="p">(</span>
@@ -270,8 +277,9 @@
 </div>
 <img alt="_images/readme-16.png" src="_images/readme-16.png" />
 </div>
+</div>
 <div class="section" id="model-evaluation">
-<h2>2) Model Evaluation<a class="headerlink" href="#model-evaluation" title="Permalink to this headline">¶</a></h2>
+<h3>2) Model Evaluation<a class="headerlink" href="#model-evaluation" title="Permalink to this headline">¶</a></h3>
 <p>We are able to also analyse the interaction between inference results and input features. For this, we will train a single layer deep learning model.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">build_model</span><span class="p">(</span><span class="n">proc_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">&quot;loan&quot;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
 <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">f_in</span><span class="p">(</span><span class="n">x_train</span><span class="p">),</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">512</span><span class="p">)</span>
@@ -281,9 +289,8 @@
 </pre></div>
 </div>
 <img alt="_images/readme-15.png" src="_images/readme-15.png" />
-</div>
 <div class="section" id="visualise-permutation-feature-importance">
-<h2>Visualise permutation feature importance<a class="headerlink" href="#visualise-permutation-feature-importance" title="Permalink to this headline">¶</a></h2>
+<h4>Visualise permutation feature importance<a class="headerlink" href="#visualise-permutation-feature-importance" title="Permalink to this headline">¶</a></h4>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_avg</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">model</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">f_in</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">y</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
 
@@ -295,7 +302,7 @@
 <img alt="_images/readme-6.png" src="_images/readme-6.png" />
 </div>
 <div class="section" id="identify-metric-imbalances-against-all-test-data">
-<h2>Identify metric imbalances against all test data<a class="headerlink" href="#identify-metric-imbalances-against-all-test-data" title="Permalink to this headline">¶</a></h2>
+<h4>Identify metric imbalances against all test data<a class="headerlink" href="#identify-metric-imbalances-against-all-test-data" title="Permalink to this headline">¶</a></h4>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="o">=</span> <span class="n">xai</span><span class="o">.</span><span class="n">metrics_imbalance</span><span class="p">(</span>
         <span class="n">x_test</span><span class="p">,</span>
         <span class="n">y_test</span><span class="p">,</span>
@@ -305,7 +312,7 @@
 <img alt="_images/readme-7.png" src="_images/readme-7.png" />
 </div>
 <div class="section" id="identify-metric-imbalances-grouped-by-protected-columns">
-<h2>Identify metric imbalances grouped by protected columns<a class="headerlink" href="#identify-metric-imbalances-grouped-by-protected-columns" title="Permalink to this headline">¶</a></h2>
+<h4>Identify metric imbalances grouped by protected columns<a class="headerlink" href="#identify-metric-imbalances-grouped-by-protected-columns" title="Permalink to this headline">¶</a></h4>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="o">=</span> <span class="n">xai</span><span class="o">.</span><span class="n">metrics_imbalances</span><span class="p">(</span>
         <span class="n">x_test</span><span class="p">,</span>
         <span class="n">y_test</span><span class="p">,</span>
@@ -317,7 +324,7 @@
 <img alt="_images/readme-8.png" src="_images/readme-8.png" />
 </div>
 <div class="section" id="visualise-the-roc-curve-against-all-test-data">
-<h2>Visualise the ROC curve against all test data<a class="headerlink" href="#visualise-the-roc-curve-against-all-test-data" title="Permalink to this headline">¶</a></h2>
+<h4>Visualise the ROC curve against all test data<a class="headerlink" href="#visualise-the-roc-curve-against-all-test-data" title="Permalink to this headline">¶</a></h4>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="o">=</span> <span class="n">xai</span><span class="o">.</span><span class="n">roc_imbalance</span><span class="p">(</span>
        <span class="n">x_test</span><span class="p">,</span>
        <span class="n">y_test</span><span class="p">,</span>
@@ -327,7 +334,7 @@
 <img alt="_images/readme-9.png" src="_images/readme-9.png" />
 </div>
 <div class="section" id="visualise-the-roc-curves-grouped-by-protected-columns">
-<h2>Visualise the ROC curves grouped by protected columns<a class="headerlink" href="#visualise-the-roc-curves-grouped-by-protected-columns" title="Permalink to this headline">¶</a></h2>
+<h4>Visualise the ROC curves grouped by protected columns<a class="headerlink" href="#visualise-the-roc-curves-grouped-by-protected-columns" title="Permalink to this headline">¶</a></h4>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="o">=</span> <span class="n">xai</span><span class="o">.</span><span class="n">roc_imbalances</span><span class="p">(</span>
     <span class="n">x_test</span><span class="p">,</span>
     <span class="n">y_test</span><span class="p">,</span>
@@ -339,7 +346,7 @@
 <img alt="_images/readme-10.png" src="_images/readme-10.png" />
 </div>
 <div class="section" id="visualise-the-precision-recall-curve-by-protected-columns">
-<h2>Visualise the precision-recall curve by protected columns<a class="headerlink" href="#visualise-the-precision-recall-curve-by-protected-columns" title="Permalink to this headline">¶</a></h2>
+<h4>Visualise the precision-recall curve by protected columns<a class="headerlink" href="#visualise-the-precision-recall-curve-by-protected-columns" title="Permalink to this headline">¶</a></h4>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="o">=</span> <span class="n">xai</span><span class="o">.</span><span class="n">pr_imbalances</span><span class="p">(</span>
     <span class="n">x_test</span><span class="p">,</span>
     <span class="n">y_test</span><span class="p">,</span>
@@ -351,7 +358,7 @@
 <img alt="_images/readme-11.png" src="_images/readme-11.png" />
 </div>
 <div class="section" id="visualise-accuracy-grouped-by-probability-buckets">
-<h2>Visualise accuracy grouped by probability buckets<a class="headerlink" href="#visualise-accuracy-grouped-by-probability-buckets" title="Permalink to this headline">¶</a></h2>
+<h4>Visualise accuracy grouped by probability buckets<a class="headerlink" href="#visualise-accuracy-grouped-by-probability-buckets" title="Permalink to this headline">¶</a></h4>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="n">xai</span><span class="o">.</span><span class="n">smile_imbalance</span><span class="p">(</span>
     <span class="n">y_test</span><span class="p">,</span>
     <span class="n">probabilities</span><span class="p">)</span>
@@ -360,7 +367,7 @@
 <img alt="_images/readme-12.png" src="_images/readme-12.png" />
 </div>
 <div class="section" id="visualise-statistical-metrics-grouped-by-probability-buckets">
-<h2>Visualise statistical metrics grouped by probability buckets<a class="headerlink" href="#visualise-statistical-metrics-grouped-by-probability-buckets" title="Permalink to this headline">¶</a></h2>
+<h4>Visualise statistical metrics grouped by probability buckets<a class="headerlink" href="#visualise-statistical-metrics-grouped-by-probability-buckets" title="Permalink to this headline">¶</a></h4>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="n">xai</span><span class="o">.</span><span class="n">smile_imbalance</span><span class="p">(</span>
     <span class="n">y_test</span><span class="p">,</span>
     <span class="n">probabilities</span><span class="p">,</span>
@@ -370,7 +377,7 @@
 <img alt="_images/readme-13.png" src="_images/readme-13.png" />
 </div>
 <div class="section" id="visualise-benefits-of-adding-manual-review-on-probability-thresholds">
-<h2>Visualise benefits of adding manual review on probability thresholds<a class="headerlink" href="#visualise-benefits-of-adding-manual-review-on-probability-thresholds" title="Permalink to this headline">¶</a></h2>
+<h4>Visualise benefits of adding manual review on probability thresholds<a class="headerlink" href="#visualise-benefits-of-adding-manual-review-on-probability-thresholds" title="Permalink to this headline">¶</a></h4>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="n">xai</span><span class="o">.</span><span class="n">smile_imbalance</span><span class="p">(</span>
     <span class="n">y_test</span><span class="p">,</span>
     <span class="n">probabilities</span><span class="p">,</span>
@@ -382,11 +389,7 @@
 </div>
 <img alt="_images/readme-14.png" src="_images/readme-14.png" />
 </div>
-<div class="section" id="quick-start">
-<h2>Quick Start<a class="headerlink" href="#quick-start" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="id1">
-<h2>Installation<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 <div class="section" id="xai-python-docstrings">
