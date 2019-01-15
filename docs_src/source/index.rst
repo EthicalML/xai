@@ -12,7 +12,7 @@ Welcome to the XAI docs - eXplainable machine learning
 
 Welcome to the ``xai`` documentation. Here you will the installation guide, the quick start guide, and the detailed docstrings code documentation of the xai library.
 
-The documentation is currently under construction - for the meantime you can check out the main Github page (https://github.com/EthicalML/) for the quickstart guide.
+The documentation is currently under construction - for the meantime you can check out the main Github repository for the code (https://github.com/EthicalML/).
 
 About
 ------
@@ -104,7 +104,7 @@ Balance the class using upsampling and/or downsampling
 .. parsed-literal::
    bal_df = xai.balance(df, "gender", cross=["loan"], upsample=1.0)
 
-.. images:: _static/readme-5.png
+.. image:: _static/readme-5.png
 
 Create a balanced test-train split (should be done pre-balancing)
 ------------------------------------------------------------------------
