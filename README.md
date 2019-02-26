@@ -10,7 +10,7 @@ XAI is a Machine Learning library that is designed with AI explainability in its
 
 You can find the documentation at [https://ethicalml.github.io/xai/index.html](https://ethicalml.github.io/xai/index.html). You can also check out our [talk at Tensorflow London](https://www.youtube.com/watch?v=GZpfBhQJ0H4) where the idea was first conceived - the talk also contains an insight on the definitions and principles in this library.
 
-## YouTube Video of Talk
+## YouTube video showing how to use XAI to mitigate undesired biases
 
 <table>
   <tr>
