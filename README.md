@@ -2,7 +2,6 @@
 ![GitHub](https://img.shields.io/badge/Version-0.0.4_ALPHA-lightgrey.svg)
 ![GitHub](https://img.shields.io/badge/Python-3.5_|_3.6-blue.svg)
 ![GitHub](https://img.shields.io/badge/License-MIT-lightgrey.svg)
-[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/Naereen/StrapDown.js/graphs/commit-activity)
 
 # XAI - An eXplainability toolbox for machine learning 
 
