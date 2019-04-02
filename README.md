@@ -21,6 +21,15 @@ You can find the documentation at [https://ethicalml.github.io/xai/index.html](h
         <a href="https://www.youtube.com/watch?v=rq95qznOZKw"><img src="images/video.jpg"></a>
     </td>
   </tr>
+  <tr>
+    <td width="30%">
+        Do you want to learn about more awesome machine learning explainability tools? Check out our community-built <a href="https://github.com/EthicalML/awesome-machine-learning-operations">"Awesome Machine Learning Production & Operations"</a> list which contains an extensive list of tools for explainability, privacy, orchestration and beyond.
+    </td>
+    <td width="70%">
+        <a href="https://github.com/EthicalML/awesome-machine-learning-operations"><img src="images/mlops-link.png"></a>
+    </td>
+  </tr>
+
 </table>
 
 # 0.0.4 - ALPHA Version
