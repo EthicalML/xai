@@ -7,6 +7,7 @@ from typing import List, Any
 import random, math
 # TODO: Remove Dependencies, starting with Sklearn
 from sklearn.metrics import roc_curve, precision_recall_curve
+import logging
 
 # TODO: Make categorical_cols optional argument (None) to 
 # avoid ambiguity when there are no categorical cols
@@ -611,173 +612,125 @@ def metrics_imbalances(
 
     return results
 
-
-
-def roc_imbalance(
-        x_df,
-        y_valid,
-        y_pred,
-        col_name=None,
-        cross=[],
-        categorical_cols=None,
+def roc_plot(
+        actual,
+        predicted,
+        df=pd.DataFrame(),
+        cross_cols=[],
+        categorical_cols=[],
         bins=6,
         plot=True):
 
-    x_tmp = x_df.copy()
-    x_tmp["target"] = y_valid
-    x_tmp["predicted"] = y_pred
+    return _curve(
+        actual=actual,
+        predicted=predicted,
+        curve_type="roc",
+        df=df,
+        cross_cols=cross_cols,
+        categorical_cols=categorical_cols,
+        bins=bins,
+        plot=plot)
 
-    if col_name is None:
-        grouped = [("target", x_tmp),]
+def pr_plot(
+        actual,
+        predicted,
+        df=pd.DataFrame(),
+        cross_cols=[],
+        categorical_cols=[],
+        bins=6,
+        plot=True):
+
+    return _curve(
+        actual=actual,
+        predicted=predicted,
+        curve_type="pr",
+        df=df,
+        cross_cols=cross_cols,
+        categorical_cols=categorical_cols,
+        bins=bins,
+        plot=plot)
+
+def _curve(
+        actual,
+        predicted,
+        curve_type="roc",
+        df=pd.DataFrame(),
+        cross_cols=[],
+        categorical_cols=[],
+        bins=6,
+        plot=True):
+
+    if curve_type == "roc":
+        curve_func = roc_curve
+        y_label = 'False Positive Rate'
+        x_label = 'True Positive Rate'
+        p1 = [0,1]
+        p2 = [0,1]
+        y_lim = [0, 1.05]
+        legend_loc = "lower right"
+    elif curve_type == "pr":
+        curve_func = precision_recall_curve 
+        y_label = "Recall"
+        x_label = "Precision"
+        p1 = [1,0]
+        p2 = [0.5,0.5]
+        y_lim = [0.25, 1.05]
+        legend_loc = "lower left"
     else:
-        cols = cross + [col_name]
+        raise ValueError("Curve function provided not valid. "
+                f" curve_func provided: {curve_func}")
+
+    if not all(c in df.columns for c in cross_cols):
+        raise KeyError("Cross columns don't match columns in dataframe provided.")
+
+    df_tmp = df.copy()
+    df_tmp["target"] = actual
+    df_tmp["predicted"] = predicted
+
+    if not categorical_cols and cross_cols:
+        categorical_cols = df_tmp.select_dtypes(
+                include=[np.object, np.bool, np.int8]).columns
+        logging.warn("No categorical_cols passed so inferred using np.object, "
+                f"np.int8 and np.bool: {categorical_cols}. If these are not "
+                "correct, please provide them as a string array as: "
+                "categorical_cols=['col1', 'col2', ...]")
+
+    if not cross_cols:
+        grouped = [("target", df_tmp),]
+    else:
         grouped = group_by_columns(
-            x_tmp,
-            cols,
+            df_tmp,
+            cross_cols,
             bins=bins,
             categorical_cols=categorical_cols)
 
     if plot:
         plt.figure()
 
-    fprs = tprs = []
+    r1s = r2s = []
 
     for group, group_df in grouped:
         group_valid = group_df["target"]
         group_pred = group_df["predicted"]
 
-        fpr, tpr, _ = roc_curve(group_valid, group_pred)
-        fprs.append(fpr)
-        tprs.append(tpr)
+        r1, r2, _ = curve_func(group_valid, group_pred)
+        r1s.append(r1)
+        r2s.append(r2)
 
         if plot:
-            plt.plot(fpr, tpr, label=group)
-            plt.plot([0, 1], [0, 1], 'k--')
+            if curve_type == "pr": r1,r2 = r2,r1
+            plt.plot(r1, r2, label=group)
+            plt.plot(p1, p2, 'k--')
 
     if plot:
         plt.xlim([0.0, 1.0])
-        plt.ylim([0.0, 1.05])
-        plt.xlabel('False Positive Rate')
-        plt.ylabel('True Positive Rate')
-        plt.legend(loc="lower right")
+        plt.ylim(y_lim)
+        plt.xlabel(x_label)
+        plt.ylabel(y_label)
+        plt.legend(loc=legend_loc)
         plt.show()
 
-    return fprs, tprs
-
-def roc_imbalances(
-        x_test,
-        y_test,
-        predictions,
-        columns=[],
-        categorical_cols=[],
-        cross=[],
-        bins=6,
-        plot=True):
-
-    if not len(columns):
-        columns = x_test.columns
-
-    if not len(categorical_cols):
-        categorical_cols = x_test.select_dtypes(include=[np.object, np.bool]).columns
-
-    results = []
-    for col in columns:
-        r = roc_imbalance(
-            x_test,
-            y_test,
-            predictions,
-            col,
-            cross=cross,
-            categorical_cols=categorical_cols,
-            bins=6,
-            plot=True)
-        results.append(r)
-
-    return results
-
-
-
-def pr_imbalance(
-        x_df,
-        y_valid,
-        y_pred,
-        col_name=None,
-        cross=[],
-        categorical_cols=None,
-        bins=6,
-        plot=True):
-
-    x_tmp = x_df.copy()
-    x_tmp["target"] = y_valid
-    x_tmp["predicted"] = y_pred
-
-    if col_name is None:
-        grouped = [("target", x_tmp),]
-    else:
-        cols = cross + [col_name]
-        grouped = group_by_columns(
-            x_tmp,
-            cols,
-            bins=bins,
-            categorical_cols=categorical_cols)
-
-    if plot:
-        plt.figure()
-
-    prs = rcs = []
-
-    for group, group_df in grouped:
-        group_valid = group_df["target"]
-        group_pred = group_df["predicted"]
-
-        pr, rc, _ = precision_recall_curve(group_valid, group_pred)
-        prs.append(pr)
-        rcs.append(rc)
-
-        if plot:
-            plt.plot(pr,rc, label=group)
-
-    if plot:
-        plt.xlim([0.0, 1.0])
-        plt.ylim([0.0, 1.05])
-        plt.xlabel('Recall')
-        plt.ylabel('Precision')
-        plt.legend(loc="lower left")
-        plt.show()
-
-    return prs, rcs
-
-def pr_imbalances(
-        x_test,
-        y_test,
-        predictions,
-        columns=[],
-        categorical_cols=[],
-        cross=[],
-        bins=6,
-        plot=True):
-
-    if not len(columns):
-        columns = x_test.columns
-
-    if not len(categorical_cols):
-        categorical_cols = x_test.select_dtypes(include=[np.object, np.bool]).columns
-
-    results = []
-    for col in columns:
-        r = pr_imbalance(
-            x_test,
-            y_test,
-            predictions,
-            col,
-            cross=cross,
-            categorical_cols=categorical_cols,
-            bins=6,
-            plot=True)
-        results.append(r)
-
-    return results
-
+    return r1s, r2s
 
 def smile_imbalance(
         y_test, 

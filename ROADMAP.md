@@ -5,5 +5,6 @@ This page contains the roadmap for the XAI library.
 
 * Add AIC and BIC model evaluation metrics
 * Add numbers on the charts for accuracy metrics
+* Update XAI so it works with the latest version of pandas
 
 
