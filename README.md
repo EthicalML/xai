@@ -35,6 +35,8 @@ You can find the documentation at [https://ethicalml.github.io/xai/index.html](h
 
 This library is currently in early stage developments and hence it will be quite unstable due to the fast updates. It is important to bare this in mind if using it in production. 
 
+If you want to see a fully functional demo in action clone this repo and run the <a href="https://github.com/EthicalML/xai/blob/master/examples/XAI%20Example%20Usage.ipynb">Example Jupyter Notebook in the Examples folder</a>.
+
 ## What do we mean by eXplainable AI?
 
 We see the challenge of explainability as more than just an algorithmic challenge, which requires a combination of data science best practices with domain-specific knowledge. The XAI library is designed to empower machine learning engineers and relevant domain experts to analyse the end-to-end solution and identify discrepancies that may result in sub-optimal performance relative to the objectives required. More broadly, the XAI library is designed using the 3-steps of explainable machine learning, which involve 1) data analysis, 2) model evaluation, and 3) production monitoring. 
