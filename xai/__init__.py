@@ -6,7 +6,10 @@ from scipy.cluster import hierarchy as hc
 from typing import List, Any
 import random, math
 # TODO: Remove Dependencies, starting with Sklearn
-from sklearn.metrics import roc_curve, precision_recall_curve
+from sklearn.metrics import roc_curve, \
+        precision_recall_curve, roc_auc_score, \
+        confusion_matrix
+import itertools
 import logging
 
 # TODO: Make categorical_cols optional argument (None) to 
@@ -357,7 +360,7 @@ def balance(
 def plot_dendogram(
         corr: pd.DataFrame, 
         cols: List[str],
-        figsize=(10,5)):
+        plt_kwargs={}):
     """
     Plot dendogram of a correlation matrix, using the columns provided.
 
@@ -369,7 +372,7 @@ def plot_dendogram(
     corr = np.round(corr, 4)
     corr_condensed = hc.distance.squareform(1-corr)
     z = hc.linkage(corr_condensed, method="average")
-    fig = plt.figure(figsize=figsize)
+    fig = plt.figure(**plt_kwargs)
     dendrogram = hc.dendrogram(
         z, labels=cols, orientation="left", leaf_font_size=16)
     plt.show()
@@ -377,8 +380,8 @@ def plot_dendogram(
 def plot_matrix(
         corr, 
         cols: List[str], 
-        figsize=(10,5)):
-    fig = plt.figure(figsize=figsize)
+        plt_kwargs={}):
+    fig = plt.figure(**plt_kwargs)
     ax = fig.add_subplot(111)
     cax = ax.matshow(
             corr, 
@@ -398,7 +401,7 @@ def correlations(
         df: pd.DataFrame,
         include_categorical: bool = False,
         plot_type: str = "dendogram",
-        figsize = [10,5],
+        plt_kwargs={},
         categorical_cols: List[str] = []):
     corr = None
     cols: List = []
@@ -416,13 +419,63 @@ def correlations(
         cols = corr.columns
 
     if plot_type == "dendogram":
-        plot_dendogram(corr, cols, figsize=figsize)
+        plot_dendogram(corr, cols, plt_kwargs=plt_kwargs)
     elif plot_type == "matrix":
-        plot_matrix(corr, cols, figsize=figsize)
+        plot_matrix(corr, cols, plt_kwargs=plt_kwargs)
     else:
-        raise(f"Variable plot_type not valid. Provided: {plot_type}")
+        raise ValueError(f"Variable plot_type not valid. Provided: {plot_type}")
 
     return corr
+
+
+
+def confusion_matrix_plot(
+        y_test, 
+        pred, 
+        scaled=True,
+        label_x_neg="PREDICTED NEGATIVE",
+        label_x_pos="PREDICTED POSITIVE", 
+        label_y_neg="ACTUAL NEGATIVE", 
+        label_y_pos="ACTUAL POSITIVE"):
+
+    confusion = confusion_matrix(y_test, pred)
+    columns = [label_y_neg, label_y_pos]
+    index = [label_x_neg, label_x_pos]
+
+    if scaled:
+        confusion_scaled = (confusion.astype("float") / 
+                            confusion.sum(axis=1)[:, np.newaxis])
+        confusion = pd.DataFrame(
+                confusion_scaled, 
+                index=index, 
+                columns=columns)
+    else:
+        confusion = pd.DataFrame(
+                confusion,
+                index=index,
+                columns=columns)
+
+    cmap = plt.get_cmap("Blues")
+    plt.figure()
+    plt.imshow(confusion, interpolation="nearest", cmap=cmap)
+    plt.title("Confusion matrix")
+    plt.colorbar()
+
+    plt.xticks(np.arange(2), columns, rotation=45)
+    plt.yticks(np.arange(2), index, rotation=45)
+
+    threshold = 0.5 if scaled else confusion.max().max() / 2
+    for i, j in itertools.product(
+            range(confusion.shape[0]), 
+            range(confusion.shape[1])):
+        txt = "{:,}".format(confusion.iloc[i,j])
+        if scaled: txt = "{:0.4f}".format(confusion.iloc[i,j])
+        plt.text(j, i, txt,
+                    horizontalalignment="center",
+                    color=("white" if confusion.iloc[i,j] > threshold else "black"))
+
+    plt.tight_layout()
+    plt.show()
 
 
 def balanced_train_test_split(
@@ -503,8 +556,7 @@ def balanced_train_test_split(
     x_test = df_test.drop("target", axis=1)
     y_test = df_test["target"].values
     
-    return x_train, y_train, x_test, y_test
-
+    return x_train, y_train, x_test, y_test, train_idx, test_idx
 
 
 def convert_probs(probs, threshold=0.5):
@@ -512,65 +564,70 @@ def convert_probs(probs, threshold=0.5):
     # TODO: Enable for multiclass
     return (probs >= threshold).astype(int)
 
-def perf_metrics(y_valid, y_pred):
+def evaluation_metrics(y_valid, y_pred):
+
     TP = np.sum( y_pred[y_valid==1] )
     TN = np.sum( y_pred[y_valid==0] == 0 )
     FP = np.sum(  y_pred[y_valid==0] )
     FN = np.sum(  y_pred[y_valid==1] == 0 )
 
-    precision = TP / (TP+FP)
-    recall = TP / (TP+FN)
-    specificity = TN / (TN+FP)
+    # Adding an OR to ensure it doesn't divide by zero
+    precision = TP / ((TP+FP) or 0.001)
+    recall = TP / ((TP+FN) or 0.001)
+    specificity = TN / ((TN+FP) or 0.001)
     accuracy = (TP+TN) / (TP+TN+FP+FN)
+    f1 = 2 * (precision * recall) / ((precision + recall) or 0.001)
+    try:
+        auc = roc_auc_score(y_valid, y_pred)
+    except ValueError:
+        auc = 0
 
-    return precision, recall, specificity, accuracy
+    return {
+        "precision": precision, 
+        "recall": recall, 
+        "specificity": specificity, 
+        "accuracy": accuracy, 
+        "auc": auc, 
+        "f1": f1
+    }
 
-def metrics_imbalance(
-        x_df,
-        y_valid,
-        y_pred,
-        col_name=None,
-        cross=[],
+def metrics_plot(
+        target,
+        predicted,
+        df=pd.DataFrame(),
+        cross_cols=[],
         categorical_cols=[],
         bins=6,
-        prob_threshold=0.5,
-        plot=True):
+        plot=True,
+        exclude_metrics=[],
+        plot_threshold=0.5):
 
-    x_tmp = x_df.copy()
-    x_tmp["target"] = y_valid
-    x_tmp["predicted"] = y_pred
-
-    # Convert predictions into classes
-    # TODO: Enable for multiclass
-    if x_tmp["predicted"].dtype.kind == 'f':
-        x_tmp["predicted"] = convert_probs(
-            x_tmp["predicted"], threshold=prob_threshold)
-
-    if col_name is None:
-        grouped = [("target", x_tmp),]
-    else:
-        cols = cross + [col_name]
-        grouped = group_by_columns(
-            x_tmp,
-            cols,
-            bins=bins,
-            categorical_cols=categorical_cols)
+    grouped = _group_metrics(
+        target,
+        predicted,
+        df, 
+        cross_cols, 
+        categorical_cols,
+        bins,
+        target_threshold=plot_threshold)
 
     prfs = []
     classes = []
     for group, group_df in grouped:
         group_valid = group_df["target"].values
         group_pred = group_df["predicted"].values
-        precision, recall, specificity, accuracy = \
-            perf_metrics(group_valid, group_pred)
-        prfs.append([precision, recall, specificity, accuracy])
+        metrics_dict = \
+            evaluation_metrics(group_valid, group_pred)
+        # Remove metrics as specified by params
+        [metrics_dict.pop(k, None) for k in exclude_metrics]
+        prfs.append(list(metrics_dict.values()))
         classes.append(str(group))
 
-    prfs_cols = ["precision", "recall", "specificity", "accuracy"]
+    prfs_cols = metrics_dict.keys()
     prfs_df = pd.DataFrame(
-            prfs, 
-            columns=prfs_cols, 
-            index=classes)
+            np.array(prfs).transpose(), 
+            columns=classes, 
+            index=prfs_cols)
 
     if plot:
         prfs_df.plot.bar(figsize=(20,5))
@@ -579,41 +636,8 @@ def metrics_imbalance(
 
     return prfs_df
 
-def metrics_imbalances(
-        x_test,
-        y_test,
-        predictions,
-        columns=[],
-        categorical_cols=[],
-        cross=[],
-        bins=6,
-        prob_threshold=0.5,
-        plot=True):
-
-    if not len(columns):
-        columns = x_test.columns
-
-    if not len(categorical_cols):
-        categorical_cols = x_test.select_dtypes(include=[np.object, np.bool]).columns
-
-    results = []
-    for col in columns:
-        r = metrics_imbalance(
-            x_test,
-            y_test,
-            predictions,
-            col,
-            cross=cross,
-            categorical_cols=categorical_cols,
-            bins=6,
-            prob_threshold=prob_threshold,
-            plot=True)
-        results.append(r)
-
-    return results
-
 def roc_plot(
-        actual,
+        target,
         predicted,
         df=pd.DataFrame(),
         cross_cols=[],
@@ -622,7 +646,7 @@ def roc_plot(
         plot=True):
 
     return _curve(
-        actual=actual,
+        target=target,
         predicted=predicted,
         curve_type="roc",
         df=df,
@@ -632,7 +656,7 @@ def roc_plot(
         plot=plot)
 
 def pr_plot(
-        actual,
+        target,
         predicted,
         df=pd.DataFrame(),
         cross_cols=[],
@@ -641,7 +665,7 @@ def pr_plot(
         plot=True):
 
     return _curve(
-        actual=actual,
+        target=target,
         predicted=predicted,
         curve_type="pr",
         df=df,
@@ -651,7 +675,7 @@ def pr_plot(
         plot=plot)
 
 def _curve(
-        actual,
+        target,
         predicted,
         curve_type="roc",
         df=pd.DataFrame(),
@@ -680,29 +704,13 @@ def _curve(
         raise ValueError("Curve function provided not valid. "
                 f" curve_func provided: {curve_func}")
 
-    if not all(c in df.columns for c in cross_cols):
-        raise KeyError("Cross columns don't match columns in dataframe provided.")
-
-    df_tmp = df.copy()
-    df_tmp["target"] = actual
-    df_tmp["predicted"] = predicted
-
-    if not categorical_cols and cross_cols:
-        categorical_cols = df_tmp.select_dtypes(
-                include=[np.object, np.bool, np.int8]).columns
-        logging.warn("No categorical_cols passed so inferred using np.object, "
-                f"np.int8 and np.bool: {categorical_cols}. If these are not "
-                "correct, please provide them as a string array as: "
-                "categorical_cols=['col1', 'col2', ...]")
-
-    if not cross_cols:
-        grouped = [("target", df_tmp),]
-    else:
-        grouped = group_by_columns(
-            df_tmp,
-            cross_cols,
-            bins=bins,
-            categorical_cols=categorical_cols)
+    grouped = _group_metrics(
+        target,
+        predicted,
+        df, 
+        cross_cols, 
+        categorical_cols,
+        bins)
 
     if plot:
         plt.figure()
@@ -731,6 +739,48 @@ def _curve(
         plt.show()
 
     return r1s, r2s
+
+def _group_metrics(
+        target,
+        predicted,
+        df, 
+        cross_cols, 
+        categorical_cols,
+        bins,
+        target_threshold=None):
+
+    if not all(c in df.columns for c in cross_cols):
+        raise KeyError("Cross columns don't match columns in dataframe provided.")
+
+    df_tmp = df.copy()
+    df_tmp["target"] = target
+    df_tmp["predicted"] = predicted
+
+    # Convert predictions into classes
+    if target_threshold and df_tmp["predicted"].dtype.kind == 'f':
+        df_tmp["predicted"] = convert_probs(
+            df_tmp["predicted"], threshold=target_threshold)
+
+    if not categorical_cols and cross_cols:
+        categorical_cols = df_tmp.select_dtypes(
+                include=[np.object, np.bool, np.int8]).columns
+        logging.warn("No categorical_cols passed so inferred using np.object, "
+                f"np.int8 and np.bool: {categorical_cols}. If these are not "
+                "correct, please provide them as a string array as: "
+                "categorical_cols=['col1', 'col2', ...]")
+
+    if not cross_cols:
+        grouped = [("target", df_tmp),]
+    else:
+        grouped = group_by_columns(
+            df_tmp,
+            cross_cols,
+            bins=bins,
+            categorical_cols=categorical_cols)
+
+    return grouped
+
+
 
 def smile_imbalance(
         y_test, 
