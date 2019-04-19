@@ -26,8 +26,9 @@ def normalize_numeric(
 
     :Example:
 
-    import xai
-    norm_df = xai.normalize_numeric(df)
+    norm_df = xai.normalize_numeric(
+                df,
+                normalize_numeric=["age", "other_numeric_attribute"])
 
     :param df: Pandas Dataframe containing data (inputs and target)
     :type df: pd.DataFrame
@@ -87,19 +88,25 @@ def group_by_columns(
         bins: int = 6,
         categorical_cols: List[str] = []):
     """
-    Groups dataframe by columns provided. If categorical it uses categories,
-        if numeric, it uses bins. If more than one column is provided, the function
-        creates crossed sub-groups.
+    Groups dataframe by the categories (or bucketized values) for all columns provided. 
+        If categorical it uses categories,
+        if numeric, it uses bins. If more than one column is provided, the columns
+        provided are, for example, age and binary_target_label, then the result 
+        would be a pandas DataFrame that is grouped by age groups for each of the
+        positive and negative/positive labels.
 
     :Example:
 
-    import xai
-    columns=["loan", "gender", "age"]
-    cat_df = xai.group_by_columns(
+    columns=["loan", "gender"]
+    df_groups = xai.group_by_columns(
         df, 
         columns=columns,
         bins=10,
-        categorical_cols=["gender"])
+        categorical_cols=["gender", "loan"])
+
+    for group, df_group in df_groups:
+        print(group) 
+        print(grouped_df.head())
 
     :param df: Pandas Dataframe containing data (inputs and target)
     :type df: pandas.DataFrame
@@ -136,7 +143,7 @@ def group_by_columns(
     return grouped 
 
 
-def show_imbalance( 
+def imbalance_plot( 
         df: pd.DataFrame, 
         *cross_cols: str, 
         categorical_cols: List[str] = [],
@@ -144,11 +151,14 @@ def show_imbalance(
         threshold: float = 0.5):
     """
     Shows the number of examples provided for each of the values across the
-    product tuples in the columns provided.
+    product tuples in the columns provided. If you would like to do processing
+    with the sub-groups created by this class please see the 
+    group_by_columns function.
+
     :Example:
 
     import xai
-    cat_df = xai.show_imbalance(
+    class_counts = xai.imbalance_plot(
         df, 
         "gender", "loan",
         bins=10,
@@ -167,13 +177,13 @@ def show_imbalance(
     :type bins: int
     :param threshold: [Default: 0.5] Threshold to display in the chart.
     :type bins: float
-    :returns: GroupsCounts, List of imbalance percent, List where imbalances found
-    :rtype: Tuple[pandas...DataFrameGroupBy, List[float], List[bool]]
+    :returns: Null
+    :rtype: None
 
     """
 
     if not cross_cols:
-        raise TypeError("show_imbalance requires at least 1 string column name")
+        raise TypeError("imbalance_plot requires at least 1 string column name")
 
     grouped = group_by_columns(
             df,
@@ -196,8 +206,6 @@ def show_imbalance(
     lp.set_label(f"Threshold: {threshold*count_max:.2f} ({threshold*100:.2f}%)")
     plt.legend()
     plt.show()
-        
-    return count_grp, ratios, imbalances
 
 def balance(
         df: pd.DataFrame,
@@ -271,7 +279,7 @@ def balance(
                 .reset_index(drop=True)
 
     if plot:
-        imbalance = show_imbalance(
+        imbalance_plot(
             tmp_df,
             *cross_cols,
             bins=bins,
@@ -279,12 +287,22 @@ def balance(
 
     return tmp_df
     
-def plot_dendogram(
+def _plot_correlation_dendogram(
         corr: pd.DataFrame, 
         cols: List[str],
         plt_kwargs={}):
     """
-    Plot dendogram of a correlation matrix, using the columns provided.
+    Plot dendogram of a correlation matrix, using the columns provided. 
+    This consists of a chart that that shows hierarchically the variables
+    that are most correlated by the connecting trees. The closer to the right
+    that the connection is, the more correlated the features are.
+    If you would like to visualise this as a tree, please 
+    see the function _plot_correlation_dendogram.
+
+    :Example:
+
+    columns_to_include=["age", "loan", "gender"]
+    xai._plot_correlation_dendogram(df, cols=columns_to_include)
 
     :returns: Null
     :rtype: None
@@ -299,10 +317,27 @@ def plot_dendogram(
         z, labels=cols, orientation="left", leaf_font_size=16)
     plt.show()
 
-def plot_matrix(
+def _plot_correlation_matrix(
         corr, 
         cols: List[str], 
         plt_kwargs={}):
+    """
+    Plot a matrix of the correlation matrix, using the columns provided in params. 
+    This visualisation contains all the columns in the X and Y axis, where the 
+    intersection of the column and row displays the correlation value. 
+    The closer this correlation factor is to 1, the more correlated the features
+    are. If you would like to visualise this as a tree, please see 
+    the function _plot_correlation_dendogram.
+
+    :Example:
+
+    columns_to_include=["age", "loan", "gender"]
+    xai._plot_correlation_matrix(df, cols=columns_to_include)
+
+    :returns: Null
+    :rtype: None
+
+    """
     fig = plt.figure(**plt_kwargs)
     ax = fig.add_subplot(111)
     cax = ax.matshow(
@@ -325,6 +360,7 @@ def correlations(
         plot_type: str = "dendogram",
         plt_kwargs={},
         categorical_cols: List[str] = []):
+
     corr = None
     cols: List = []
     if include_categorical:
@@ -341,15 +377,13 @@ def correlations(
         cols = corr.columns
 
     if plot_type == "dendogram":
-        plot_dendogram(corr, cols, plt_kwargs=plt_kwargs)
+        _plot_correlation_dendogram(corr, cols, plt_kwargs=plt_kwargs)
     elif plot_type == "matrix":
-        plot_matrix(corr, cols, plt_kwargs=plt_kwargs)
+        _plot_correlation_matrix(corr, cols, plt_kwargs=plt_kwargs)
     else:
         raise ValueError(f"Variable plot_type not valid. Provided: {plot_type}")
 
     return corr
-
-
 
 def confusion_matrix_plot(
         y_test, 
