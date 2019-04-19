@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from scipy.stats import spearmanr as sr
 from scipy.cluster import hierarchy as hc
-from typing import List, Any
+from typing import List, Any, Union, Tuple
 import random, math
 # TODO: Remove Dependencies, starting with Sklearn
 from sklearn.metrics import roc_curve, \
@@ -18,8 +18,7 @@ import logging
 
 def normalize_numeric(
         df, 
-        numerical_cols: List[str] = []
-        ) -> pd.DataFrame:
+        numerical_cols: List[str] = []):
     """
     Normalizes numeric columns by substracting the mean and dividing
         by standard deviation. If the parameter numerical_cols is not
@@ -86,8 +85,7 @@ def group_by_columns(
         df: pd.DataFrame,
         columns: List[str], 
         bins: int = 6,
-        categorical_cols: List[str] = [],
-        ) -> pd.core.groupby.groupby.DataFrameGroupBy:
+        categorical_cols: List[str] = []):
     """
     Groups dataframe by columns provided. If categorical it uses categories,
         if numeric, it uses bins. If more than one column is provided, the function
@@ -108,7 +106,8 @@ def group_by_columns(
     :param bins: [Default: 6] Number of bins to be used for numerical cols
     :type bins: int
     :param categorical_cols: [Default: []] Columns within dataframe that are
-        categorical. Columns that are not np.objects and are not part explicitly
+        categorical. Columns that are not np.objects or np.bool and 
+        are not part explicitly
         provided here will be treated as numeric, and bins will be used.
     :type categorical_cols: List[str]
     :returns: Dataframe with categorical numerical values.
@@ -117,7 +116,7 @@ def group_by_columns(
     """
 
     if not len(categorical_cols):
-        categorical_cols = df.select_dtypes(include=[np.object, np.bool]).columns
+        categorical_cols = _infer_categorical(df)
     
     group_list = []
     for c in columns:
@@ -139,31 +138,26 @@ def group_by_columns(
 
 def show_imbalance( 
         df: pd.DataFrame, 
-        column_name: str, 
-        cross: List[str] = [],
+        *cross_cols: str, 
         categorical_cols: List[str] = [],
         bins: int = 6, 
-        threshold: float = 0.5
-        ) -> Any:
+        threshold: float = 0.5):
     """
-    Shows imbalances in the data by comparing either categories
-        or bins for numerical columns.
-
+    Shows the number of examples provided for each of the values across the
+    product tuples in the columns provided.
     :Example:
 
     import xai
     cat_df = xai.show_imbalance(
         df, 
-        "gender",
-        cross=["loan"],
+        "gender", "loan",
         bins=10,
         threshold=0.8)
 
     :param df: Pandas Dataframe containing data (inputs and target)
     :type df: pandas.DataFrame
-    :param column: The column to use as basis for calculating imbalances
-    :type column: str
-    :param cross: [Default: []] An array containing other columns to cross with for comparison
+    :param *cross_cols: One or more positional arguments (passed as *args) that 
+    are used to split the data into the cross product of their values 
     :type cross: List[str]
     :param categorical_cols: [Default: []] Columns within dataframe that are
         categorical. Columns that are not np.objects and are not part explicitly
@@ -178,16 +172,16 @@ def show_imbalance(
 
     """
 
-    if not len(categorical_cols):
-        categorical_cols = df.select_dtypes(include=[np.object, np.bool]).columns
-    
-    cols = cross + [column_name]
+    if not cross_cols:
+        raise TypeError("show_imbalance requires at least 1 string column name")
+
     grouped = group_by_columns(
             df,
-            cols, 
+            list(cross_cols), 
             bins=bins,
             categorical_cols=categorical_cols)
-    grouped_col = grouped[column_name]
+
+    grouped_col = grouped[cross_cols[0]]
     count_grp = grouped_col.count()
     count_max = count_grp.values.max()
     ratios = round(count_grp/count_max,4)
@@ -205,81 +199,14 @@ def show_imbalance(
         
     return count_grp, ratios, imbalances
 
-def show_imbalances(
-        df: pd.DataFrame,
-        columns: List[str] = [],
-        cross: List[str] = [],
-        categorical_cols: List[str] = [],
-        bins: int = 6) -> Any:
-    """
-    Shows imbalances in the data by comparing either categories
-        or bins for numerical columns for multiple columns provided.
-
-    :Example:
-
-    target = "loan"
-    protected = ["gender", "ethnicity", "age"]
-
-    cat_df = xai.show_imbalances(
-        df, 
-        protected,
-        cross=[target],
-        bins=10,
-        threshold=0.8)
-
-    :param df: Pandas Dataframe containing data (inputs and target)
-    :type df: pandas.DataFrame
-    :param columns: The columns to use as basis for calculating imbalances
-    :type columns: List[str]
-    :param cross: [Default: []] An array containing other columns to 
-        cross with for comparison
-    :type cross: List[str]
-    :param categorical_cols: [Default: []] Columns within dataframe that are
-        categorical. Columns that are not np.objects and are not part explicitly
-        provided here will be treated as numeric, and bins will be used.
-    :type categorical_cols: List[str]
-    :param bins: [Default: 6] Number of bins to be used for numerical cols
-    :type bins: int
-    :param threshold: [Default: 0.5] Threshold to display in the chart.
-    :type bins: float
-    :returns: Dataframe with categorical numerical values.
-    :rtype: pandas.DataFrame
-    :returns: List of Tuples containing: GroupsCounts, List of 
-        imbalance percent, and List where imbalances found
-    :rtype: List[Tuple[pandas...DataFrameGroupBy, List[float], List[bool]]]
-
-    """
-    if not len(columns):
-        columns = df.columns
-
-    if not len(categorical_cols):
-        categorical_cols = df.select_dtypes(include=[np.object, np.bool]).columns
-
-    if cross and any([x in columns for x in cross]):
-        raise("Error: Columns in 'cross' are also in 'columns'")
-
-    imbalances = []
-    for col in columns:
-        imbalance = show_imbalance(
-            df,
-            col,
-            bins=bins,
-            cross=cross,
-            categorical_cols=categorical_cols)
-        imbalances.append(imbalance)
-
-    return imbalances
-
 def balance(
         df: pd.DataFrame,
-        column_name: str,
-        cross: List[str] = [],
-        upsample: int = 0.5,
+        *cross_cols: str, 
+        upsample: float = 0.5,
         downsample: int = 1,
         bins: int = 6,
         categorical_cols: List[str] = [],
-        plot: bool = True
-        ) -> pd.DataFrame:
+        plot: bool = True):
     """
     Balances a dataframe based on the columns and cross columns provided.
         The results can be upsampled or downsampled. By default, there is no
@@ -290,17 +217,14 @@ def balance(
 
     cat_df = xai.balance(
         df, 
-        "gender",
-        cross=["loan"],
+        "gender", "loan",
         upsample=0.8,
         downsample=0.8)
 
-    :param df: Pandas Dataframe containing data (inputs and target)
+    :param df: Pandas Dataframe containing data (inputs and target )
     :type df: pandas.DataFrame
-    :param column_name: The column to use as basis for balancing dataframe
-    :type column_name: List[str]
-    :param cross: [Default: []] An array containing other columns to 
-        cross with for comparison
+    :param *cross_cols: One or more positional arguments (passed as *args) that 
+    are used to split the data into the cross product of their values 
     :type cross: List[str]
     :param upsample: [Default: 0.5] Target upsample for columns lower 
         than percentage.
@@ -324,10 +248,9 @@ def balance(
     if not len(categorical_cols):
         categorical_cols = df.select_dtypes(include=[np.object, np.bool]).columns
 
-    cols = cross + [column_name]
     grouped = group_by_columns(
                 df,
-                cols, 
+                list(cross_cols), 
                 bins=bins,
                 categorical_cols=categorical_cols)
 
@@ -350,9 +273,8 @@ def balance(
     if plot:
         imbalance = show_imbalance(
             tmp_df,
-            column_name,
+            *cross_cols,
             bins=bins,
-            cross=cross,
             categorical_cols=categorical_cols)
 
     return tmp_df
@@ -740,6 +662,18 @@ def _curve(
 
     return r1s, r2s
 
+
+def _infer_categorical(df):
+    categorical_cols = df.select_dtypes(
+            include=[np.object, np.bool, np.int8]).columns
+    logging.warn("No categorical_cols passed so inferred using np.object, "
+            f"np.int8 and np.bool: {categorical_cols}. If you see an error"
+            " these are not "
+            "correct, please provide them as a string array as: "
+            "categorical_cols=['col1', 'col2', ...]")
+    return categorical_cols
+
+
 def _group_metrics(
         target,
         predicted,
@@ -761,13 +695,8 @@ def _group_metrics(
         df_tmp["predicted"] = convert_probs(
             df_tmp["predicted"], threshold=target_threshold)
 
-    if not categorical_cols and cross_cols:
-        categorical_cols = df_tmp.select_dtypes(
-                include=[np.object, np.bool, np.int8]).columns
-        logging.warn("No categorical_cols passed so inferred using np.object, "
-                f"np.int8 and np.bool: {categorical_cols}. If these are not "
-                "correct, please provide them as a string array as: "
-                "categorical_cols=['col1', 'col2', ...]")
+    if categorical_cols and cross_cols:
+        categorical_cols = _infer_categorical(df_tmp)
 
     if not cross_cols:
         grouped = [("target", df_tmp),]
