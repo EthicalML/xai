@@ -8,5 +8,6 @@ This page contains the roadmap for the XAI library.
 * Enable metrics for multiclass
 * Allow all plots to get matplotlib parameters
 * Update XAI so it works with the latest version of pandas
+* Address runtime warnings on xai.correlations function
 
 
