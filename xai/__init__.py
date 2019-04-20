@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from scipy.stats import spearmanr as sr
 from scipy.cluster import hierarchy as hc
-from typing import List, Any, Union, Tuple
+from typing import List, Any, Union, Tuple, Optional
 import random, math
 # TODO: Remove Dependencies, starting with Sklearn
 from sklearn.metrics import roc_curve, \
@@ -151,9 +151,9 @@ def imbalance_plot(
         threshold: float = 0.5):
     """
     Shows the number of examples provided for each of the values across the
-    product tuples in the columns provided. If you would like to do processing
-    with the sub-groups created by this class please see the 
-    group_by_columns function.
+        product tuples in the columns provided. If you would like to do processing
+        with the sub-groups created by this class please see the 
+        group_by_columns function.
 
     :Example:
 
@@ -167,7 +167,7 @@ def imbalance_plot(
     :param df: Pandas Dataframe containing data (inputs and target)
     :type df: pandas.DataFrame
     :param *cross_cols: One or more positional arguments (passed as *args) that 
-    are used to split the data into the cross product of their values 
+        are used to split the data into the cross product of their values 
     :type cross_cross: List[str]
     :param categorical_cols: [Default: []] Columns within dataframe that are
         categorical. Columns that are not np.objects and are not part explicitly
@@ -505,14 +505,21 @@ def confusion_matrix_plot(
 
 def balanced_train_test_split(
         x: pd.DataFrame,
-        y: Union[np.array, list],
+        y: Union[np.ndarray, list],
         *cross_cols: str,
         categorical_cols: List[str] = [],
         min_per_group: int = 20,
-        max_per_group: int = None,
+        max_per_group: Optional[int] = None,
         fallback_type: str = "upsample",
         bins: int =6, 
-        random_state: int=None):
+        random_state: int=None
+        ) -> Tuple[
+                pd.DataFrame, 
+                np.ndarray, 
+                pd.DataFrame, 
+                np.ndarray, 
+                np.ndarray,
+                np.ndarray]:
     """
     Splits the "x" DataFrame and "y" Array into train/test split training sets with 
     a balanced number of examples for each of the categories of the columns provided.
@@ -522,57 +529,67 @@ def balanced_train_test_split(
     "fallback_type" parameter provides the behaviour that is triggered if there are not
     enough datapoint examples for one of the subcategory groups - the default is "half"
 
-    :Example:
+    Example
+    -------
 
-    x: pd.DataFrame # Contains the input features
-    y: np.array # Contains the labels for the data
-    categorical_cols: List[str] # Name of columns that are categorical
+    .. code-block:: python
 
-    x_train, y_train, x_test, y_test, train_idx, test_idx = \
+        x: pd.DataFrame # Contains the input features
+        y: np.array # Contains the labels for the data
+        categorical_cols: List[str] # Name of columns that are categorical
+
+        x_train, y_train, x_test, y_test, train_idx, test_idx = \\
             xai.balanced_train_test_split(
                     x, y, balance_on=["gender"], 
                     categorical_cols=categorical_cols, min_per_group=300,
                     fallback_type="half")
 
-
-    :param x: Pandas dataframe containing all the features in dataset
-    :type x: pd.DataFrame
-    :param pred: Array containing "actual" labels for the dataset 
-    :type pred: Union[np.array, list]
-    :param *cross_cols: One or more positional arguments (passed as *args) that 
-    are used to split the data into the cross product of their values 
-    :type cross_cols: List[str]
-    :param categorical_cols: [Default: []] Columns within dataframe that are
+    Args
+    -----
+    x : 
+        Pandas dataframe containing all the features in dataset
+    y : 
+        Array containing "actual" labels for the dataset 
+    *cross_cols :
+        One or more positional arguments (passed as *args) that 
+        are used to split the data into the cross product of their values 
+    categorical_cols : 
+        [Default: []] Columns within dataframe that are
         categorical. Columns that are not np.objects and are not part explicitly
         provided here will be treated as numeric, and bins will be used.
-    :type categorical_cols: List[str]
-    :param min_per_group: [Default: 20] This is the number of examples for each
+    min_per_group : 
+        [Default: 20] This is the number of examples for each
         of the groups created
-    :type scaled: int
-    :param max_per_group: [Default: None] This is the maximum number of examples for
+    max_per_group : 
+        [Default: None] This is the maximum number of examples for
         each group to be provided with.
-    :type max_per_group: Optional[int]
-    :param fallback_type: [Default: upsample] This is the fallback mechanism for when
+    fallback_type : 
+        [Default: upsample] This is the fallback mechanism for when
         one of the groups contains less elements than the number provided 
         through min_per_group. The options are "upsample", "ignore" and "error". 
             - "upsample": This will get samples with replacement so will repeat elements
             - "ignore": Will just ignore and return all the elements available
             - "error": Throw an exception for any groups with less elements
-    :type fallback_type: str
-    :param bins: [Default: 6] Number of bins to be used for numerical cols
-    :type bins: int
-    :param random_state: [Default: None] Random seed for the internal sampling
-    :type random_state: Optional[int]
+    bins : 
+        [Default: 6] Number of bins to be used for numerical cols
+    random_state: 
+        [Default: None] Random seed for the internal sampling
 
-    Returns:
-        (tuple): tuple containing:
+    Returns
+    -------
 
-            x_train (pd.DataFrame): DataFrame containing traning datapoints
-            y_train (np.array): Array containing labels for training datapoints
-            x_test (pd.DataFrame): DataFrame containing test datapoints
-            y_test (np.array): Array containing labels for test datapoints
-            train_idx (np.array): Boolean array with True on Training indexes
-            test_idx (np.array): Boolean array with True on Testing indexes
+    x_train : pd.DataFrame 
+        DataFrame containing traning datapoints
+    y_train : np.ndarray 
+        Array containing labels for training datapoints
+    x_test : pd.DataFrame
+        DataFrame containing test datapoints
+    y_test : np.ndarray
+        Array containing labels for test datapoints
+    train_idx : np.ndarray 
+        Boolean array with True on Training indexes
+    test_idx : np.ndarray 
+        Boolean array with True on Testing indexes
 
     """
 
