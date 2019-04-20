@@ -17,32 +17,34 @@
   
 
   
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
 
-  
-  
     
 
   
-
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" /> 
-
-  
-  <script src="_static/js/modernizr.min.js"></script>
-
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -401,36 +403,31 @@
 <span id="xai-data-module"></span><h2>xai.data module<a class="headerlink" href="#module-xai.data" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="xai.data.load_census">
-<code class="descclassname">xai.data.</code><code class="descname">load_census</code><span class="sig-paren">(</span><em>return_xy: bool = False</em><span class="sig-paren">)</span> &#x2192; Tuple[pandas.core.frame.DataFrame, Optional[numpy.core.multiarray.array]]<a class="headerlink" href="#xai.data.load_census" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">xai.data.</code><code class="descname">load_census</code><span class="sig-paren">(</span><em>return_xy=False</em><span class="sig-paren">)</span><a class="headerlink" href="#xai.data.load_census" title="Permalink to this definition">¶</a></dt>
 <dd><p>Load adult census dataset with column as “loan”
 instead of “target” to use during examples to “automate
 a loan approval process”.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Example:</th><td class="field-body"></td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
 <p>from xai.data import load_census
 df = load_census()</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>return_xy</strong> (<em>bool</em>) – [default: False] pass True if you would like
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>return_xy</strong> (<em>bool</em>) – [default: False] pass True if you would like
 to return the data as X, y where X are the input columns and
 y is the target. If nothing (or False) is provided, the default
-return will be the full dataframe.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Dataframe with full contents OR dataframe with inputs and
-array with targets.</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">(pandas.DataFrame, Optional[numpy.array])</td>
-</tr>
-</tbody>
-</table>
+return will be the full dataframe.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Dataframe with full contents OR dataframe with inputs and
+array with targets.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>(pandas.DataFrame, Optional[numpy.array])</p>
+</dd>
+</dl>
 </dd></dl>
 
 </div>
@@ -438,102 +435,199 @@ array with targets.</td>
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-xai" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="xai.balance">
-<code class="descclassname">xai.</code><code class="descname">balance</code><span class="sig-paren">(</span><em>df: pandas.core.frame.DataFrame</em>, <em>column_name: str</em>, <em>cross: List[str] = []</em>, <em>upsample: int = 0.5</em>, <em>downsample: int = 1</em>, <em>bins: int = 6</em>, <em>categorical_cols: List[str] = []</em>, <em>plot: bool = True</em><span class="sig-paren">)</span> &#x2192; pandas.core.frame.DataFrame<a class="headerlink" href="#xai.balance" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="docutils">
-<dt>Balances a dataframe based on the columns and cross columns provided.</dt>
-<dd>The results can be upsampled or downsampled. By default, there is no
+<code class="descclassname">xai.</code><code class="descname">balance</code><span class="sig-paren">(</span><em>df</em>, <em>*cross_cols</em>, <em>upsample=0.5</em>, <em>downsample=1</em>, <em>bins=6</em>, <em>categorical_cols=[]</em>, <em>plot=True</em><span class="sig-paren">)</span><a class="headerlink" href="#xai.balance" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Balances a dataframe based on the columns and cross columns provided.</dt><dd><p>The results can be upsampled or downsampled. By default, there is no
 downsample, and the upsample is towards a minimum of 50% of the
-frequency of the highest class.</dd>
+frequency of the highest class.</p>
+</dd>
 </dl>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Example:</th><td class="field-body"></td>
-</tr>
-</tbody>
-</table>
-<dl class="docutils">
-<dt>cat_df = xai.balance(</dt>
-<dd>df,
-“gender”,
-cross=[“loan”],
+<dl class="field-list simple">
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<dl class="simple">
+<dt>cat_df = xai.balance(</dt><dd><p>df,
+“gender”, “loan”,
 upsample=0.8,
-downsample=0.8)</dd>
+downsample=0.8)</p>
+</dd>
 </dl>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>df</strong> (<em>pandas.DataFrame</em>) – Pandas Dataframe containing data (inputs and target)</li>
-<li><strong>column_name</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – The column to use as basis for balancing dataframe</li>
-<li><strong>cross</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – [Default: []] An array containing other columns to
-cross with for comparison</li>
-<li><strong>upsample</strong> (<em>float</em>) – [Default: 0.5] Target upsample for columns lower
-than percentage.</li>
-<li><strong>downsample</strong> (<em>float</em>) – [Default: 1] Target downsample for columns higher
-than percentage.</li>
-<li><strong>bins</strong> (<em>float</em>) – [Default: 6] Number of bins to be used for numerical cols</li>
-<li><strong>categorical_cols</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – [Default: []] Columns within dataframe that are
-categorical. Columns that are not np.objects and are not part explicitly
-provided here will be treated as numeric, and bins will be used.</li>
-<li><strong>threshold</strong> – [Default: 0.5] Threshold to display in the chart.</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>pandas.DataFrame</em>) – Pandas Dataframe containing data (inputs and target )</p></li>
+<li><p><strong>*cross_cols</strong> – <p>One or more positional arguments (passed as <a href="#id3"><span class="problematic" id="id4">*</span></a>args) that</p>
+</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Dataframe with categorical numerical values.</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">pandas.DataFrame</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
+<p>are used to split the data into the cross product of their values
+:type cross_cols: List[str]
+:type upsample: <code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>
+:param upsample: [Default: 0.5] Target upsample for columns lower</p>
+<blockquote>
+<div><p>than percentage.</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>downsample</strong> (<em>float</em>) – [Default: 1] Target downsample for columns higher
+than percentage.</p></li>
+<li><p><strong>bins</strong> (<em>int</em>) – [Default: 6] Number of bins to be used for numerical cols</p></li>
+<li><p><strong>categorical_cols</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – [Default: []] Columns within dataframe that are
+categorical. Columns that are not np.objects and are not part explicitly
+provided here will be treated as numeric, and bins will be used.</p></li>
+<li><p><strong>threshold</strong> (<em>float</em>) – [Default: 0.5] Threshold to display in the chart.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Dataframe with categorical numerical values.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pandas.DataFrame</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
 <dt id="xai.balanced_train_test_split">
-<code class="descclassname">xai.</code><code class="descname">balanced_train_test_split</code><span class="sig-paren">(</span><em>x: pandas.core.frame.DataFrame</em>, <em>y: numpy.core.multiarray.array</em>, <em>cross: List[str] = []</em>, <em>categorical_cols: List[str] = []</em>, <em>min_per_class: int = 20</em>, <em>fallback_type: str = 'half'</em>, <em>bins: int = 6</em>, <em>random_state: int = None</em>, <em>include_target=True</em><span class="sig-paren">)</span><a class="headerlink" href="#xai.balanced_train_test_split" title="Permalink to this definition">¶</a></dt>
-<dd><p>sample_type: Can be “error”, or “half”“</p>
+<code class="descclassname">xai.</code><code class="descname">balanced_train_test_split</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>*cross_cols</em>, <em>categorical_cols=[]</em>, <em>min_per_group=20</em>, <em>max_per_group=None</em>, <em>fallback_type='upsample'</em>, <em>bins=6</em>, <em>random_state=None</em><span class="sig-paren">)</span><a class="headerlink" href="#xai.balanced_train_test_split" title="Permalink to this definition">¶</a></dt>
+<dd><p>Splits the “x” DataFrame and “y” Array into train/test split training sets with
+a balanced number of examples for each of the categories of the columns provided.
+For example, if the columns provided are “gender” and “loan”, the resulting splits
+would contain an equal number of examples for Male with Loan Approved, Male with
+Loan Rejected, Female with Loan Approved, and Female with Loan Rejected. The
+“fallback_type” parameter provides the behaviour that is triggered if there are not
+enough datapoint examples for one of the subcategory groups - the default is “half”</p>
+<p class="rubric">Example</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span> <span class="c1"># Contains the input features</span>
+<span class="n">y</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span> <span class="c1"># Contains the labels for the data</span>
+<span class="n">categorical_cols</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="c1"># Name of columns that are categorical</span>
+
+<span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">x_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">train_idx</span><span class="p">,</span> <span class="n">test_idx</span> <span class="o">=</span> \
+    <span class="n">xai</span><span class="o">.</span><span class="n">balanced_train_test_split</span><span class="p">(</span>
+            <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">balance_on</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;gender&quot;</span><span class="p">],</span>
+            <span class="n">categorical_cols</span><span class="o">=</span><span class="n">categorical_cols</span><span class="p">,</span> <span class="n">min_per_group</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span>
+            <span class="n">fallback_type</span><span class="o">=</span><span class="s2">&quot;half&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>) – Pandas dataframe containing all the features in dataset</p></li>
+<li><p><strong>y</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code>]) – Array containing “actual” labels for the dataset</p></li>
+<li><p><strong>*cross_cols</strong> – One or more positional arguments (passed as <a href="#id5"><span class="problematic" id="id6">*</span></a>args) that
+are used to split the data into the cross product of their values</p></li>
+<li><p><strong>categorical_cols</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]) – [Default: []] Columns within dataframe that are
+categorical. Columns that are not np.objects and are not part explicitly
+provided here will be treated as numeric, and bins will be used.</p></li>
+<li><p><strong>min_per_group</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – [Default: 20] This is the number of examples for each
+of the groups created</p></li>
+<li><p><strong>max_per_group</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>]) – [Default: None] This is the maximum number of examples for
+each group to be provided with.</p></li>
+<li><p><strong>fallback_type</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – <p>[Default: upsample] This is the fallback mechanism for when
+one of the groups contains less elements than the number provided
+through min_per_group. The options are “upsample”, “ignore” and “error”.</p>
+<blockquote>
+<div><ul>
+<li><p>”upsample”: This will get samples with replacement so will repeat elements</p></li>
+<li><p>”ignore”: Will just ignore and return all the elements available</p></li>
+<li><p>”error”: Throw an exception for any groups with less elements</p></li>
+</ul>
+</div></blockquote>
+</p></li>
+<li><p><strong>bins</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – [Default: 6] Number of bins to be used for numerical cols</p></li>
+<li><p><strong>random_state</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>]) – [Default: None] Random seed for the internal sampling</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Tuple</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>]</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p><strong>x_train</strong> (<em>pd.DataFrame</em>) – DataFrame containing traning datapoints</p></li>
+<li><p><strong>y_train</strong> (<em>np.ndarray</em>) – Array containing labels for training datapoints</p></li>
+<li><p><strong>x_test</strong> (<em>pd.DataFrame</em>) – DataFrame containing test datapoints</p></li>
+<li><p><strong>y_test</strong> (<em>np.ndarray</em>) – Array containing labels for test datapoints</p></li>
+<li><p><strong>train_idx</strong> (<em>np.ndarray</em>) – Boolean array with True on Training indexes</p></li>
+<li><p><strong>test_idx</strong> (<em>np.ndarray</em>) – Boolean array with True on Testing indexes</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="xai.confusion_matrix_plot">
+<code class="descclassname">xai.</code><code class="descname">confusion_matrix_plot</code><span class="sig-paren">(</span><em>y_test</em>, <em>pred</em>, <em>scaled=True</em>, <em>label_x_neg='PREDICTED NEGATIVE'</em>, <em>label_x_pos='PREDICTED POSITIVE'</em>, <em>label_y_neg='ACTUAL NEGATIVE'</em>, <em>label_y_pos='ACTUAL POSITIVE'</em><span class="sig-paren">)</span><a class="headerlink" href="#xai.confusion_matrix_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots a confusion matrix for a binary classifier with the expected and
+predicted values provided.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<dl class="simple">
+<dt>xai.confusion_matrix_plot(</dt><dd><p>actual_labels,
+predicted_labels,
+scaled=True)</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>y_test</strong> (<em>Union</em><em>[</em><em>np.array</em><em>, </em><em>list</em><em>]</em>) – Array containing binary “actual” labels for data</p></li>
+<li><p><strong>pred</strong> (<em>Union</em><em>[</em><em>np.array</em><em>, </em><em>list</em><em>]</em>) – Array containing binary “predictedd” labels for data</p></li>
+<li><p><strong>scaled</strong> – [Default: True] Whether the values are scaled to 0-1 or</p></li>
+</ul>
+</dd>
+</dl>
+<p>displayed as total number of instances
+:type scaled: bool
+:param label_x_neg: [Default: “PREDICTED NEGATIVE”] Plot label for
+the predicted negative values
+:type label_x_neg: str
+:param label_x_pos: [Default: “PREDICTED POSITIVE”] Plot label for
+the predicted positive values
+:type label_x_pos: str
+:param label_y_neg: [Default: “ACTUAL NEGATIVE”] Plot label for
+the actual negative values
+:type label_y_neg: str
+:param label_y_pos: [Default: “ACTUAL POSITIVE”] Plot label for
+the actual positive values
+:type label_y_pos: str
+:returns: Null
+:rtype: None</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="xai.convert_categories">
-<code class="descclassname">xai.</code><code class="descname">convert_categories</code><span class="sig-paren">(</span><em>df</em>, <em>categorical_cols: List[str] = []</em><span class="sig-paren">)</span><a class="headerlink" href="#xai.convert_categories" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="docutils">
-<dt>Converts columns to numeric categories. If the categorical_cols</dt>
-<dd>parameter is passed as a list then those columns are converted.
-Otherwise, all np.object columns are converted.</dd>
+<code class="descclassname">xai.</code><code class="descname">convert_categories</code><span class="sig-paren">(</span><em>df</em>, <em>categorical_cols=[]</em><span class="sig-paren">)</span><a class="headerlink" href="#xai.convert_categories" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Converts columns to numeric categories. If the categorical_cols</dt><dd><p>parameter is passed as a list then those columns are converted.
+Otherwise, all np.object columns are converted.</p>
+</dd>
 </dl>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Example:</th><td class="field-body"></td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
 <p>import xai
 cat_df = xai.convert_categories(df)</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>df</strong> (<em>pandas.DataFrame</em>) – Pandas Dataframe containing data (inputs and target)</li>
-<li><strong>categorical_cols</strong> (<em>str</em>) – List of strings containing categorical cols</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>pandas.DataFrame</em>) – Pandas Dataframe containing data (inputs and target)</p></li>
+<li><p><strong>categorical_cols</strong> (<em>str</em>) – List of strings containing categorical cols</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Dataframe with categorical numerical values.</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">pandas.DataFrame</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Dataframe with categorical numerical values.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pandas.DataFrame</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
@@ -544,7 +638,59 @@ cat_df = xai.convert_categories(df)</p>
 
 <dl class="function">
 <dt id="xai.correlations">
-<code class="descclassname">xai.</code><code class="descname">correlations</code><span class="sig-paren">(</span><em>df: pandas.core.frame.DataFrame, include_categorical: bool = False, plot_type: str = 'dendogram', figsize=[10, 5], categorical_cols: List[str] = []</em><span class="sig-paren">)</span><a class="headerlink" href="#xai.correlations" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">xai.</code><code class="descname">correlations</code><span class="sig-paren">(</span><em>df</em>, <em>include_categorical=False</em>, <em>plot_type='dendogram'</em>, <em>plt_kwargs={}</em>, <em>categorical_cols=[]</em><span class="sig-paren">)</span><a class="headerlink" href="#xai.correlations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the correlations for the columns provided and plots the relevant
+image as requested by the parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<dl class="simple">
+<dt>cat_df = xai.balance(</dt><dd><p>df,
+“gender”, “loan”,
+upsample=0.8,
+downsample=0.8)</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>pandas.DataFrame</em>) – Pandas Dataframe containing data (inputs and target )</p></li>
+<li><p><strong>*cross_cols</strong> – <p>One or more positional arguments (passed as <a href="#id9"><span class="problematic" id="id10">*</span></a>args) that</p>
+</p></li>
+</ul>
+</dd>
+</dl>
+<p>are used to split the data into the cross product of their values
+:type cross_cols: List[str]
+:param upsample: [Default: 0.5] Target upsample for columns lower</p>
+<blockquote>
+<div><p>than percentage.</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>downsample</strong> (<em>float</em>) – [Default: 1] Target downsample for columns higher
+than percentage.</p></li>
+<li><p><strong>bins</strong> (<em>int</em>) – [Default: 6] Number of bins to be used for numerical cols</p></li>
+<li><p><strong>categorical_cols</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – [Default: []] Columns within dataframe that are
+categorical. Columns that are not np.objects and are not part explicitly
+provided here will be treated as numeric, and bins will be used.</p></li>
+<li><p><strong>threshold</strong> (<em>float</em>) – [Default: 0.5] Threshold to display in the chart.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Returns a dataframe containing the correlation values for the features</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pandas.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="xai.evaluation_metrics">
+<code class="descclassname">xai.</code><code class="descname">evaluation_metrics</code><span class="sig-paren">(</span><em>y_valid</em>, <em>y_pred</em><span class="sig-paren">)</span><a class="headerlink" href="#xai.evaluation_metrics" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
@@ -554,252 +700,143 @@ cat_df = xai.convert_categories(df)</p>
 
 <dl class="function">
 <dt id="xai.group_by_columns">
-<code class="descclassname">xai.</code><code class="descname">group_by_columns</code><span class="sig-paren">(</span><em>df: pandas.core.frame.DataFrame, columns: List[str], bins: int = 6, categorical_cols: List[str] = []</em><span class="sig-paren">)</span> &#x2192; pandas.core.groupby.groupby.DataFrameGroupBy<a class="headerlink" href="#xai.group_by_columns" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="docutils">
-<dt>Groups dataframe by columns provided. If categorical it uses categories,</dt>
-<dd>if numeric, it uses bins. If more than one column is provided, the function
-creates crossed sub-groups.</dd>
+<code class="descclassname">xai.</code><code class="descname">group_by_columns</code><span class="sig-paren">(</span><em>df</em>, <em>columns</em>, <em>bins=6</em>, <em>categorical_cols=[]</em><span class="sig-paren">)</span><a class="headerlink" href="#xai.group_by_columns" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Groups dataframe by the categories (or bucketized values) for all columns provided.</dt><dd><p>If categorical it uses categories,
+if numeric, it uses bins. If more than one column is provided, the columns
+provided are, for example, age and binary_target_label, then the result
+would be a pandas DataFrame that is grouped by age groups for each of the
+positive and negative/positive labels.</p>
+</dd>
 </dl>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Example:</th><td class="field-body"></td>
-</tr>
-</tbody>
-</table>
-<p>import xai
-columns=[“loan”, “gender”, “age”]
-cat_df = xai.group_by_columns(</p>
+<dl class="field-list simple">
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<p>columns=[“loan”, “gender”]
+df_groups = xai.group_by_columns(</p>
 <blockquote>
-<div>df,
+<div><p>df,
 columns=columns,
 bins=10,
-categorical_cols=[“gender”])</div></blockquote>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>df</strong> (<em>pandas.DataFrame</em>) – Pandas Dataframe containing data (inputs and target)</li>
-<li><strong>bins</strong> (<em>int</em>) – [Default: 6] Number of bins to be used for numerical cols</li>
-<li><strong>categorical_cols</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – [Default: []] Columns within dataframe that are
-categorical. Columns that are not np.objects and are not part explicitly
-provided here will be treated as numeric, and bins will be used.</li>
+categorical_cols=[“gender”, “loan”])</p>
+</div></blockquote>
+<dl class="simple">
+<dt>for group, df_group in df_groups:</dt><dd><p>print(group)
+print(grouped_df.head())</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>pandas.DataFrame</em>) – Pandas Dataframe containing data (inputs and target)</p></li>
+<li><p><strong>bins</strong> (<em>int</em>) – [Default: 6] Number of bins to be used for numerical cols</p></li>
+<li><p><strong>categorical_cols</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – [Default: []] Columns within dataframe that are
+categorical. Columns that are not np.objects or np.bool and
+are not part explicitly
+provided here will be treated as numeric, and bins will be used.</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Dataframe with categorical numerical values.</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">pandas.core.groupby.groupby.DataFrameGroupBy</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Dataframe with categorical numerical values.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pandas.core.groupby.groupby.DataFrameGroupBy</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
-<dt id="xai.metrics_imbalance">
-<code class="descclassname">xai.</code><code class="descname">metrics_imbalance</code><span class="sig-paren">(</span><em>x_df</em>, <em>y_valid</em>, <em>y_pred</em>, <em>col_name=None</em>, <em>cross=[]</em>, <em>categorical_cols=[]</em>, <em>bins=6</em>, <em>prob_threshold=0.5</em>, <em>plot=True</em><span class="sig-paren">)</span><a class="headerlink" href="#xai.metrics_imbalance" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dt id="xai.imbalance_plot">
+<code class="descclassname">xai.</code><code class="descname">imbalance_plot</code><span class="sig-paren">(</span><em>df</em>, <em>*cross_cols</em>, <em>categorical_cols=[]</em>, <em>bins=6</em>, <em>threshold=0.5</em><span class="sig-paren">)</span><a class="headerlink" href="#xai.imbalance_plot" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Shows the number of examples provided for each of the values across the</dt><dd><p>product tuples in the columns provided. If you would like to do processing
+with the sub-groups created by this class please see the
+group_by_columns function.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<p>import xai
+class_counts = xai.imbalance_plot(</p>
+<blockquote>
+<div><p>df,
+“gender”, “loan”,
+bins=10,
+threshold=0.8)</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>pandas.DataFrame</em>) – Pandas Dataframe containing data (inputs and target)</p></li>
+<li><p><strong>*cross_cols</strong> – <p>One or more positional arguments (passed as <a href="#id13"><span class="problematic" id="id14">*</span></a>args) that
+are used to split the data into the cross product of their values</p>
+</p></li>
+<li><p><strong>categorical_cols</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – [Default: []] Columns within dataframe that are
+categorical. Columns that are not np.objects and are not part explicitly
+provided here will be treated as numeric, and bins will be used.</p></li>
+<li><p><strong>bins</strong> (<em>int</em>) – [Default: 6] Number of bins to be used for numerical cols</p></li>
+<li><p><strong>threshold</strong> (<em>float</em>) – [Default: 0.5] Threshold to display in the chart.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Null</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="function">
-<dt id="xai.metrics_imbalances">
-<code class="descclassname">xai.</code><code class="descname">metrics_imbalances</code><span class="sig-paren">(</span><em>x_test</em>, <em>y_test</em>, <em>predictions</em>, <em>columns=[]</em>, <em>categorical_cols=[]</em>, <em>cross=[]</em>, <em>bins=6</em>, <em>prob_threshold=0.5</em>, <em>plot=True</em><span class="sig-paren">)</span><a class="headerlink" href="#xai.metrics_imbalances" title="Permalink to this definition">¶</a></dt>
+<dt id="xai.metrics_plot">
+<code class="descclassname">xai.</code><code class="descname">metrics_plot</code><span class="sig-paren">(</span><em>target</em>, <em>predicted</em>, <em>df=Empty DataFrame Columns: [] Index: []</em>, <em>cross_cols=[]</em>, <em>categorical_cols=[]</em>, <em>bins=6</em>, <em>plot=True</em>, <em>exclude_metrics=[]</em>, <em>plot_threshold=0.5</em><span class="sig-paren">)</span><a class="headerlink" href="#xai.metrics_plot" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
 <dt id="xai.normalize_numeric">
-<code class="descclassname">xai.</code><code class="descname">normalize_numeric</code><span class="sig-paren">(</span><em>df</em>, <em>numerical_cols: List[str] = []</em><span class="sig-paren">)</span> &#x2192; pandas.core.frame.DataFrame<a class="headerlink" href="#xai.normalize_numeric" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="docutils">
-<dt>Normalizes numeric columns by substracting the mean and dividing</dt>
-<dd>by standard deviation. If the parameter numerical_cols is not
-provided, it will take all the columns of dtype np.number.</dd>
+<code class="descclassname">xai.</code><code class="descname">normalize_numeric</code><span class="sig-paren">(</span><em>df</em>, <em>numerical_cols=[]</em><span class="sig-paren">)</span><a class="headerlink" href="#xai.normalize_numeric" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Normalizes numeric columns by substracting the mean and dividing</dt><dd><p>by standard deviation. If the parameter numerical_cols is not
+provided, it will take all the columns of dtype np.number.</p>
+</dd>
 </dl>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Example:</th><td class="field-body"></td>
-</tr>
-</tbody>
-</table>
-<p>import xai
-norm_df = xai.normalize_numeric(df)</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>df</strong> (<em>pd.DataFrame</em>) – Pandas Dataframe containing data (inputs and target)</li>
-<li><strong>numerical_cols</strong> – List of strings containing numercial cols</li>
+<dl class="field-list simple">
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<dl class="simple">
+<dt>norm_df = xai.normalize_numeric(</dt><dd><p>df,
+normalize_numeric=[“age”, “other_numeric_attribute”])</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>pd.DataFrame</em>) – Pandas Dataframe containing data (inputs and target)</p></li>
+<li><p><strong>numerical_cols</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]) – List of strings containing numercial cols</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Dataframe with normalized numerical values.</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">pandas.DataFrame</p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="xai.perf_metrics">
-<code class="descclassname">xai.</code><code class="descname">perf_metrics</code><span class="sig-paren">(</span><em>y_valid</em>, <em>y_pred</em><span class="sig-paren">)</span><a class="headerlink" href="#xai.perf_metrics" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="xai.plot_dendogram">
-<code class="descclassname">xai.</code><code class="descname">plot_dendogram</code><span class="sig-paren">(</span><em>corr: pandas.core.frame.DataFrame, cols: List[str], figsize=(10, 5)</em><span class="sig-paren">)</span><a class="headerlink" href="#xai.plot_dendogram" title="Permalink to this definition">¶</a></dt>
-<dd><p>Plot dendogram of a correlation matrix, using the columns provided.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Null</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">None</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="xai.plot_matrix">
-<code class="descclassname">xai.</code><code class="descname">plot_matrix</code><span class="sig-paren">(</span><em>corr, cols: List[str], figsize=(10, 5)</em><span class="sig-paren">)</span><a class="headerlink" href="#xai.plot_matrix" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="xai.pr_imbalance">
-<code class="descclassname">xai.</code><code class="descname">pr_imbalance</code><span class="sig-paren">(</span><em>x_df</em>, <em>y_valid</em>, <em>y_pred</em>, <em>col_name=None</em>, <em>cross=[]</em>, <em>categorical_cols=None</em>, <em>bins=6</em>, <em>plot=True</em><span class="sig-paren">)</span><a class="headerlink" href="#xai.pr_imbalance" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="xai.pr_imbalances">
-<code class="descclassname">xai.</code><code class="descname">pr_imbalances</code><span class="sig-paren">(</span><em>x_test</em>, <em>y_test</em>, <em>predictions</em>, <em>columns=[]</em>, <em>categorical_cols=[]</em>, <em>cross=[]</em>, <em>bins=6</em>, <em>plot=True</em><span class="sig-paren">)</span><a class="headerlink" href="#xai.pr_imbalances" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="xai.roc_imbalance">
-<code class="descclassname">xai.</code><code class="descname">roc_imbalance</code><span class="sig-paren">(</span><em>x_df</em>, <em>y_valid</em>, <em>y_pred</em>, <em>col_name=None</em>, <em>cross=[]</em>, <em>categorical_cols=None</em>, <em>bins=6</em>, <em>plot=True</em><span class="sig-paren">)</span><a class="headerlink" href="#xai.roc_imbalance" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="xai.roc_imbalances">
-<code class="descclassname">xai.</code><code class="descname">roc_imbalances</code><span class="sig-paren">(</span><em>x_test</em>, <em>y_test</em>, <em>predictions</em>, <em>columns=[]</em>, <em>categorical_cols=[]</em>, <em>cross=[]</em>, <em>bins=6</em>, <em>plot=True</em><span class="sig-paren">)</span><a class="headerlink" href="#xai.roc_imbalances" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="xai.show_imbalance">
-<code class="descclassname">xai.</code><code class="descname">show_imbalance</code><span class="sig-paren">(</span><em>df: pandas.core.frame.DataFrame</em>, <em>column_name: str</em>, <em>cross: List[str] = []</em>, <em>categorical_cols: List[str] = []</em>, <em>bins: int = 6</em>, <em>threshold: float = 0.5</em><span class="sig-paren">)</span> &#x2192; Any<a class="headerlink" href="#xai.show_imbalance" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="docutils">
-<dt>Shows imbalances in the data by comparing either categories</dt>
-<dd>or bins for numerical columns.</dd>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Dataframe with normalized numerical values.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pandas.DataFrame</p>
+</dd>
 </dl>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Example:</th><td class="field-body"></td>
-</tr>
-</tbody>
-</table>
-<p>import xai
-cat_df = xai.show_imbalance(</p>
-<blockquote>
-<div>df,
-“gender”,
-cross=[“loan”],
-bins=10,
-threshold=0.8)</div></blockquote>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>df</strong> (<em>pandas.DataFrame</em>) – Pandas Dataframe containing data (inputs and target)</li>
-<li><strong>column</strong> (<em>str</em>) – The column to use as basis for calculating imbalances</li>
-<li><strong>cross</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – [Default: []] An array containing other columns to cross with for comparison</li>
-<li><strong>categorical_cols</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – [Default: []] Columns within dataframe that are
-categorical. Columns that are not np.objects and are not part explicitly
-provided here will be treated as numeric, and bins will be used.</li>
-<li><strong>bins</strong> (<em>float</em>) – [Default: 6] Number of bins to be used for numerical cols</li>
-<li><strong>threshold</strong> – [Default: 0.5] Threshold to display in the chart.</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">GroupsCounts, List of imbalance percent, List where imbalances found</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Tuple[pandas…DataFrameGroupBy, List[float], List[bool]]</p>
-</td>
-</tr>
-</tbody>
-</table>
 </dd></dl>
 
 <dl class="function">
-<dt id="xai.show_imbalances">
-<code class="descclassname">xai.</code><code class="descname">show_imbalances</code><span class="sig-paren">(</span><em>df: pandas.core.frame.DataFrame</em>, <em>columns: List[str] = []</em>, <em>cross: List[str] = []</em>, <em>categorical_cols: List[str] = []</em>, <em>bins: int = 6</em><span class="sig-paren">)</span> &#x2192; Any<a class="headerlink" href="#xai.show_imbalances" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="docutils">
-<dt>Shows imbalances in the data by comparing either categories</dt>
-<dd>or bins for numerical columns for multiple columns provided.</dd>
-</dl>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Example:</th><td class="field-body"></td>
-</tr>
-</tbody>
-</table>
-<p>target = “loan”
-protected = [“gender”, “ethnicity”, “age”]</p>
-<dl class="docutils">
-<dt>cat_df = xai.show_imbalances(</dt>
-<dd>df,
-protected,
-cross=[target],
-bins=10,
-threshold=0.8)</dd>
-</dl>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>df</strong> (<em>pandas.DataFrame</em>) – Pandas Dataframe containing data (inputs and target)</li>
-<li><strong>columns</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – The columns to use as basis for calculating imbalances</li>
-<li><strong>cross</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – [Default: []] An array containing other columns to
-cross with for comparison</li>
-<li><strong>categorical_cols</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – [Default: []] Columns within dataframe that are
-categorical. Columns that are not np.objects and are not part explicitly
-provided here will be treated as numeric, and bins will be used.</li>
-<li><strong>bins</strong> (<em>float</em>) – [Default: 6] Number of bins to be used for numerical cols</li>
-<li><strong>threshold</strong> – [Default: 0.5] Threshold to display in the chart.</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Dataframe with categorical numerical values.</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first">pandas.DataFrame</p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">List of Tuples containing: GroupsCounts, List of
-imbalance percent, and List where imbalances found</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">List[Tuple[pandas…DataFrameGroupBy, List[float], List[bool]]]</p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
+<dt id="xai.pr_plot">
+<code class="descclassname">xai.</code><code class="descname">pr_plot</code><span class="sig-paren">(</span><em>target</em>, <em>predicted</em>, <em>df=Empty DataFrame Columns: [] Index: []</em>, <em>cross_cols=[]</em>, <em>categorical_cols=[]</em>, <em>bins=6</em>, <em>plot=True</em><span class="sig-paren">)</span><a class="headerlink" href="#xai.pr_plot" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="xai.roc_plot">
+<code class="descclassname">xai.</code><code class="descname">roc_plot</code><span class="sig-paren">(</span><em>target</em>, <em>predicted</em>, <em>df=Empty DataFrame Columns: [] Index: []</em>, <em>cross_cols=[]</em>, <em>categorical_cols=[]</em>, <em>bins=6</em>, <em>plot=True</em><span class="sig-paren">)</span><a class="headerlink" href="#xai.roc_plot" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="function">
 <dt id="xai.smile_imbalance">
@@ -837,25 +874,16 @@ imbalance percent, and List where imbalances found</p>
   
 
 
-  
-
-    
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-    
-
-  
-
-  <script type="text/javascript" src="_static/js/theme.js"></script>
-
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>
+
+  
+  
+    
+   
 
 </body>
 </html>
