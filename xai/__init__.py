@@ -168,7 +168,7 @@ def imbalance_plot(
     :type df: pandas.DataFrame
     :param *cross_cols: One or more positional arguments (passed as *args) that 
     are used to split the data into the cross product of their values 
-    :type cross: List[str]
+    :type cross_cross: List[str]
     :param categorical_cols: [Default: []] Columns within dataframe that are
         categorical. Columns that are not np.objects and are not part explicitly
         provided here will be treated as numeric, and bins will be used.
@@ -176,7 +176,7 @@ def imbalance_plot(
     :param bins: [Default: 6] Number of bins to be used for numerical cols
     :type bins: int
     :param threshold: [Default: 0.5] Threshold to display in the chart.
-    :type bins: float
+    :type threshold: float
     :returns: Null
     :rtype: None
 
@@ -207,6 +207,7 @@ def imbalance_plot(
     plt.legend()
     plt.show()
 
+
 def balance(
         df: pd.DataFrame,
         *cross_cols: str, 
@@ -233,7 +234,7 @@ def balance(
     :type df: pandas.DataFrame
     :param *cross_cols: One or more positional arguments (passed as *args) that 
     are used to split the data into the cross product of their values 
-    :type cross: List[str]
+    :type cross_cols: List[str]
     :param upsample: [Default: 0.5] Target upsample for columns lower 
         than percentage.
     :type upsample: float
@@ -247,7 +248,7 @@ def balance(
         provided here will be treated as numeric, and bins will be used.
     :type categorical_cols: List[str]
     :param threshold: [Default: 0.5] Threshold to display in the chart.
-    :type bins: float
+    :type threshold: float
     :returns: Dataframe with categorical numerical values.
     :rtype: pandas.DataFrame
 
@@ -360,6 +361,41 @@ def correlations(
         plot_type: str = "dendogram",
         plt_kwargs={},
         categorical_cols: List[str] = []):
+    """
+    Computes the correlations for the columns provided and plots the relevant
+    image as requested by the parameters.
+
+    :Example:
+
+    cat_df = xai.balance(
+        df, 
+        "gender", "loan",
+        upsample=0.8,
+        downsample=0.8)
+
+    :param df: Pandas Dataframe containing data (inputs and target )
+    :type df: pandas.DataFrame
+    :param *cross_cols: One or more positional arguments (passed as *args) that 
+    are used to split the data into the cross product of their values 
+    :type cross_cols: List[str]
+    :param upsample: [Default: 0.5] Target upsample for columns lower 
+        than percentage.
+    :type upsample: float
+    :param downsample: [Default: 1] Target downsample for columns higher 
+        than percentage.
+    :type downsample: float
+    :param bins: [Default: 6] Number of bins to be used for numerical cols
+    :type bins: int
+    :param categorical_cols: [Default: []] Columns within dataframe that are
+        categorical. Columns that are not np.objects and are not part explicitly
+        provided here will be treated as numeric, and bins will be used.
+    :type categorical_cols: List[str]
+    :param threshold: [Default: 0.5] Threshold to display in the chart.
+    :type threshold: float
+    :returns: Returns a dataframe containing the correlation values for the features
+    :rtype: pandas.DataFrame
+
+    """
 
     corr = None
     cols: List = []
@@ -393,6 +429,39 @@ def confusion_matrix_plot(
         label_x_pos="PREDICTED POSITIVE", 
         label_y_neg="ACTUAL NEGATIVE", 
         label_y_pos="ACTUAL POSITIVE"):
+    """
+    Plots a confusion matrix for a binary classifier with the expected and 
+    predicted values provided.
+
+    :Example:
+
+    xai.confusion_matrix_plot(
+        actual_labels, 
+        predicted_labels,
+        scaled=True)
+
+    :param y_test: Array containing binary "actual" labels for data
+    :type y_test: Union[np.array, list]
+    :param pred: Array containing binary "predictedd" labels for data
+    :type pred: Union[np.array, list]
+    :param scaled: [Default: True] Whether the values are scaled to 0-1 or 
+    displayed as total number of instances
+    :type scaled: bool
+    :param label_x_neg: [Default: "PREDICTED NEGATIVE"] Plot label for 
+    the predicted negative values
+    :type label_x_neg: str
+    :param label_x_pos: [Default: "PREDICTED POSITIVE"] Plot label for 
+    the predicted positive values
+    :type label_x_pos: str
+    :param label_y_neg: [Default: "ACTUAL NEGATIVE"] Plot label for 
+    the actual negative values
+    :type label_y_neg: str
+    :param label_y_pos: [Default: "ACTUAL POSITIVE"] Plot label for 
+    the actual positive values
+    :type label_y_pos: str
+    :returns: Null
+    :rtype: None
+    """
 
     confusion = confusion_matrix(y_test, pred)
     columns = [label_y_neg, label_y_pos]
@@ -436,32 +505,95 @@ def confusion_matrix_plot(
 
 def balanced_train_test_split(
         x: pd.DataFrame,
-        y: np.array,
-        cross: List[str] =[],
+        y: Union[np.array, list],
+        *cross_cols: str,
         categorical_cols: List[str] = [],
-        min_per_class: int =20,
-        fallback_type: str ="half",
+        min_per_group: int = 20,
+        max_per_group: int = None,
+        fallback_type: str = "upsample",
         bins: int =6, 
-        random_state: int=None,
-        include_target=True):
+        random_state: int=None):
     """
-    sample_type: Can be "error", or "half""
+    Splits the "x" DataFrame and "y" Array into train/test split training sets with 
+    a balanced number of examples for each of the categories of the columns provided.
+    For example, if the columns provided are "gender" and "loan", the resulting splits
+    would contain an equal number of examples for Male with Loan Approved, Male with 
+    Loan Rejected, Female with Loan Approved, and Female with Loan Rejected. The 
+    "fallback_type" parameter provides the behaviour that is triggered if there are not
+    enough datapoint examples for one of the subcategory groups - the default is "half"
+
+    :Example:
+
+    x: pd.DataFrame # Contains the input features
+    y: np.array # Contains the labels for the data
+    categorical_cols: List[str] # Name of columns that are categorical
+
+    x_train, y_train, x_test, y_test, train_idx, test_idx = \
+            xai.balanced_train_test_split(
+                    x, y, balance_on=["gender"], 
+                    categorical_cols=categorical_cols, min_per_group=300,
+                    fallback_type="half")
+
+
+    :param x: Pandas dataframe containing all the features in dataset
+    :type x: pd.DataFrame
+    :param pred: Array containing "actual" labels for the dataset 
+    :type pred: Union[np.array, list]
+    :param *cross_cols: One or more positional arguments (passed as *args) that 
+    are used to split the data into the cross product of their values 
+    :type cross_cols: List[str]
+    :param categorical_cols: [Default: []] Columns within dataframe that are
+        categorical. Columns that are not np.objects and are not part explicitly
+        provided here will be treated as numeric, and bins will be used.
+    :type categorical_cols: List[str]
+    :param min_per_group: [Default: 20] This is the number of examples for each
+        of the groups created
+    :type scaled: int
+    :param max_per_group: [Default: None] This is the maximum number of examples for
+        each group to be provided with.
+    :type max_per_group: Optional[int]
+    :param fallback_type: [Default: upsample] This is the fallback mechanism for when
+        one of the groups contains less elements than the number provided 
+        through min_per_group. The options are "upsample", "ignore" and "error". 
+            - "upsample": This will get samples with replacement so will repeat elements
+            - "ignore": Will just ignore and return all the elements available
+            - "error": Throw an exception for any groups with less elements
+    :type fallback_type: str
+    :param bins: [Default: 6] Number of bins to be used for numerical cols
+    :type bins: int
+    :param random_state: [Default: None] Random seed for the internal sampling
+    :type random_state: Optional[int]
+
+    Returns:
+        (tuple): tuple containing:
+
+            x_train (pd.DataFrame): DataFrame containing traning datapoints
+            y_train (np.array): Array containing labels for training datapoints
+            x_test (pd.DataFrame): DataFrame containing test datapoints
+            y_test (np.array): Array containing labels for test datapoints
+            train_idx (np.array): Boolean array with True on Training indexes
+            test_idx (np.array): Boolean array with True on Testing indexes
+
     """
-    # TODO: Allow parameter test_size:int so it's possible 
-    # to provide preferred test size, and fill up the rest with normal .sample()
+
+    if not cross_cols:
+        raise TypeError("imbalance_plot requires at least 1 string column name")
+    if min_per_group < 1:
+        raise TypeError("min_per_group must be at least 1")
+    if max_per_group and max_per_group < min_per_group:
+        raise TypeError(f"min_per_group ({min_per_group}) must be less or equal than "
+                f"max_per_group ({max_per_group}) if max_per_group is provided.")
     
     if random_state:
         random.setstate(random_state)
-    
+
     tmp_df = x.copy()
     tmp_df["target"] = y
 
-    # Adding target to the columns to combine
-    if include_target:
-        cross = ["target"] + cross
+    cross = ["target"] + list(cross_cols)
     
-    if not len(categorical_cols):
-        categorical_cols = list(tmp_df.select_dtypes(include=[np.object, np.bool]).columns)
+    if not categorical_cols:
+        categorical_cols = _infer_categorical(tmp_df)
 
     # TODO: Enable for non-categorical targets
     categorical_cols = ["target"] + categorical_cols
@@ -474,23 +606,21 @@ def balanced_train_test_split(
 
     def resample(x):
         group_size = x.shape[0]
-        if fallback_type == "half":
-            if group_size > 2*min_per_class:
-                return x.sample(min_per_class)
-            else:
-                if group_size > 1:
-                    return x.sample(math.floor(group_size / 2))
-                else:
-                    if random.random() > 0.5:
-                        return x
-                    else:
-                        return
+
+        if max_per_group:
+            if group_size > max_per_group:
+                return x.sample(max_per_group)
+
+        if group_size > min_per_group:
+            return x.sample(min_per_group)
+
+        if fallback_type == "upsample":
+            return x.sample(min_per_group, replace=True)
+        elif fallback_type == "ignore":
+            return x
         elif fallback_type == "error":
-            if group_size > 2*min_per_class: 
-                return x.sample(min_per_class)
-            else:
-                raise("Number of samples for group are not enough,"
-                        " and fallback_type provided was 'error'")
+            raise ValueError("Number of samples for group are not enough,"
+                    " and fallback_type provided was 'error'")
         else:
             raise(f"Sampling type provided not found: given {fallback_type}, "\
                  "expected: 'error', or 'half'")
