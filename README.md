@@ -74,47 +74,69 @@ import xai.data
 df = xai.data.load_census()
 df.head()
 ```
-<img width="100%" src="images/readme-1.png">
+<img width="100%" src="images/readme-csv-head.jpg">
 
-#### View class imbalances for protected columns
+#### View class imbalances for all categories of one column
 ``` python
-protected_cols = ["gender", "ethnicity", "age"]
-ims = xai.show_imbalances(df, protected_cols)
+ims = xai.imbalance_plot(df, "gender")
 ```
-<img width="100%" src="images/readme-2.png">
+<img width="100%" src="images/readme-imbalance-gender.jpg">
 
-#### View imbalance of one column
+#### View imbalances for all categories across multiple columns
 ``` python
-im = xai.show_imbalance(df, "gender")
+im = xai.show_imbalance(df, "gender", "loan")
 ```
-<img width="100%" src="images/readme-3.png">
+<img width="100%" src="images/readme-imbalance-multiple.jpg">
 
-#### View imbalance of one column intersected with another
+#### Balance classes using upsampling and/or downsampling
 ``` python
-im = xai.show_imbalance(df, "gender", cross=["loan"])
+bal_df = xai.balance(df, "gender", "loan", upsample=0.8)
 ```
-<img width="100%" src="images/readme-4.png">
+<img width="100%" src="images/readme-balance-upsample.jpg">
 
-#### Balance the class using upsampling and/or downsampling
+#### Perform custom operations on groups
 ``` python
-bal_df = xai.balance(df, "gender", cross=["loan"], upsample=1.0)
+groups = xai.group_by_columns(df, ["gender", "loan"])
+for group, group_df in groups:    
+    print(group) 
+    print(group_df["loan"].head(), "\n")
 ```
-<img width="100%" src="images/readme-5.png">
+<img width="100%" src="images/readme-groups.jpg">
 
-#### Create a balanced test-train split (should be done pre-balancing)
+#### Visualise correlations as a matrix
+``` python
+_ = xai.correlations(df, include_categorical=True, plot_type="matrix")
+```
+<img width="100%" src="images/readme-correlation-matrix.jpg">
+
+#### Visualise correlations as a hierarchical dendogram
+``` python
+_ = xai.correlations(df, include_categorical=True)
+```
+<img width="100%" src="images/readme-correlation-dendogram.jpg">
+
+#### Create a balanced validation and training split dataset
 ``` python
 # Balanced train-test split with minimum 300 examples of 
-# the cross of the target y and the column gender
-x_train, y_train, x_test, y_test = xai.balanced_train_test_split(
-            x, y, cross=["gender"], 
-            categorical_cols=categorical_cols, min_per_class=300)
+#     the cross of the target y and the column gender
+x_train, y_train, x_test, y_test, train_idx, test_idx = \
+    xai.balanced_train_test_split(
+            x, y, "gender", 
+            min_per_group=300,
+            max_per_group=300,
+            categorical_cols=categorical_cols)
 
-# Visualise the imbalances of gender and the target 
-df_test = x_test.copy()
+x_train_display = bal_df[train_idx]
+x_test_display = bal_df[test_idx]
+
+print("Total number of examples: ", x_test.shape[0])
+
+df_test = x_test_display.copy()
 df_test["loan"] = y_test
-_= xai.show_imbalance(df_test, "gender", cross=["loan"], categorical_cols=categorical_cols)
+
+_= xai.imbalance_plot(df_test, "gender", "loan", categorical_cols=categorical_cols)
 ```
-<img width="100%" src="images/readme-16.png">
+<img width="100%" src="images/readme-balance-split.jpg">
 
 ### 2) Model Evaluation
 
@@ -143,54 +165,57 @@ imp.head()
 
 #### Identify metric imbalances against all test data
 ``` python
-_= xai.metrics_imbalance(
-        x_test, 
+_= xai.metrics_plot(
         y_test, 
         probabilities)
 ```
-<img width="100%" src="images/readme-7.png">
+<img width="100%" src="images/readme-metrics-plot.jpg">
 
-#### Identify metric imbalances grouped by protected columns
+#### Identify metric imbalances across a specific column
 ``` python
-_= xai.metrics_imbalances(
-        x_test, 
-        y_test, 
-        probabilities,
-        columns=protected,
-        categorical_cols=categorical_cols)
+_ = xai.metrics_plot(
+    y_test, 
+    probabilities, 
+    df=x_test_display, 
+    cross_cols=["gender"],
+    categorical_cols=categorical_cols)
 ```
-<img width="100%" src="images/readme-8.png">
+<img width="100%" src="images/readme-metrics-column.jpg">
+
+#### Identify metric imbalances across multiple columns
+``` python
+_ = xai.metrics_plot(
+    y_test, 
+    probabilities, 
+    df=x_test_display, 
+    cross_cols=["gender", "ethnicity"],
+    categorical_cols=categorical_cols)
+```
+<img width="100%" src="images/readme-metrics-multiple.jpg">
+
+#### Draw confusion matrix
+``` python
+xai.confusion_matrix_plot(y_test, pred)
+```
+<img width="100%" src="images/readme-confusion-matrix.jpg">
 
 #### Visualise the ROC curve against all test data
 ``` python
-_= xai.roc_imbalance(
-    x_test, 
-    y_test, 
-    probabilities)
+_ = xai.roc_plot(y_test, probabilities)
 ```
 <img width="100%" src="images/readme-9.png">
 
-#### Visualise the ROC curves grouped by protected columns
+#### Visualise the ROC curves grouped by a protected column
 ``` python
-_= xai.roc_imbalances(
-    x_test, 
+protected = ["gender", "ethnicity", "age"]
+_ = [xai.roc_plot(
     y_test, 
     probabilities, 
-    columns=protected,
-    categorical_cols=categorical_cols)
+    df=x_test_display, 
+    cross_cols=[p],
+    categorical_cols=categorical_cols) for p in protected]
 ```
 <img width="100%" src="images/readme-10.png">
-
-#### Visualise the precision-recall curve by protected columns
-``` python
-_= xai.pr_imbalances(
-    x_test, 
-    y_test, 
-    probabilities, 
-    columns=protected,
-    categorical_cols=categorical_cols)
-```
-<img width="100%" src="images/readme-11.png">
 
 #### Visualise accuracy grouped by probability buckets
 ``` python

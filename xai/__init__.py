@@ -876,7 +876,7 @@ def _group_metrics(
         df_tmp["predicted"] = convert_probs(
             df_tmp["predicted"], threshold=target_threshold)
 
-    if categorical_cols and cross_cols:
+    if not categorical_cols and cross_cols:
         categorical_cols = _infer_categorical(df_tmp)
 
     if not cross_cols:
