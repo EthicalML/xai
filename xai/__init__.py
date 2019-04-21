@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from scipy.stats import spearmanr as sr
 from scipy.cluster import hierarchy as hc
-from typing import List, Any, Union, Tuple, Optional
+from typing import List, Any, Union, Tuple, Optional, Dict
 import random, math
 # TODO: Remove Dependencies, starting with Sklearn
 from sklearn.metrics import roc_curve, \
@@ -662,12 +662,97 @@ def balanced_train_test_split(
     return x_train, y_train, x_test, y_test, train_idx, test_idx
 
 
-def convert_probs(probs, threshold=0.5):
-    """Convert probabilities into classes"""
-    # TODO: Enable for multiclass
+def convert_probs(
+        probs: np.ndarray,
+        threshold: float = 0.5
+        ) -> np.ndarray:
+    """
+    Converts all the probabilities in the array provided into binary labels
+    as per the threshold provided which is 0.5 by default.
+
+    Example
+    ---------
+
+    .. code-block:: python
+
+        probs = np.array([0.1, 0.2, 0.7, 0.8, 0.6])
+        labels = xai.convert_probs(probs, threshold=0.65)
+        print(labels)
+
+        > [0, 0, 1, 1, 0]
+        
+    Args
+    -------
+
+    probs : 
+        Numpy array or list containing a list of floats between 0 and 1
+    threshold :
+        Float that provides the threshold for which probabilities over the 
+        threshold will be converted to 1
+
+    Returns
+    ----------
+
+    : np.ndarray
+        Numpy array containing the labels based on threshold provided
+
+    """
+    
     return (probs >= threshold).astype(int)
 
-def evaluation_metrics(y_valid, y_pred):
+def evaluation_metrics(
+        y_valid, 
+        y_pred
+        ) -> Dict[str, float]:
+    """
+    Calculates model performance metrics (accuracy, precision, recall, etc) 
+    from the actual and predicted lables provided. 
+
+    Example
+    ---------
+
+    .. code-block:: python
+
+        y_actual: np.ndarray
+        y_predicted: np.ndarray
+
+        metrics = xai.evaluation_metrics(y_actual, y_predicted)
+        for k,v in metrics.items():
+            print(f"{k}: {v}")
+
+        > precision: 0.8, 
+        > recall: 0.9, 
+        > specificity: 0.7, 
+        > accuracy: 0.8, 
+        > auc: 0.7, 
+        > f1: 0.8
+        
+    Args
+    -------
+
+    y_valid : 
+        Numpy array with the actual labels for the datapoints
+    y_pred :
+        Numpy array with the predicted labels for the datapoints
+
+    Returns
+    ----------
+
+    : Dict[str, float]
+        Dictionary containing the metrics as follows:
+
+        .. code-block:: python
+
+            return {
+                "precision": precision, 
+                "recall": recall, 
+                "specificity": specificity, 
+                "accuracy": accuracy, 
+                "auc": auc, 
+                "f1": f1
+            }
+
+    """
 
     TP = np.sum( y_pred[y_valid==1] )
     TN = np.sum( y_pred[y_valid==0] == 0 )
@@ -695,15 +780,71 @@ def evaluation_metrics(y_valid, y_pred):
     }
 
 def metrics_plot(
-        target,
-        predicted,
-        df=pd.DataFrame(),
-        cross_cols=[],
-        categorical_cols=[],
-        bins=6,
-        plot=True,
-        exclude_metrics=[],
-        plot_threshold=0.5):
+        target: np.ndarray,
+        predicted: np.ndarray,
+        df: pd.DataFrame = pd.DataFrame(),
+        cross_cols: List[str] = [],
+        categorical_cols: List[str] = [],
+        bins: int = 6,
+        plot: bool = True,
+        exclude_metrics: List[str] = [],
+        plot_threshold: float = 0.5
+        ) -> pd.DataFrame:
+    """
+    Creates a plot that displays statistical metrics including precision, 
+    recall, accuracy, auc, f1 and specificity for each of the groups created
+    for the columns provided by cross_cols. For example, if the columns passed
+    are "gender" and "age", the resulting plot will show the statistical metrics
+    for Male and Female for each binned group.
+
+    Example
+    ---------
+
+    .. code-block:: python
+
+        target: np.ndarray
+        predicted: np.ndarray
+
+        df_metrics = xai.metrics_plot(
+                        target,
+                        predicted,
+                        df=df_data,
+                        cross_cols=["gender", "age"],
+                        bins=3
+
+    Args
+    -------
+
+    target: 
+        Numpy array containing the target labels for the datapoints
+    predicted :
+        Numpy array containing the predicted labels for the datapoints
+    df :
+        Pandas dataframe containing all the features for the datapoints.
+        It can be empty if only looking to calculate global metrics, but
+        if you would like to compute for categories across columns, the
+        columns you are grouping by need to be provided
+    cross_cols :
+        Contains the columns that you would like to use to cross the values
+    bins :
+        [Default: 6] The number of bins in which you'd like 
+        numerical columns to be split
+    plot :
+        [Default: True] If True a plot will be drawn with the results
+    exclude_metrics :
+        These are the metrics that you can choose to exclude if you only
+        want specific ones (for example, excluding "f1", "specificity", etc)
+    plot_threshold:
+        The percentage that will be used to draw the threshold line in the plot
+        which would provide guidance on what is the ideal metrics to achieve.
+
+    Returns
+    ----------
+
+    : pd.DataFrame
+        Pandas Dataframe containing all the metrics for the groups provided
+
+    """
 
     grouped = _group_metrics(
         target,
@@ -717,7 +858,7 @@ def metrics_plot(
     prfs = []
     classes = []
     for group, group_df in grouped:
-        group_valid = group_df["target"].values
+        group_valid = group_df['target'].values
         group_pred = group_df["predicted"].values
         metrics_dict = \
             evaluation_metrics(group_valid, group_pred)
