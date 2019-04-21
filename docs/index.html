@@ -633,7 +633,31 @@ cat_df = xai.convert_categories(df)</p>
 <dl class="function">
 <dt id="xai.convert_probs">
 <code class="descclassname">xai.</code><code class="descname">convert_probs</code><span class="sig-paren">(</span><em>probs</em>, <em>threshold=0.5</em><span class="sig-paren">)</span><a class="headerlink" href="#xai.convert_probs" title="Permalink to this definition">¶</a></dt>
-<dd><p>Convert probabilities into classes</p>
+<dd><p>Converts all the probabilities in the array provided into binary labels
+as per the threshold provided which is 0.5 by default.</p>
+<p class="rubric">Example</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">probs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">])</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="n">xai</span><span class="o">.</span><span class="n">convert_probs</span><span class="p">(</span><span class="n">probs</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">0.65</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span>
+
+<span class="o">&gt;</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>probs</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – Numpy array or list containing a list of floats between 0 and 1</p></li>
+<li><p><strong>threshold</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – Float that provides the threshold for which probabilities over the
+threshold will be converted to 1</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Numpy array containing the labels based on threshold provided</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
@@ -691,7 +715,50 @@ provided here will be treated as numeric, and bins will be used.</p></li>
 <dl class="function">
 <dt id="xai.evaluation_metrics">
 <code class="descclassname">xai.</code><code class="descname">evaluation_metrics</code><span class="sig-paren">(</span><em>y_valid</em>, <em>y_pred</em><span class="sig-paren">)</span><a class="headerlink" href="#xai.evaluation_metrics" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Calculates model performance metrics (accuracy, precision, recall, etc)
+from the actual and predicted lables provided.</p>
+<p class="rubric">Example</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">y_actual</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+<span class="n">y_predicted</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+
+<span class="n">metrics</span> <span class="o">=</span> <span class="n">xai</span><span class="o">.</span><span class="n">evaluation_metrics</span><span class="p">(</span><span class="n">y_actual</span><span class="p">,</span> <span class="n">y_predicted</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">metrics</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;{k}: {v}&quot;</span><span class="p">)</span>
+
+<span class="o">&gt;</span> <span class="n">precision</span><span class="p">:</span> <span class="mf">0.8</span><span class="p">,</span>
+<span class="o">&gt;</span> <span class="n">recall</span><span class="p">:</span> <span class="mf">0.9</span><span class="p">,</span>
+<span class="o">&gt;</span> <span class="n">specificity</span><span class="p">:</span> <span class="mf">0.7</span><span class="p">,</span>
+<span class="o">&gt;</span> <span class="n">accuracy</span><span class="p">:</span> <span class="mf">0.8</span><span class="p">,</span>
+<span class="o">&gt;</span> <span class="n">auc</span><span class="p">:</span> <span class="mf">0.7</span><span class="p">,</span>
+<span class="o">&gt;</span> <span class="n">f1</span><span class="p">:</span> <span class="mf">0.8</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>y_valid</strong> – Numpy array with the actual labels for the datapoints</p></li>
+<li><p><strong>y_pred</strong> – Numpy array with the predicted labels for the datapoints</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p>Dictionary containing the metrics as follows:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">return</span> <span class="p">{</span>
+    <span class="s2">&quot;precision&quot;</span><span class="p">:</span> <span class="n">precision</span><span class="p">,</span>
+    <span class="s2">&quot;recall&quot;</span><span class="p">:</span> <span class="n">recall</span><span class="p">,</span>
+    <span class="s2">&quot;specificity&quot;</span><span class="p">:</span> <span class="n">specificity</span><span class="p">,</span>
+    <span class="s2">&quot;accuracy&quot;</span><span class="p">:</span> <span class="n">accuracy</span><span class="p">,</span>
+    <span class="s2">&quot;auc&quot;</span><span class="p">:</span> <span class="n">auc</span><span class="p">,</span>
+    <span class="s2">&quot;f1&quot;</span><span class="p">:</span> <span class="n">f1</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Dict[str, float]</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="function">
 <dt id="xai.feature_importance">
@@ -793,7 +860,50 @@ provided here will be treated as numeric, and bins will be used.</p></li>
 <dl class="function">
 <dt id="xai.metrics_plot">
 <code class="descclassname">xai.</code><code class="descname">metrics_plot</code><span class="sig-paren">(</span><em>target</em>, <em>predicted</em>, <em>df=Empty DataFrame Columns: [] Index: []</em>, <em>cross_cols=[]</em>, <em>categorical_cols=[]</em>, <em>bins=6</em>, <em>plot=True</em>, <em>exclude_metrics=[]</em>, <em>plot_threshold=0.5</em><span class="sig-paren">)</span><a class="headerlink" href="#xai.metrics_plot" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Creates a plot that displays statistical metrics including precision,
+recall, accuracy, auc, f1 and specificity for each of the groups created
+for the columns provided by cross_cols. For example, if the columns passed
+are “gender” and “age”, the resulting plot will show the statistical metrics
+for Male and Female for each binned group.</p>
+<p class="rubric">Example</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">target</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+<span class="n">predicted</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+
+<span class="n">df_metrics</span> <span class="o">=</span> <span class="n">xai</span><span class="o">.</span><span class="n">metrics_plot</span><span class="p">(</span>
+                <span class="n">target</span><span class="p">,</span>
+                <span class="n">predicted</span><span class="p">,</span>
+                <span class="n">df</span><span class="o">=</span><span class="n">df_data</span><span class="p">,</span>
+                <span class="n">cross_cols</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;gender&quot;</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">],</span>
+                <span class="n">bins</span><span class="o">=</span><span class="mi">3</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>target</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – Numpy array containing the target labels for the datapoints</p></li>
+<li><p><strong>predicted</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – Numpy array containing the predicted labels for the datapoints</p></li>
+<li><p><strong>df</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>) – Pandas dataframe containing all the features for the datapoints.
+It can be empty if only looking to calculate global metrics, but
+if you would like to compute for categories across columns, the
+columns you are grouping by need to be provided</p></li>
+<li><p><strong>cross_cols</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]) – Contains the columns that you would like to use to cross the values</p></li>
+<li><p><strong>bins</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – [Default: 6] The number of bins in which you’d like
+numerical columns to be split</p></li>
+<li><p><strong>plot</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – [Default: True] If True a plot will be drawn with the results</p></li>
+<li><p><strong>exclude_metrics</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]) – These are the metrics that you can choose to exclude if you only
+want specific ones (for example, excluding “f1”, “specificity”, etc)</p></li>
+<li><p><strong>plot_threshold</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – The percentage that will be used to draw the threshold line in the plot
+which would provide guidance on what is the ideal metrics to achieve.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Pandas Dataframe containing all the metrics for the groups provided</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="function">
 <dt id="xai.normalize_numeric">
