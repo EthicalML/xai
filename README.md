@@ -1,5 +1,5 @@
 ![GitHub](https://img.shields.io/badge/Release-ALPHA-yellow.svg)
-![GitHub](https://img.shields.io/badge/Version-0.0.4_ALPHA-lightgrey.svg)
+![GitHub](https://img.shields.io/badge/Version-0.0.5_ALPHA-lightgrey.svg)
 ![GitHub](https://img.shields.io/badge/Python-3.5_|_3.6-blue.svg)
 ![GitHub](https://img.shields.io/badge/License-MIT-lightgrey.svg)
 
@@ -31,7 +31,7 @@ You can find the documentation at [https://ethicalml.github.io/xai/index.html](h
 
 </table>
 
-# 0.0.4 - ALPHA Version
+# 0.0.5 - ALPHA Version
 
 This library is currently in early stage developments and hence it will be quite unstable due to the fast updates. It is important to bare this in mind if using it in production. 
 
