@@ -14,10 +14,10 @@ You can find the documentation at [https://ethicalml.github.io/xai/index.html](h
 <table>
   <tr>
     <td width="30%">
-        This <a href="https://www.youtube.com/watch?v=rq95qznOZKw">video of the talk presented at the PyCon By 2019 Conference </a> provides an overview on the motivations for machine learning explainability as well as techniques to introduce explainability and mitigate undesired biases using the XAI Library.
+        This <a href="https://www.youtube.com/watch?v=vq8mDiDODhc">video of the talk presented at the PyData London 2019 Conference </a> which provides an overview on the motivations for machine learning explainability as well as techniques to introduce explainability and mitigate undesired biases using the XAI Library.
     </td>
     <td width="70%">
-        <a href="https://www.youtube.com/watch?v=rq95qznOZKw"><img src="images/video.jpg"></a>
+        <a href="https://www.youtube.com/watch?v=vq8mDiDODhc"><img src="images/video.jpg"></a>
     </td>
   </tr>
   <tr>
