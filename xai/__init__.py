@@ -1035,14 +1035,14 @@ def _group_metrics(
 
 def smile_imbalance(
         y_test, 
-        probs, 
+        probs: np.ndarray, 
         threshold=0.5, 
         manual_review=None,
         display_breakdown=False,
         bins=10):
     
     # TODO: Change function so it only iterates once
-
+    probs = np.array(probs)
     preds = convert_probs(probs, threshold).flatten()
     d = pd.DataFrame(probs)
     d.columns = ["probs"]
