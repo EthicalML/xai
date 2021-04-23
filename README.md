@@ -1,6 +1,6 @@
 ![GitHub](https://img.shields.io/badge/Release-ALPHA-yellow.svg)
 ![GitHub](https://img.shields.io/badge/Version-0.0.5_ALPHA-lightgrey.svg)
-![GitHub](https://img.shields.io/badge/Python-3.5_|_3.6-blue.svg)
+![GitHub](https://img.shields.io/badge/Python-3.5_|_3.6_3.7-blue.svg)
 ![GitHub](https://img.shields.io/badge/License-MIT-lightgrey.svg)
 
 # XAI - An eXplainability toolbox for machine learning 
