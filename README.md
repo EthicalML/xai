@@ -31,9 +31,7 @@ You can find the documentation at [https://ethicalml.github.io/xai/index.html](h
 
 </table>
 
-# 0.0.5 - ALPHA Version
-
-This library is currently in early stage developments and hence it will be quite unstable due to the fast updates. It is important to bare this in mind if using it in production. 
+# 0.1.0
 
 If you want to see a fully functional demo in action clone this repo and run the <a href="https://github.com/EthicalML/xai/blob/master/examples/XAI%20Example%20Usage.ipynb">Example Jupyter Notebook in the Examples folder</a>.
 
@@ -84,7 +82,7 @@ ims = xai.imbalance_plot(df, "gender")
 
 #### View imbalances for all categories across multiple columns
 ``` python
-im = xai.show_imbalance(df, "gender", "loan")
+im = xai.imbalance_plot(df, "gender", "loan")
 ```
 <img width="100%" src="images/readme-imbalance-multiple.jpg">
 
