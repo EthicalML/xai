@@ -82,7 +82,7 @@ ims = xai.imbalance_plot(df, "gender")
 
 #### View imbalances for all categories across multiple columns
 ``` python
-im = xai.show_imbalance(df, "gender", "loan")
+im = xai.imbalance_plot(df, "gender", "loan")
 ```
 <img width="100%" src="images/readme-imbalance-multiple.jpg">
 
