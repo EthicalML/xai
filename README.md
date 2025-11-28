@@ -47,16 +47,34 @@ We provide a visual overview of these three steps mentioned above in this diagra
 
 ## Installation
 
+### Prerequisites
+
+First, install [uv](https://github.com/astral-sh/uv), a fast Python package manager:
+
+```bash
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+
+### Install XAI
+
 The XAI package is on PyPI. To install you can run:
 
-```
-pip install xai
+```bash
+uv pip install xai
 ```
 
 Alternatively you can install from source by cloning the repo and running:
 
+```bash
+uv pip install -e .
 ```
-python setup.py install 
+
+### Additional Commands
+
+To clean build artifacts and cache files:
+
+```bash
+uv run xai-clean
 ```
 
 ## Usage
