@@ -74,7 +74,7 @@ def convert_categories(
     tmp_df = df.copy()
 
     if not len(categorical_cols):
-        categorical_cols = df.select_dtypes(include=[np.object, np.bool]).columns
+        categorical_cols = df.select_dtypes(include=[object, bool]).columns
 
     tmp_df[categorical_cols] = tmp_df[categorical_cols].astype('category')
     tmp_df[categorical_cols] = tmp_df[categorical_cols].apply(lambda x: x.cat.codes)
@@ -255,7 +255,7 @@ def balance(
     """
 
     if not len(categorical_cols):
-        categorical_cols = df.select_dtypes(include=[np.object, np.bool]).columns
+        categorical_cols = df.select_dtypes(include=[object, bool]).columns
 
     grouped = group_by_columns(
                 df,
@@ -405,7 +405,7 @@ def correlations(
     else:
 
         if not len(categorical_cols):
-            categorical_cols = df.select_dtypes(include=[np.object, np.bool]).columns
+            categorical_cols = df.select_dtypes(include=[object, bool]).columns
 
         cols = [c for c in df.columns if c not in categorical_cols]
 
@@ -987,9 +987,9 @@ def _curve(
 
 def _infer_categorical(df):
     categorical_cols = df.select_dtypes(
-            include=[np.object, np.bool, np.int8]).columns
-    logging.warn("No categorical_cols passed so inferred using np.object, "
-            f"np.int8 and np.bool: {categorical_cols}. If you see an error"
+            include=[object, bool, np.int8]).columns
+    logging.warn("No categorical_cols passed so inferred using object, "
+            f"np.int8 and bool: {categorical_cols}. If you see an error"
             " these are not "
             "correct, please provide them as a string array as: "
             "categorical_cols=['col1', 'col2', ...]")
