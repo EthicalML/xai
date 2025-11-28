@@ -1,87 +1,43 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Welcome to the XAI docs - eXplainable machine learning &mdash; xai - eXplainable AI 0.1 documentation</title>
-  
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
 
   
-  
-  
-  
-
-  
-  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script type="text/javascript" src="_static/language_data.js"></script>
-    
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-
-    
-
-  
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <script src="_static/documentation_options.js?v=2709fde1"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
 
           
-            <a href="#" class="icon icon-home"> xai - eXplainable AI
           
-
-          
+          <a href="#" class="icon icon-home">
+            xai - eXplainable AI
           </a>
-
-          
-            
-            
-              <div class="version">
-                0.1
-              </div>
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <!-- Local TOC -->
               <div class="local-toc"><ul>
 <li><a class="reference internal" href="#">Welcome to the XAI docs - eXplainable machine learning</a></li>
@@ -119,100 +75,82 @@
 </li>
 <li><a class="reference internal" href="#xai-python-docstrings">xai Python Docstrings</a><ul>
 <li><a class="reference internal" href="#submodules">Submodules</a></li>
-<li><a class="reference internal" href="#module-xai.data">xai.data module</a></li>
-<li><a class="reference internal" href="#module-xai">Module contents</a></li>
+<li><a class="reference internal" href="#module-xai.data">xai.data module</a><ul>
+<li><a class="reference internal" href="#xai.data.load_census"><code class="docutils literal notranslate"><span class="pre">load_census()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-xai">Module contents</a><ul>
+<li><a class="reference internal" href="#xai.balance"><code class="docutils literal notranslate"><span class="pre">balance()</span></code></a></li>
+<li><a class="reference internal" href="#xai.balanced_train_test_split"><code class="docutils literal notranslate"><span class="pre">balanced_train_test_split()</span></code></a></li>
+<li><a class="reference internal" href="#xai.confusion_matrix_plot"><code class="docutils literal notranslate"><span class="pre">confusion_matrix_plot()</span></code></a></li>
+<li><a class="reference internal" href="#xai.convert_categories"><code class="docutils literal notranslate"><span class="pre">convert_categories()</span></code></a></li>
+<li><a class="reference internal" href="#xai.convert_probs"><code class="docutils literal notranslate"><span class="pre">convert_probs()</span></code></a></li>
+<li><a class="reference internal" href="#xai.correlations"><code class="docutils literal notranslate"><span class="pre">correlations()</span></code></a></li>
+<li><a class="reference internal" href="#xai.evaluation_metrics"><code class="docutils literal notranslate"><span class="pre">evaluation_metrics()</span></code></a></li>
+<li><a class="reference internal" href="#xai.feature_importance"><code class="docutils literal notranslate"><span class="pre">feature_importance()</span></code></a></li>
+<li><a class="reference internal" href="#xai.group_by_columns"><code class="docutils literal notranslate"><span class="pre">group_by_columns()</span></code></a></li>
+<li><a class="reference internal" href="#xai.imbalance_plot"><code class="docutils literal notranslate"><span class="pre">imbalance_plot()</span></code></a></li>
+<li><a class="reference internal" href="#xai.metrics_plot"><code class="docutils literal notranslate"><span class="pre">metrics_plot()</span></code></a></li>
+<li><a class="reference internal" href="#xai.normalize_numeric"><code class="docutils literal notranslate"><span class="pre">normalize_numeric()</span></code></a></li>
+<li><a class="reference internal" href="#xai.pr_plot"><code class="docutils literal notranslate"><span class="pre">pr_plot()</span></code></a></li>
+<li><a class="reference internal" href="#xai.roc_plot"><code class="docutils literal notranslate"><span class="pre">roc_plot()</span></code></a></li>
+<li><a class="reference internal" href="#xai.smile_imbalance"><code class="docutils literal notranslate"><span class="pre">smile_imbalance()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
 </div>
-            
-          
         </div>
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="#">xai - eXplainable AI</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="#">Docs</a> &raquo;</li>
-        
-      <li>Welcome to the XAI docs - eXplainable machine learning</li>
-    
-    
+      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Welcome to the XAI docs - eXplainable machine learning</li>
       <li class="wy-breadcrumbs-aside">
-        
-            
             <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
-  <div class="section" id="welcome-to-the-xai-docs-explainable-machine-learning">
-<h1>Welcome to the XAI docs - eXplainable machine learning<a class="headerlink" href="#welcome-to-the-xai-docs-explainable-machine-learning" title="Permalink to this headline">¶</a></h1>
+             
+  <section id="welcome-to-the-xai-docs-explainable-machine-learning">
+<h1>Welcome to the XAI docs - eXplainable machine learning<a class="headerlink" href="#welcome-to-the-xai-docs-explainable-machine-learning" title="Link to this heading">¶</a></h1>
 <div class="toctree-wrapper compound">
 </div>
 <p>Welcome to the <code class="docutils literal notranslate"><span class="pre">xai</span></code> documentation. Here you will the installation guide, the quick start guide, and the detailed docstrings code documentation of the xai library.</p>
 <p>The documentation is currently under construction - for the meantime you can check out the main Github repository for the code (<a class="reference external" href="https://github.com/EthicalML/xai">https://github.com/EthicalML/xai</a>).</p>
-</div>
-<div class="section" id="about">
-<h1>About<a class="headerlink" href="#about" title="Permalink to this headline">¶</a></h1>
+</section>
+<section id="about">
+<h1>About<a class="headerlink" href="#about" title="Link to this heading">¶</a></h1>
 <p>XAI is a Machine Learning library that is designed with AI explainability in its core. XAI contains various tools that enable for analysis and evaluation of data and models. The XAI library is maintained by <a class="reference external" href="http://ethical.institute/">The Institute for Ethical AI &amp; ML</a>, and it was developed based on the <a class="reference external" href="http://ethical.institute/principles.html">8 principles for Responsible Machine Learning</a>.</p>
 <p>You can find the documentation at <a class="reference external" href="https://ethicalml.github.io/xai/index.html">https://ethicalml.github.io/xai/index.html</a>. You can also check out our <a class="reference external" href="https://www.youtube.com/watch?v=GZpfBhQJ0H4">talk at Tensorflow London</a> where the idea was first conceived - the talk also contains an insight on the definitions and principles in this library.</p>
-<div class="section" id="alpha-version">
-<h2>0.0.4 - ALPHA Version<a class="headerlink" href="#alpha-version" title="Permalink to this headline">¶</a></h2>
+<section id="alpha-version">
+<h2>0.0.4 - ALPHA Version<a class="headerlink" href="#alpha-version" title="Link to this heading">¶</a></h2>
 <p>This library is currently in early stage developments and hence it will be quite unstable due to the fast updates. It is important to bare this in mind if using it in production.</p>
-</div>
-<div class="section" id="what-do-we-mean-by-explainable-ai">
-<h2>What do we mean by eXplainable AI?<a class="headerlink" href="#what-do-we-mean-by-explainable-ai" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="what-do-we-mean-by-explainable-ai">
+<h2>What do we mean by eXplainable AI?<a class="headerlink" href="#what-do-we-mean-by-explainable-ai" title="Link to this heading">¶</a></h2>
 <p>We see the challenge of explainability as more than just an algorithmic challenge, which requires a combination of data science best practices with domain-specific knowledge. The XAI library is designed to empower machine learning engineers and relevant domain experts to analyse the end-to-end solution and identify discrepancies that may result in sub-optimal performance relative to the objectives required. More broadly, the XAI library is designed using the 3-steps of explainable machine learning, which involve 1) data analysis, 2) model evaluation, and 3) production monitoring.</p>
 <p>We provide a visual overview of these three steps mentioned above in this diagram:</p>
 <img alt="_images/bias.png" src="_images/bias.png" />
-</div>
-</div>
-<div class="section" id="xai-quickstart">
-<h1>XAI Quickstart<a class="headerlink" href="#xai-quickstart" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="installation">
-<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="xai-quickstart">
+<h1>XAI Quickstart<a class="headerlink" href="#xai-quickstart" title="Link to this heading">¶</a></h1>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">¶</a></h2>
 <p>The XAI package is on PyPI. To install you can run:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">xai</span>
 </pre></div>
@@ -221,50 +159,50 @@
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">install</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="usage">
-<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading">¶</a></h2>
 <p>You can find example usage in the examples folder.</p>
-<div class="section" id="data-analysis">
-<h3>1) Data Analysis<a class="headerlink" href="#data-analysis" title="Permalink to this headline">¶</a></h3>
+<section id="data-analysis">
+<h3>1) Data Analysis<a class="headerlink" href="#data-analysis" title="Link to this heading">¶</a></h3>
 <p>With XAI you can identify imbalances in the data. For this, we will load the census dataset from the XAI library.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">xai.data</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">xai.data</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">xai</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">load_census</span><span class="p">()</span>
 <span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 <img alt="_images/readme-1.png" src="_images/readme-1.png" />
-<div class="section" id="view-class-imbalances-for-protected-columns">
-<h4>View class imbalances for protected columns<a class="headerlink" href="#view-class-imbalances-for-protected-columns" title="Permalink to this headline">¶</a></h4>
+<section id="view-class-imbalances-for-protected-columns">
+<h4>View class imbalances for protected columns<a class="headerlink" href="#view-class-imbalances-for-protected-columns" title="Link to this heading">¶</a></h4>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">protected_cols</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;gender&quot;</span><span class="p">,</span> <span class="s2">&quot;ethnicity&quot;</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">]</span>
 <span class="n">ims</span> <span class="o">=</span> <span class="n">xai</span><span class="o">.</span><span class="n">show_imbalances</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">protected_cols</span><span class="p">)</span>
 </pre></div>
 </div>
 <img alt="_images/readme-2.png" src="_images/readme-2.png" />
-</div>
-<div class="section" id="view-imbalance-of-one-column">
-<h4>View imbalance of one column<a class="headerlink" href="#view-imbalance-of-one-column" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="view-imbalance-of-one-column">
+<h4>View imbalance of one column<a class="headerlink" href="#view-imbalance-of-one-column" title="Link to this heading">¶</a></h4>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">im</span> <span class="o">=</span> <span class="n">xai</span><span class="o">.</span><span class="n">show_imbalance</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s2">&quot;gender&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <img alt="_images/readme-3.png" src="_images/readme-3.png" />
-</div>
-<div class="section" id="view-imbalance-of-one-column-intersected-with-another">
-<h4>View imbalance of one column intersected with another<a class="headerlink" href="#view-imbalance-of-one-column-intersected-with-another" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="view-imbalance-of-one-column-intersected-with-another">
+<h4>View imbalance of one column intersected with another<a class="headerlink" href="#view-imbalance-of-one-column-intersected-with-another" title="Link to this heading">¶</a></h4>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">im</span> <span class="o">=</span> <span class="n">xai</span><span class="o">.</span><span class="n">show_imbalance</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s2">&quot;gender&quot;</span><span class="p">,</span> <span class="n">cross</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;loan&quot;</span><span class="p">])</span>
 </pre></div>
 </div>
 <img alt="_images/readme-4.png" src="_images/readme-4.png" />
-</div>
-<div class="section" id="balance-the-class-using-upsampling-and-or-downsampling">
-<h4>Balance the class using upsampling and/or downsampling<a class="headerlink" href="#balance-the-class-using-upsampling-and-or-downsampling" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="balance-the-class-using-upsampling-and-or-downsampling">
+<h4>Balance the class using upsampling and/or downsampling<a class="headerlink" href="#balance-the-class-using-upsampling-and-or-downsampling" title="Link to this heading">¶</a></h4>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">bal_df</span> <span class="o">=</span> <span class="n">xai</span><span class="o">.</span><span class="n">balance</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s2">&quot;gender&quot;</span><span class="p">,</span> <span class="n">cross</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;loan&quot;</span><span class="p">],</span> <span class="n">upsample</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
 </pre></div>
 </div>
 <img alt="_images/readme-5.png" src="_images/readme-5.png" />
-</div>
-<div class="section" id="create-a-balanced-test-train-split-should-be-done-pre-balancing">
-<h4>Create a balanced test-train split (should be done pre-balancing)<a class="headerlink" href="#create-a-balanced-test-train-split-should-be-done-pre-balancing" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="create-a-balanced-test-train-split-should-be-done-pre-balancing">
+<h4>Create a balanced test-train split (should be done pre-balancing)<a class="headerlink" href="#create-a-balanced-test-train-split-should-be-done-pre-balancing" title="Link to this heading">¶</a></h4>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Balanced train-test split with minimum 300 examples of</span>
 <span class="c1"># the cross of the target y and the column gender</span>
 <span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">x_test</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">xai</span><span class="o">.</span><span class="n">balanced_train_test_split</span><span class="p">(</span>
@@ -278,10 +216,10 @@
 </pre></div>
 </div>
 <img alt="_images/readme-16.png" src="_images/readme-16.png" />
-</div>
-</div>
-<div class="section" id="model-evaluation">
-<h3>2) Model Evaluation<a class="headerlink" href="#model-evaluation" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+<section id="model-evaluation">
+<h3>2) Model Evaluation<a class="headerlink" href="#model-evaluation" title="Link to this heading">¶</a></h3>
 <p>We are able to also analyse the interaction between inference results and input features. For this, we will train a single layer deep learning model.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">build_model</span><span class="p">(</span><span class="n">proc_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">&quot;loan&quot;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
 <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">f_in</span><span class="p">(</span><span class="n">x_train</span><span class="p">),</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">512</span><span class="p">)</span>
@@ -291,9 +229,9 @@
 </pre></div>
 </div>
 <img alt="_images/readme-15.png" src="_images/readme-15.png" />
-<div class="section" id="visualise-permutation-feature-importance">
-<h4>Visualise permutation feature importance<a class="headerlink" href="#visualise-permutation-feature-importance" title="Permalink to this headline">¶</a></h4>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_avg</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+<section id="visualise-permutation-feature-importance">
+<h4>Visualise permutation feature importance<a class="headerlink" href="#visualise-permutation-feature-importance" title="Link to this heading">¶</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">get_avg</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">model</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">f_in</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">y</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
 
 <span class="n">imp</span> <span class="o">=</span> <span class="n">xai</span><span class="o">.</span><span class="n">feature_importance</span><span class="p">(</span><span class="n">x_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">get_avg</span><span class="p">)</span>
@@ -302,9 +240,9 @@
 </pre></div>
 </div>
 <img alt="_images/readme-6.png" src="_images/readme-6.png" />
-</div>
-<div class="section" id="identify-metric-imbalances-against-all-test-data">
-<h4>Identify metric imbalances against all test data<a class="headerlink" href="#identify-metric-imbalances-against-all-test-data" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="identify-metric-imbalances-against-all-test-data">
+<h4>Identify metric imbalances against all test data<a class="headerlink" href="#identify-metric-imbalances-against-all-test-data" title="Link to this heading">¶</a></h4>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="o">=</span> <span class="n">xai</span><span class="o">.</span><span class="n">metrics_imbalance</span><span class="p">(</span>
         <span class="n">x_test</span><span class="p">,</span>
         <span class="n">y_test</span><span class="p">,</span>
@@ -312,9 +250,9 @@
 </pre></div>
 </div>
 <img alt="_images/readme-7.png" src="_images/readme-7.png" />
-</div>
-<div class="section" id="identify-metric-imbalances-grouped-by-protected-columns">
-<h4>Identify metric imbalances grouped by protected columns<a class="headerlink" href="#identify-metric-imbalances-grouped-by-protected-columns" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="identify-metric-imbalances-grouped-by-protected-columns">
+<h4>Identify metric imbalances grouped by protected columns<a class="headerlink" href="#identify-metric-imbalances-grouped-by-protected-columns" title="Link to this heading">¶</a></h4>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="o">=</span> <span class="n">xai</span><span class="o">.</span><span class="n">metrics_imbalances</span><span class="p">(</span>
         <span class="n">x_test</span><span class="p">,</span>
         <span class="n">y_test</span><span class="p">,</span>
@@ -324,9 +262,9 @@
 </pre></div>
 </div>
 <img alt="_images/readme-8.png" src="_images/readme-8.png" />
-</div>
-<div class="section" id="visualise-the-roc-curve-against-all-test-data">
-<h4>Visualise the ROC curve against all test data<a class="headerlink" href="#visualise-the-roc-curve-against-all-test-data" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="visualise-the-roc-curve-against-all-test-data">
+<h4>Visualise the ROC curve against all test data<a class="headerlink" href="#visualise-the-roc-curve-against-all-test-data" title="Link to this heading">¶</a></h4>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="o">=</span> <span class="n">xai</span><span class="o">.</span><span class="n">roc_imbalance</span><span class="p">(</span>
        <span class="n">x_test</span><span class="p">,</span>
        <span class="n">y_test</span><span class="p">,</span>
@@ -334,9 +272,9 @@
 </pre></div>
 </div>
 <img alt="_images/readme-9.png" src="_images/readme-9.png" />
-</div>
-<div class="section" id="visualise-the-roc-curves-grouped-by-protected-columns">
-<h4>Visualise the ROC curves grouped by protected columns<a class="headerlink" href="#visualise-the-roc-curves-grouped-by-protected-columns" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="visualise-the-roc-curves-grouped-by-protected-columns">
+<h4>Visualise the ROC curves grouped by protected columns<a class="headerlink" href="#visualise-the-roc-curves-grouped-by-protected-columns" title="Link to this heading">¶</a></h4>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="o">=</span> <span class="n">xai</span><span class="o">.</span><span class="n">roc_imbalances</span><span class="p">(</span>
     <span class="n">x_test</span><span class="p">,</span>
     <span class="n">y_test</span><span class="p">,</span>
@@ -346,9 +284,9 @@
 </pre></div>
 </div>
 <img alt="_images/readme-10.png" src="_images/readme-10.png" />
-</div>
-<div class="section" id="visualise-the-precision-recall-curve-by-protected-columns">
-<h4>Visualise the precision-recall curve by protected columns<a class="headerlink" href="#visualise-the-precision-recall-curve-by-protected-columns" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="visualise-the-precision-recall-curve-by-protected-columns">
+<h4>Visualise the precision-recall curve by protected columns<a class="headerlink" href="#visualise-the-precision-recall-curve-by-protected-columns" title="Link to this heading">¶</a></h4>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="o">=</span> <span class="n">xai</span><span class="o">.</span><span class="n">pr_imbalances</span><span class="p">(</span>
     <span class="n">x_test</span><span class="p">,</span>
     <span class="n">y_test</span><span class="p">,</span>
@@ -358,18 +296,18 @@
 </pre></div>
 </div>
 <img alt="_images/readme-11.png" src="_images/readme-11.png" />
-</div>
-<div class="section" id="visualise-accuracy-grouped-by-probability-buckets">
-<h4>Visualise accuracy grouped by probability buckets<a class="headerlink" href="#visualise-accuracy-grouped-by-probability-buckets" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="visualise-accuracy-grouped-by-probability-buckets">
+<h4>Visualise accuracy grouped by probability buckets<a class="headerlink" href="#visualise-accuracy-grouped-by-probability-buckets" title="Link to this heading">¶</a></h4>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="n">xai</span><span class="o">.</span><span class="n">smile_imbalance</span><span class="p">(</span>
     <span class="n">y_test</span><span class="p">,</span>
     <span class="n">probabilities</span><span class="p">)</span>
 </pre></div>
 </div>
 <img alt="_images/readme-12.png" src="_images/readme-12.png" />
-</div>
-<div class="section" id="visualise-statistical-metrics-grouped-by-probability-buckets">
-<h4>Visualise statistical metrics grouped by probability buckets<a class="headerlink" href="#visualise-statistical-metrics-grouped-by-probability-buckets" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="visualise-statistical-metrics-grouped-by-probability-buckets">
+<h4>Visualise statistical metrics grouped by probability buckets<a class="headerlink" href="#visualise-statistical-metrics-grouped-by-probability-buckets" title="Link to this heading">¶</a></h4>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="n">xai</span><span class="o">.</span><span class="n">smile_imbalance</span><span class="p">(</span>
     <span class="n">y_test</span><span class="p">,</span>
     <span class="n">probabilities</span><span class="p">,</span>
@@ -377,9 +315,9 @@
 </pre></div>
 </div>
 <img alt="_images/readme-13.png" src="_images/readme-13.png" />
-</div>
-<div class="section" id="visualise-benefits-of-adding-manual-review-on-probability-thresholds">
-<h4>Visualise benefits of adding manual review on probability thresholds<a class="headerlink" href="#visualise-benefits-of-adding-manual-review-on-probability-thresholds" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="visualise-benefits-of-adding-manual-review-on-probability-thresholds">
+<h4>Visualise benefits of adding manual review on probability thresholds<a class="headerlink" href="#visualise-benefits-of-adding-manual-review-on-probability-thresholds" title="Link to this heading">¶</a></h4>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="n">xai</span><span class="o">.</span><span class="n">smile_imbalance</span><span class="p">(</span>
     <span class="n">y_test</span><span class="p">,</span>
     <span class="n">probabilities</span><span class="p">,</span>
@@ -390,52 +328,52 @@
 </pre></div>
 </div>
 <img alt="_images/readme-14.png" src="_images/readme-14.png" />
-</div>
-</div>
-</div>
-</div>
-<div class="section" id="xai-python-docstrings">
-<h1>xai Python Docstrings<a class="headerlink" href="#xai-python-docstrings" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="module-xai.data">
-<span id="xai-data-module"></span><h2>xai.data module<a class="headerlink" href="#module-xai.data" title="Permalink to this headline">¶</a></h2>
-<dl class="function">
-<dt id="xai.data.load_census">
-<code class="descclassname">xai.data.</code><code class="descname">load_census</code><span class="sig-paren">(</span><em>return_xy=False</em><span class="sig-paren">)</span><a class="headerlink" href="#xai.data.load_census" title="Permalink to this definition">¶</a></dt>
+</section>
+</section>
+</section>
+</section>
+<section id="xai-python-docstrings">
+<h1>xai Python Docstrings<a class="headerlink" href="#xai-python-docstrings" title="Link to this heading">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">¶</a></h2>
+</section>
+<section id="module-xai.data">
+<span id="xai-data-module"></span><h2>xai.data module<a class="headerlink" href="#module-xai.data" title="Link to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="xai.data.load_census">
+<span class="sig-prename descclassname"><span class="pre">xai.data.</span></span><span class="sig-name descname"><span class="pre">load_census</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">return_xy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#xai.data.load_census" title="Link to this definition">¶</a></dt>
 <dd><p>Load adult census dataset with column as “loan”
 instead of “target” to use during examples to “automate
 a loan approval process”.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Example</dt>
+<dt class="field-odd">Example<span class="colon">:</span></dt>
 <dd class="field-odd"><p></p></dd>
 </dl>
 <p>from xai.data import load_census
 df = load_census()</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>return_xy</strong> (<em>bool</em>) – [default: False] pass True if you would like
 to return the data as X, y where X are the input columns and
 y is the target. If nothing (or False) is provided, the default
 return will be the full dataframe.</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>Dataframe with full contents OR dataframe with inputs and
 array with targets.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>(pandas.DataFrame, Optional[numpy.array])</p>
 </dd>
 </dl>
 </dd></dl>
 
-</div>
-<div class="section" id="module-xai">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-xai" title="Permalink to this headline">¶</a></h2>
-<dl class="function">
-<dt id="xai.balance">
-<code class="descclassname">xai.</code><code class="descname">balance</code><span class="sig-paren">(</span><em>df</em>, <em>*cross_cols</em>, <em>upsample=0.5</em>, <em>downsample=1</em>, <em>bins=6</em>, <em>categorical_cols=[]</em>, <em>plot=True</em><span class="sig-paren">)</span><a class="headerlink" href="#xai.balance" title="Permalink to this definition">¶</a></dt>
+</section>
+<section id="module-xai">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-xai" title="Link to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="xai.balance">
+<span class="sig-prename descclassname"><span class="pre">xai.</span></span><span class="sig-name descname"><span class="pre">balance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">cross_cols</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">upsample</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">downsample</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bins</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">6</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">categorical_cols</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#xai.balance" title="Link to this definition">¶</a></dt>
 <dd><dl class="simple">
 <dt>Balances a dataframe based on the columns and cross columns provided.</dt><dd><p>The results can be upsampled or downsampled. By default, there is no
 downsample, and the upsample is towards a minimum of 50% of the
@@ -443,7 +381,7 @@ frequency of the highest class.</p>
 </dd>
 </dl>
 <dl class="field-list simple">
-<dt class="field-odd">Example</dt>
+<dt class="field-odd">Example<span class="colon">:</span></dt>
 <dd class="field-odd"><p></p></dd>
 </dl>
 <dl class="simple">
@@ -454,7 +392,7 @@ downsample=0.8)</p>
 </dd>
 </dl>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>df</strong> (<em>pandas.DataFrame</em>) – Pandas Dataframe containing data (inputs and target )</p></li>
 <li><p><strong>*cross_cols</strong> – <p>One or more positional arguments (passed as <a href="#id3"><span class="problematic" id="id4">*</span></a>args) that</p>
@@ -464,13 +402,13 @@ downsample=0.8)</p>
 </dl>
 <p>are used to split the data into the cross product of their values
 :type cross_cols: List[str]
-:type upsample: <code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>
+:type upsample: <span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></span>
 :param upsample: [Default: 0.5] Target upsample for columns lower</p>
 <blockquote>
 <div><p>than percentage.</p>
 </div></blockquote>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>downsample</strong> (<em>float</em>) – [Default: 1] Target downsample for columns higher
 than percentage.</p></li>
@@ -481,18 +419,18 @@ provided here will be treated as numeric, and bins will be used.</p></li>
 <li><p><strong>threshold</strong> (<em>float</em>) – [Default: 0.5] Threshold to display in the chart.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>Dataframe with categorical numerical values.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>pandas.DataFrame</p>
 </dd>
 </dl>
 </dd></dl>
 
-<dl class="function">
-<dt id="xai.balanced_train_test_split">
-<code class="descclassname">xai.</code><code class="descname">balanced_train_test_split</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>*cross_cols</em>, <em>categorical_cols=[]</em>, <em>min_per_group=20</em>, <em>max_per_group=None</em>, <em>fallback_type='upsample'</em>, <em>bins=6</em>, <em>random_state=None</em><span class="sig-paren">)</span><a class="headerlink" href="#xai.balanced_train_test_split" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt class="sig sig-object py" id="xai.balanced_train_test_split">
+<span class="sig-prename descclassname"><span class="pre">xai.</span></span><span class="sig-name descname"><span class="pre">balanced_train_test_split</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">cross_cols</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">categorical_cols</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_per_group</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_per_group</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fallback_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'upsample'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bins</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">6</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#xai.balanced_train_test_split" title="Link to this definition">¶</a></dt>
 <dd><p>Splits the “x” DataFrame and “y” Array into train/test split training sets with
 a balanced number of examples for each of the categories of the columns provided.
 For example, if the columns provided are “gender” and “loan”, the resulting splits
@@ -513,20 +451,20 @@ enough datapoint examples for one of the subcategory groups - the default is “
 </pre></div>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>x</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>) – Pandas dataframe containing all the features in dataset</p></li>
-<li><p><strong>y</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code>]) – Array containing “actual” labels for the dataset</p></li>
-<li><p><strong>*cross_cols</strong> – One or more positional arguments (passed as <a href="#id5"><span class="problematic" id="id6">*</span></a>args) that
+<li><p><strong>x</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></span>) – Pandas dataframe containing all the features in dataset</p></li>
+<li><p><strong>y</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code>]</span>) – Array containing “actual” labels for the dataset</p></li>
+<li><p><strong>*cross_cols</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span>) – One or more positional arguments (passed as <a href="#id5"><span class="problematic" id="id6">*</span></a>args) that
 are used to split the data into the cross product of their values</p></li>
-<li><p><strong>categorical_cols</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]) – [Default: []] Columns within dataframe that are
+<li><p><strong>categorical_cols</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]</span>) – [Default: []] Columns within dataframe that are
 categorical. Columns that are not np.objects and are not part explicitly
 provided here will be treated as numeric, and bins will be used.</p></li>
-<li><p><strong>min_per_group</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – [Default: 20] This is the number of examples for each
+<li><p><strong>min_per_group</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></span>) – [Default: 20] This is the number of examples for each
 of the groups created</p></li>
-<li><p><strong>max_per_group</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>]) – [Default: None] This is the maximum number of examples for
+<li><p><strong>max_per_group</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>]</span>) – [Default: None] This is the maximum number of examples for
 each group to be provided with.</p></li>
-<li><p><strong>fallback_type</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – <p>[Default: upsample] This is the fallback mechanism for when
+<li><p><strong>fallback_type</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span>) – <p>[Default: upsample] This is the fallback mechanism for when
 one of the groups contains less elements than the number provided
 through min_per_group. The options are “upsample”, “ignore” and “error”.</p>
 <blockquote>
@@ -537,15 +475,16 @@ through min_per_group. The options are “upsample”, “ignore” and “error
 </ul>
 </div></blockquote>
 </p></li>
-<li><p><strong>bins</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – [Default: 6] Number of bins to be used for numerical cols</p></li>
-<li><p><strong>random_state</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>]) – [Default: None] Random seed for the internal sampling</p></li>
+<li><p><strong>bins</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></span>) – [Default: 6] Number of bins to be used for numerical cols</p></li>
+<li><p><strong>random_state</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></span>) – [Default: None] Random seed for the internal sampling</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Tuple</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>]</p>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>]</span></p>
 </dd>
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p><ul class="simple">
+<li></li>
 <li><p><strong>x_train</strong> (<em>pd.DataFrame</em>) – DataFrame containing traning datapoints</p></li>
 <li><p><strong>y_train</strong> (<em>np.ndarray</em>) – Array containing labels for training datapoints</p></li>
 <li><p><strong>x_test</strong> (<em>pd.DataFrame</em>) – DataFrame containing test datapoints</p></li>
@@ -558,13 +497,13 @@ through min_per_group. The options are “upsample”, “ignore” and “error
 </dl>
 </dd></dl>
 
-<dl class="function">
-<dt id="xai.confusion_matrix_plot">
-<code class="descclassname">xai.</code><code class="descname">confusion_matrix_plot</code><span class="sig-paren">(</span><em>y_test</em>, <em>pred</em>, <em>scaled=True</em>, <em>label_x_neg='PREDICTED NEGATIVE'</em>, <em>label_x_pos='PREDICTED POSITIVE'</em>, <em>label_y_neg='ACTUAL NEGATIVE'</em>, <em>label_y_pos='ACTUAL POSITIVE'</em><span class="sig-paren">)</span><a class="headerlink" href="#xai.confusion_matrix_plot" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt class="sig sig-object py" id="xai.confusion_matrix_plot">
+<span class="sig-prename descclassname"><span class="pre">xai.</span></span><span class="sig-name descname"><span class="pre">confusion_matrix_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_test</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pred</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scaled</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_x_neg</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'PREDICTED</span> <span class="pre">NEGATIVE'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_x_pos</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'PREDICTED</span> <span class="pre">POSITIVE'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_y_neg</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'ACTUAL</span> <span class="pre">NEGATIVE'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_y_pos</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'ACTUAL</span> <span class="pre">POSITIVE'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#xai.confusion_matrix_plot" title="Link to this definition">¶</a></dt>
 <dd><p>Plots a confusion matrix for a binary classifier with the expected and
 predicted values provided.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Example</dt>
+<dt class="field-odd">Example<span class="colon">:</span></dt>
 <dd class="field-odd"><p></p></dd>
 </dl>
 <dl class="simple">
@@ -574,25 +513,29 @@ scaled=True)</p>
 </dd>
 </dl>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>y_test</strong> (<em>Union</em><em>[</em><em>np.array</em><em>, </em><em>list</em><em>]</em>) – Array containing binary “actual” labels for data</p></li>
 <li><p><strong>pred</strong> (<em>Union</em><em>[</em><em>np.array</em><em>, </em><em>list</em><em>]</em>) – Array containing binary “predictedd” labels for data</p></li>
-<li><p><strong>scaled</strong> – [Default: True] Whether the values are scaled to 0-1 or</p></li>
+<li><p><strong>scaled</strong> (<em>bool</em>) – [Default: True] Whether the values are scaled to 0-1 or</p></li>
 </ul>
 </dd>
 </dl>
 <p>displayed as total number of instances
 :type scaled: bool
+:type label_x_neg: str
 :param label_x_neg: [Default: “PREDICTED NEGATIVE”] Plot label for
 the predicted negative values
 :type label_x_neg: str
+:type label_x_pos: str
 :param label_x_pos: [Default: “PREDICTED POSITIVE”] Plot label for
 the predicted positive values
 :type label_x_pos: str
+:type label_y_neg: str
 :param label_y_neg: [Default: “ACTUAL NEGATIVE”] Plot label for
 the actual negative values
 :type label_y_neg: str
+:type label_y_pos: str
 :param label_y_pos: [Default: “ACTUAL POSITIVE”] Plot label for
 the actual positive values
 :type label_y_pos: str
@@ -600,73 +543,77 @@ the actual positive values
 :rtype: None</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="xai.convert_categories">
-<code class="descclassname">xai.</code><code class="descname">convert_categories</code><span class="sig-paren">(</span><em>df</em>, <em>categorical_cols=[]</em><span class="sig-paren">)</span><a class="headerlink" href="#xai.convert_categories" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt class="sig sig-object py" id="xai.convert_categories">
+<span class="sig-prename descclassname"><span class="pre">xai.</span></span><span class="sig-name descname"><span class="pre">convert_categories</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">categorical_cols</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#xai.convert_categories" title="Link to this definition">¶</a></dt>
 <dd><dl class="simple">
 <dt>Converts columns to numeric categories. If the categorical_cols</dt><dd><p>parameter is passed as a list then those columns are converted.
 Otherwise, all np.object columns are converted.</p>
 </dd>
 </dl>
 <dl class="field-list simple">
-<dt class="field-odd">Example</dt>
+<dt class="field-odd">Example<span class="colon">:</span></dt>
 <dd class="field-odd"><p></p></dd>
 </dl>
 <p>import xai
 cat_df = xai.convert_categories(df)</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>df</strong> (<em>pandas.DataFrame</em>) – Pandas Dataframe containing data (inputs and target)</p></li>
 <li><p><strong>categorical_cols</strong> (<em>str</em>) – List of strings containing categorical cols</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>Dataframe with categorical numerical values.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>pandas.DataFrame</p>
 </dd>
 </dl>
 </dd></dl>
 
-<dl class="function">
-<dt id="xai.convert_probs">
-<code class="descclassname">xai.</code><code class="descname">convert_probs</code><span class="sig-paren">(</span><em>probs</em>, <em>threshold=0.5</em><span class="sig-paren">)</span><a class="headerlink" href="#xai.convert_probs" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt class="sig sig-object py" id="xai.convert_probs">
+<span class="sig-prename descclassname"><span class="pre">xai.</span></span><span class="sig-name descname"><span class="pre">convert_probs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">probs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#xai.convert_probs" title="Link to this definition">¶</a></dt>
 <dd><p>Converts all the probabilities in the array provided into binary labels
 as per the threshold provided which is 0.5 by default.</p>
 <p class="rubric">Example</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">probs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">])</span>
 <span class="n">labels</span> <span class="o">=</span> <span class="n">xai</span><span class="o">.</span><span class="n">convert_probs</span><span class="p">(</span><span class="n">probs</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">0.65</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span>
 
 <span class="o">&gt;</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
 </pre></div>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>probs</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – Numpy array or list containing a list of floats between 0 and 1</p></li>
-<li><p><strong>threshold</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – Float that provides the threshold for which probabilities over the
+<li><p><strong>probs</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></span>) – Numpy array or list containing a list of floats between 0 and 1</p></li>
+<li><p><strong>threshold</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></span>) – Float that provides the threshold for which probabilities over the
 threshold will be converted to 1</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Numpy array containing the labels based on threshold provided</p>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></span></p>
 </dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>np.ndarray</p>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><ul class="simple">
+<li></li>
+<li><p><em>np.ndarray</em> – Numpy array containing the labels based on threshold provided</p></li>
+</ul>
+</p>
 </dd>
 </dl>
 </dd></dl>
 
-<dl class="function">
-<dt id="xai.correlations">
-<code class="descclassname">xai.</code><code class="descname">correlations</code><span class="sig-paren">(</span><em>df</em>, <em>include_categorical=False</em>, <em>plot_type='dendogram'</em>, <em>plt_kwargs={}</em>, <em>categorical_cols=[]</em><span class="sig-paren">)</span><a class="headerlink" href="#xai.correlations" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt class="sig sig-object py" id="xai.correlations">
+<span class="sig-prename descclassname"><span class="pre">xai.</span></span><span class="sig-name descname"><span class="pre">correlations</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_categorical</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'dendogram'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plt_kwargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">categorical_cols</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#xai.correlations" title="Link to this definition">¶</a></dt>
 <dd><p>Computes the correlations for the columns provided and plots the relevant
 image as requested by the parameters.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Example</dt>
+<dt class="field-odd">Example<span class="colon">:</span></dt>
 <dd class="field-odd"><p></p></dd>
 </dl>
 <dl class="simple">
@@ -677,7 +624,7 @@ downsample=0.8)</p>
 </dd>
 </dl>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>df</strong> (<em>pandas.DataFrame</em>) – Pandas Dataframe containing data (inputs and target )</p></li>
 <li><p><strong>*cross_cols</strong> – <p>One or more positional arguments (passed as <a href="#id9"><span class="problematic" id="id10">*</span></a>args) that</p>
@@ -692,7 +639,7 @@ downsample=0.8)</p>
 <div><p>than percentage.</p>
 </div></blockquote>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>downsample</strong> (<em>float</em>) – [Default: 1] Target downsample for columns higher
 than percentage.</p></li>
@@ -703,18 +650,18 @@ provided here will be treated as numeric, and bins will be used.</p></li>
 <li><p><strong>threshold</strong> (<em>float</em>) – [Default: 0.5] Threshold to display in the chart.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>Returns a dataframe containing the correlation values for the features</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>pandas.DataFrame</p>
 </dd>
 </dl>
 </dd></dl>
 
-<dl class="function">
-<dt id="xai.evaluation_metrics">
-<code class="descclassname">xai.</code><code class="descname">evaluation_metrics</code><span class="sig-paren">(</span><em>y_valid</em>, <em>y_pred</em><span class="sig-paren">)</span><a class="headerlink" href="#xai.evaluation_metrics" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt class="sig sig-object py" id="xai.evaluation_metrics">
+<span class="sig-prename descclassname"><span class="pre">xai.</span></span><span class="sig-name descname"><span class="pre">evaluation_metrics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_valid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#xai.evaluation_metrics" title="Link to this definition">¶</a></dt>
 <dd><p>Calculates model performance metrics (accuracy, precision, recall, etc)
 from the actual and predicted lables provided.</p>
 <p class="rubric">Example</p>
@@ -723,7 +670,7 @@ from the actual and predicted lables provided.</p>
 
 <span class="n">metrics</span> <span class="o">=</span> <span class="n">xai</span><span class="o">.</span><span class="n">evaluation_metrics</span><span class="p">(</span><span class="n">y_actual</span><span class="p">,</span> <span class="n">y_predicted</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">metrics</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;{k}: {v}&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="o">&gt;</span> <span class="n">precision</span><span class="p">:</span> <span class="mf">0.8</span><span class="p">,</span>
 <span class="o">&gt;</span> <span class="n">recall</span><span class="p">:</span> <span class="mf">0.9</span><span class="p">,</span>
@@ -734,14 +681,19 @@ from the actual and predicted lables provided.</p>
 </pre></div>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>y_valid</strong> – Numpy array with the actual labels for the datapoints</p></li>
 <li><p><strong>y_pred</strong> – Numpy array with the predicted labels for the datapoints</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><p>Dictionary containing the metrics as follows:</p>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>]</span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><ul>
+<li></li>
+<li><p><em>Dict[str, float]</em> – Dictionary containing the metrics as follows:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">return</span> <span class="p">{</span>
     <span class="s2">&quot;precision&quot;</span><span class="p">:</span> <span class="n">precision</span><span class="p">,</span>
     <span class="s2">&quot;recall&quot;</span><span class="p">:</span> <span class="n">recall</span><span class="p">,</span>
@@ -752,22 +704,21 @@ from the actual and predicted lables provided.</p>
 <span class="p">}</span>
 </pre></div>
 </div>
+</li>
+</ul>
 </p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>Dict[str, float]</p>
 </dd>
 </dl>
 </dd></dl>
 
-<dl class="function">
-<dt id="xai.feature_importance">
-<code class="descclassname">xai.</code><code class="descname">feature_importance</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>func</em>, <em>repeat=10</em>, <em>plot=True</em><span class="sig-paren">)</span><a class="headerlink" href="#xai.feature_importance" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt class="sig sig-object py" id="xai.feature_importance">
+<span class="sig-prename descclassname"><span class="pre">xai.</span></span><span class="sig-name descname"><span class="pre">feature_importance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">func</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">repeat</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#xai.feature_importance" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="function">
-<dt id="xai.group_by_columns">
-<code class="descclassname">xai.</code><code class="descname">group_by_columns</code><span class="sig-paren">(</span><em>df</em>, <em>columns</em>, <em>bins=6</em>, <em>categorical_cols=[]</em><span class="sig-paren">)</span><a class="headerlink" href="#xai.group_by_columns" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt class="sig sig-object py" id="xai.group_by_columns">
+<span class="sig-prename descclassname"><span class="pre">xai.</span></span><span class="sig-name descname"><span class="pre">group_by_columns</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bins</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">6</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">categorical_cols</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#xai.group_by_columns" title="Link to this definition">¶</a></dt>
 <dd><dl class="simple">
 <dt>Groups dataframe by the categories (or bucketized values) for all columns provided.</dt><dd><p>If categorical it uses categories,
 if numeric, it uses bins. If more than one column is provided, the columns
@@ -777,7 +728,7 @@ positive and negative/positive labels.</p>
 </dd>
 </dl>
 <dl class="field-list simple">
-<dt class="field-odd">Example</dt>
+<dt class="field-odd">Example<span class="colon">:</span></dt>
 <dd class="field-odd"><p></p></dd>
 </dl>
 <p>columns=[“loan”, “gender”]
@@ -794,7 +745,7 @@ print(grouped_df.head())</p>
 </dd>
 </dl>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>df</strong> (<em>pandas.DataFrame</em>) – Pandas Dataframe containing data (inputs and target)</p></li>
 <li><p><strong>bins</strong> (<em>int</em>) – [Default: 6] Number of bins to be used for numerical cols</p></li>
@@ -804,18 +755,18 @@ are not part explicitly
 provided here will be treated as numeric, and bins will be used.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>Dataframe with categorical numerical values.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>pandas.core.groupby.groupby.DataFrameGroupBy</p>
 </dd>
 </dl>
 </dd></dl>
 
-<dl class="function">
-<dt id="xai.imbalance_plot">
-<code class="descclassname">xai.</code><code class="descname">imbalance_plot</code><span class="sig-paren">(</span><em>df</em>, <em>*cross_cols</em>, <em>categorical_cols=[]</em>, <em>bins=6</em>, <em>threshold=0.5</em><span class="sig-paren">)</span><a class="headerlink" href="#xai.imbalance_plot" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt class="sig sig-object py" id="xai.imbalance_plot">
+<span class="sig-prename descclassname"><span class="pre">xai.</span></span><span class="sig-name descname"><span class="pre">imbalance_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">cross_cols</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">categorical_cols</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bins</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">6</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#xai.imbalance_plot" title="Link to this definition">¶</a></dt>
 <dd><dl class="simple">
 <dt>Shows the number of examples provided for each of the values across the</dt><dd><p>product tuples in the columns provided. If you would like to do processing
 with the sub-groups created by this class please see the
@@ -823,7 +774,7 @@ group_by_columns function.</p>
 </dd>
 </dl>
 <dl class="field-list simple">
-<dt class="field-odd">Example</dt>
+<dt class="field-odd">Example<span class="colon">:</span></dt>
 <dd class="field-odd"><p></p></dd>
 </dl>
 <p>import xai
@@ -835,7 +786,7 @@ bins=10,
 threshold=0.8)</p>
 </div></blockquote>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>df</strong> (<em>pandas.DataFrame</em>) – Pandas Dataframe containing data (inputs and target)</p></li>
 <li><p><strong>*cross_cols</strong> – <p>One or more positional arguments (passed as <a href="#id13"><span class="problematic" id="id14">*</span></a>args) that
@@ -848,18 +799,18 @@ provided here will be treated as numeric, and bins will be used.</p></li>
 <li><p><strong>threshold</strong> (<em>float</em>) – [Default: 0.5] Threshold to display in the chart.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>Null</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>None</p>
 </dd>
 </dl>
 </dd></dl>
 
-<dl class="function">
-<dt id="xai.metrics_plot">
-<code class="descclassname">xai.</code><code class="descname">metrics_plot</code><span class="sig-paren">(</span><em>target</em>, <em>predicted</em>, <em>df=Empty DataFrame Columns: [] Index: []</em>, <em>cross_cols=[]</em>, <em>categorical_cols=[]</em>, <em>bins=6</em>, <em>plot=True</em>, <em>exclude_metrics=[]</em>, <em>plot_threshold=0.5</em><span class="sig-paren">)</span><a class="headerlink" href="#xai.metrics_plot" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt class="sig sig-object py" id="xai.metrics_plot">
+<span class="sig-prename descclassname"><span class="pre">xai.</span></span><span class="sig-name descname"><span class="pre">metrics_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">predicted</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df=Empty</span> <span class="pre">DataFrame</span> <span class="pre">Columns:</span> <span class="pre">[]</span> <span class="pre">Index:</span> <span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cross_cols=[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">categorical_cols=[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bins=6</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exclude_metrics=[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_threshold=0.5</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#xai.metrics_plot" title="Link to this definition">¶</a></dt>
 <dd><p>Creates a plot that displays statistical metrics including precision,
 recall, accuracy, auc, f1 and specificity for each of the groups created
 for the columns provided by cross_cols. For example, if the columns passed
@@ -878,43 +829,47 @@ for Male and Female for each binned group.</p>
 </pre></div>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>target</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – Numpy array containing the target labels for the datapoints</p></li>
-<li><p><strong>predicted</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – Numpy array containing the predicted labels for the datapoints</p></li>
-<li><p><strong>df</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>) – Pandas dataframe containing all the features for the datapoints.
+<li><p><strong>target</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></span>) – Numpy array containing the target labels for the datapoints</p></li>
+<li><p><strong>predicted</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></span>) – Numpy array containing the predicted labels for the datapoints</p></li>
+<li><p><strong>df</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></span>) – Pandas dataframe containing all the features for the datapoints.
 It can be empty if only looking to calculate global metrics, but
 if you would like to compute for categories across columns, the
 columns you are grouping by need to be provided</p></li>
-<li><p><strong>cross_cols</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]) – Contains the columns that you would like to use to cross the values</p></li>
-<li><p><strong>bins</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – [Default: 6] The number of bins in which you’d like
+<li><p><strong>cross_cols</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]</span>) – Contains the columns that you would like to use to cross the values</p></li>
+<li><p><strong>bins</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></span>) – [Default: 6] The number of bins in which you’d like
 numerical columns to be split</p></li>
-<li><p><strong>plot</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – [Default: True] If True a plot will be drawn with the results</p></li>
-<li><p><strong>exclude_metrics</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]) – These are the metrics that you can choose to exclude if you only
+<li><p><strong>plot</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></span>) – [Default: True] If True a plot will be drawn with the results</p></li>
+<li><p><strong>exclude_metrics</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]</span>) – These are the metrics that you can choose to exclude if you only
 want specific ones (for example, excluding “f1”, “specificity”, etc)</p></li>
-<li><p><strong>plot_threshold</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – The percentage that will be used to draw the threshold line in the plot
+<li><p><strong>plot_threshold</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></span>) – The percentage that will be used to draw the threshold line in the plot
 which would provide guidance on what is the ideal metrics to achieve.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Pandas Dataframe containing all the metrics for the groups provided</p>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></span></p>
 </dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>pd.DataFrame</p>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><ul class="simple">
+<li></li>
+<li><p><em>pd.DataFrame</em> – Pandas Dataframe containing all the metrics for the groups provided</p></li>
+</ul>
+</p>
 </dd>
 </dl>
 </dd></dl>
 
-<dl class="function">
-<dt id="xai.normalize_numeric">
-<code class="descclassname">xai.</code><code class="descname">normalize_numeric</code><span class="sig-paren">(</span><em>df</em>, <em>numerical_cols=[]</em><span class="sig-paren">)</span><a class="headerlink" href="#xai.normalize_numeric" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt class="sig sig-object py" id="xai.normalize_numeric">
+<span class="sig-prename descclassname"><span class="pre">xai.</span></span><span class="sig-name descname"><span class="pre">normalize_numeric</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">numerical_cols</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#xai.normalize_numeric" title="Link to this definition">¶</a></dt>
 <dd><dl class="simple">
 <dt>Normalizes numeric columns by substracting the mean and dividing</dt><dd><p>by standard deviation. If the parameter numerical_cols is not
 provided, it will take all the columns of dtype np.number.</p>
 </dd>
 </dl>
 <dl class="field-list simple">
-<dt class="field-odd">Example</dt>
+<dt class="field-odd">Example<span class="colon">:</span></dt>
 <dd class="field-odd"><p></p></dd>
 </dl>
 <dl class="simple">
@@ -923,77 +878,65 @@ normalize_numeric=[“age”, “other_numeric_attribute”])</p>
 </dd>
 </dl>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>df</strong> (<em>pd.DataFrame</em>) – Pandas Dataframe containing data (inputs and target)</p></li>
-<li><p><strong>numerical_cols</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]) – List of strings containing numercial cols</p></li>
+<li><p><strong>numerical_cols</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]</span>) – List of strings containing numercial cols</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>Dataframe with normalized numerical values.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>pandas.DataFrame</p>
 </dd>
 </dl>
 </dd></dl>
 
-<dl class="function">
-<dt id="xai.pr_plot">
-<code class="descclassname">xai.</code><code class="descname">pr_plot</code><span class="sig-paren">(</span><em>target</em>, <em>predicted</em>, <em>df=Empty DataFrame Columns: [] Index: []</em>, <em>cross_cols=[]</em>, <em>categorical_cols=[]</em>, <em>bins=6</em>, <em>plot=True</em><span class="sig-paren">)</span><a class="headerlink" href="#xai.pr_plot" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt class="sig sig-object py" id="xai.pr_plot">
+<span class="sig-prename descclassname"><span class="pre">xai.</span></span><span class="sig-name descname"><span class="pre">pr_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">predicted</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df=Empty</span> <span class="pre">DataFrame</span> <span class="pre">Columns:</span> <span class="pre">[]</span> <span class="pre">Index:</span> <span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cross_cols=[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">categorical_cols=[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bins=6</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot=True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#xai.pr_plot" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="function">
-<dt id="xai.roc_plot">
-<code class="descclassname">xai.</code><code class="descname">roc_plot</code><span class="sig-paren">(</span><em>target</em>, <em>predicted</em>, <em>df=Empty DataFrame Columns: [] Index: []</em>, <em>cross_cols=[]</em>, <em>categorical_cols=[]</em>, <em>bins=6</em>, <em>plot=True</em><span class="sig-paren">)</span><a class="headerlink" href="#xai.roc_plot" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt class="sig sig-object py" id="xai.roc_plot">
+<span class="sig-prename descclassname"><span class="pre">xai.</span></span><span class="sig-name descname"><span class="pre">roc_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">predicted</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df=Empty</span> <span class="pre">DataFrame</span> <span class="pre">Columns:</span> <span class="pre">[]</span> <span class="pre">Index:</span> <span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cross_cols=[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">categorical_cols=[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bins=6</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot=True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#xai.roc_plot" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="function">
-<dt id="xai.smile_imbalance">
-<code class="descclassname">xai.</code><code class="descname">smile_imbalance</code><span class="sig-paren">(</span><em>y_test</em>, <em>probs</em>, <em>threshold=0.5</em>, <em>manual_review=None</em>, <em>display_breakdown=False</em>, <em>bins=10</em><span class="sig-paren">)</span><a class="headerlink" href="#xai.smile_imbalance" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt class="sig sig-object py" id="xai.smile_imbalance">
+<span class="sig-prename descclassname"><span class="pre">xai.</span></span><span class="sig-name descname"><span class="pre">smile_imbalance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_test</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">probs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">manual_review</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">display_breakdown</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bins</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#xai.smile_imbalance" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
-           
           </div>
           <footer>
-  
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &copy; Copyright 2018, Alejandro Saucedo
-
-    </p>
+    <p>&#169; Copyright 2018, Alejandro Saucedo.</p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
-
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

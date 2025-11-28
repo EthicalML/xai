@@ -32,8 +32,8 @@ print(sys.path)
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-    'sphinx.ext.autodoc', 
-    'sphinxcontrib.napoleon',
+    'sphinx.ext.autodoc',
+    'sphinx.ext.napoleon',
     'sphinx_autodoc_typehints',
 ]
 
@@ -70,7 +70,7 @@ release = '0.1'
 #
 # This is also used if you do content translation via gettext catalogs.
 # Usually you set "language" from the command line for these cases.
-language = None
+language = 'en'
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
