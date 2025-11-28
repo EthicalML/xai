@@ -276,7 +276,7 @@ def balance(
         else:
             return x
 
-    tmp_df = grouped.apply(norm) \
+    tmp_df = grouped.apply(norm, include_groups=False) \
                 .reset_index(drop=True)
 
     if plot:
@@ -642,7 +642,7 @@ def balanced_train_test_split(
             raise(f"Sampling type provided not found: given {fallback_type}, "\
                  "expected: 'error', or 'half'")
                     
-    group = grouped.apply(resample)
+    group = grouped.apply(resample, include_groups=False)
 
     selected_idx = [g[-1] for g in group.index.values]
     
@@ -1057,16 +1057,16 @@ def smile_imbalance(
     d["false-negatives"] = np.full(y_test.shape[0], False, bool)
     d["manual-review"] =  np.full(y_test.shape[0], False, bool)
 
-    d["true-positives"].loc[y_test == 1] = preds[y_test == 1] == 1
-    d["true-negatives"].loc[y_test == 0] = preds[y_test == 0] == 0
-    d["false-positives"].loc[y_test == 0] = preds[y_test == 0] == 1
-    d["false-negatives"].loc[y_test == 1] = preds[y_test == 1] == 0
+    d.loc[y_test == 1, "true-positives"] = preds[y_test == 1] == 1
+    d.loc[y_test == 0, "true-negatives"] = preds[y_test == 0] == 0
+    d.loc[y_test == 0, "false-positives"] = preds[y_test == 0] == 1
+    d.loc[y_test == 1, "false-negatives"] = preds[y_test == 1] == 0
 
     d["correct"] = d["true-positives"].values
-    d["correct"].loc[d["true-negatives"] == 1] = True
+    d.loc[d["true-negatives"] == 1, "correct"] = True
 
     d["incorrect"] = d["false-positives"].values
-    d["incorrect"].loc[d["false-negatives"] == 1] = True 
+    d.loc[d["false-negatives"] == 1, "incorrect"] = True 
     
     if display_breakdown:
         disp_cols = ["true-positives", 
@@ -1082,13 +1082,13 @@ def smile_imbalance(
         d["manual-review"] = gt * lt > 0
         
         if display_breakdown:
-            d["true-positives"].loc[d["manual-review"]] = False
-            d["true-negatives"].loc[d["manual-review"]] = False
-            d["false-positives"].loc[d["manual-review"]] = False
-            d["false-negatives"].loc[d["manual-review"]] = False
+            d.loc[d["manual-review"], "true-positives"] = False
+            d.loc[d["manual-review"], "true-negatives"] = False
+            d.loc[d["manual-review"], "false-positives"] = False
+            d.loc[d["manual-review"], "false-negatives"] = False
         else:
-            d["correct"].loc[d["manual-review"]] = False
-            d["incorrect"].loc[d["manual-review"]] = False
+            d.loc[d["manual-review"], "correct"] = False
+            d.loc[d["manual-review"], "incorrect"] = False
         
         disp_cols.append("manual-review")
 
