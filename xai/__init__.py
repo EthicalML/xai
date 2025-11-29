@@ -134,12 +134,17 @@ def group_by_columns(
             col_min = col.min()
             col_max = col.max()
             # TODO: Use the original bins for display purposes as they may come normalised
-            col_bins = pd.cut(col, list(np.linspace(col_min, col_max, bins)))
-            grp = col_bins
+
+            # If all values are the same, treat as categorical
+            if col_min == col_max:
+                grp = c  # Use the column itself as the group (single category)
+            else:
+                col_bins = pd.cut(col, list(np.linspace(col_min, col_max, bins)))
+                grp = col_bins
 
         group_list.append(grp)
 
-    grouped = df.groupby(group_list)
+    grouped = df.groupby(group_list, observed=True)
     return grouped 
 
 
@@ -198,7 +203,7 @@ def imbalance_plot(
     # TODO: Make threshold a minimum number of examples per class
     imbalances = ratios < threshold
     
-    cm = plt.cm.get_cmap('RdYlBu_r')
+    cm = plt.colormaps.get_cmap('RdYlBu_r')
     colors = [cm(1-r/threshold/2) if t else cm(0) \
                for r,t in zip(ratios, imbalances)]
     ax = count_grp.plot.bar(color=colors)
@@ -206,6 +211,8 @@ def imbalance_plot(
     lp.set_label(f"Threshold: {threshold*count_max:.2f} ({threshold*100:.2f}%)")
     plt.legend()
     plt.show()
+
+    return count_grp
 
 
 def balance(
@@ -276,7 +283,7 @@ def balance(
         else:
             return x
 
-    tmp_df = grouped.apply(norm, include_groups=False) \
+    tmp_df = grouped.apply(norm, include_groups=True) \
                 .reset_index(drop=True)
 
     if plot:
@@ -480,7 +487,7 @@ def confusion_matrix_plot(
                 index=index,
                 columns=columns)
 
-    cmap = plt.get_cmap("Blues")
+    cmap = plt.colormaps.get_cmap("Blues")
     plt.figure()
     plt.imshow(confusion, interpolation="nearest", cmap=cmap)
     plt.title("Confusion matrix")
@@ -501,6 +508,8 @@ def confusion_matrix_plot(
 
     plt.tight_layout()
     plt.show()
+
+    return confusion
 
 
 def balanced_train_test_split(
@@ -988,7 +997,7 @@ def _curve(
 def _infer_categorical(df):
     categorical_cols = df.select_dtypes(
             include=[object, bool, np.int8]).columns
-    logging.warn("No categorical_cols passed so inferred using object, "
+    logging.warning("No categorical_cols passed so inferred using object, "
             f"np.int8 and bool: {categorical_cols}. If you see an error"
             " these are not "
             "correct, please provide them as a string array as: "

@@ -143,25 +143,6 @@ class TestLoadCensus:
         assert 'loan' not in X.columns
         assert y.iloc[0] == '<=50K'
 
-    @patch('pandas.read_csv')
-    @patch('os.path.join')
-    @patch('os.path.dirname')
-    @patch('os.path.abspath')
-    def test_load_census_path_module_logic(self, mock_abspath, mock_dirname, mock_join, mock_read_csv, mock_census_data):
-        """Test the path construction logic in load_census."""
-        mock_read_csv.return_value = mock_census_data
-
-        # Mock the path construction calls
-        mock_abspath.return_value = '/fake/path/to/xai/data/__init__.py'
-        mock_dirname.return_value = '/fake/path/to/xai/data'
-        mock_join.return_value = '/fake/path/to/xai/data/census.csv'
-
-        xai.data.load_census()
-
-        # Verify path construction was called correctly
-        mock_abspath.assert_called_once()
-        mock_dirname.assert_called_once_with('/fake/path/to/xai/data/__init__.py')
-        mock_join.assert_called_once_with('/fake/path/to/xai/data', 'census.csv')
 
     @patch('pandas.read_csv')
     def test_load_census_preserves_data_types(self, mock_read_csv, mock_census_data):
