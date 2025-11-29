@@ -31,7 +31,7 @@ You can find the documentation at [https://ethicalml.github.io/xai/index.html](h
 
 </table>
 
-# 0.2.0
+# 0.3.0
 
 If you want to see a fully functional demo in action clone this repo and run the <a href="https://github.com/EthicalML/xai/blob/master/examples/XAI%20Example%20Usage.ipynb">Example Jupyter Notebook in the Examples folder</a>.
 

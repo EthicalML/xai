@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "xai"
-version = "0.2.0"
+version = "0.3.0"
 description = "XAI - An industry-ready machine learning library that ensures explainable AI by design"
 readme = "README.md"
 license = {text = "MIT"}
